@@ -1,0 +1,17 @@
+fastapi
+python-multipart
+uvicorn[standard]
+pydantic
+pydantic-settings
+fastapi-mail
+passlib
+jwt
+arq
+msgpack
+types-redis
+sqlalchemy[asyncio]
+fastapi-pagination
+asyncpg
+alembic[tz]
+tenacity
+boto3

@@ -1,0 +1,63 @@
+version: "3.9"
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+    driver: bridge
+
+services:
+  # caddy:
+  #   image: caddy:alpine
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     - "443:443/udp"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile
+  #     - caddy_data:/data
+  #     - caddy_config:/config
+  #   networks:
+  #     - web
+  #     - internal
+
+  db:
+    image: postgres:14-alpine
+    env_file:
+      - docker-compose.env
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - internal
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    networks:
+      - internal
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   env_file:
+  #     - docker-compose.env
+  #   depends_on:
+  #     - redis
+  #     - db
+  #   restart: unless-stopped
+  #   networks:
+  #     - internal
+
+volumes:
+  # caddy_data:
+  # caddy_config:
+  postgres_data:
+
+
