@@ -6,13 +6,17 @@ definePageMeta({
 
 
 <template>
-  <div class="mt-5 mb-24 container mx-auto">
+  <div class="mt-5 mb-24 mycontainer mx-auto">
     <div>
-      <UButton label="GO BACK" icon="i-ph-arrow-up-left" to="/" variant="ghost" color="gray" />
+      <NuxtLink to="/">
+        <div class="flex items-center gap-2">
+          <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>GO BACK</span>
+        </div>
+      </NuxtLink>
     </div>
     <div class="my-5 flex gap-5 justify-center">
       <div class="max-w-[412px]">
-        <NuxtPicture src="/img/image-27.png" />
+        <NuxtPicture src="/img/delivery-01.webp" />
         <div class="text-4xl my-6">DELIVERY/SHIPPING</div>
         <div class="text-xl my-6">AFTER “PLACING AN ORDER” WE WILL CONTACT YOU WITHIN 24 HOURS.</div>
         <div class="text-xl my-6">DELIVERY SHIPPING IN UAE WITHIN 1-3 DAYS STARTS FROM 4 $ -15 $</div>
@@ -21,7 +25,7 @@ definePageMeta({
         <div class="text-xl my-6">IT IS POSSIBLE TO PAY BY CRYPTOCURRENCY.</div>
       </div>
       <div>
-        <img src="https://ysv-dev-static-img.s3.ap-northeast-1.amazonaws.com/image+25.png" />
+        <img src="/img/delivery-02.webp" />
       </div>
     </div>
   </div>

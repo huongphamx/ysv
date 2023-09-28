@@ -18,19 +18,27 @@ definePageMeta({
 
 
 <template>
-  <div class="h-screen flex justify-center items-center">
-    <div class="border p-5 rounded-lg w-1/2">
-      <div class="text-xl font-bold text-center">Admin Login</div>
-      <UForm ref="loginForm" :state="loginFormState" :schema="loginFormSchema" :validate-on="['submit']">
-        <UFormGroup name="email" label="Email address" class="my-2">
+  <div class="mt-10 flex justify-center">
+    <div class="border p-5 rounded-lg md:w-1/2 lg:w-1/3">
+      <div class="text-xl font-bold text-center">YSV Admin Login</div>
+      <UForm ref="loginForm" :state="loginFormState" :schema="loginFormSchema" :validate-on="['submit']"
+        class="flex flex-col gap-3">
+        <UFormGroup name="email" label="Email address">
           <UInput v-model="loginFormState.email" />
         </UFormGroup>
 
-        <UFormGroup name="password" label="Password" class="my-2">
+        <UFormGroup name="password" label="Password">
           <UInput type="password" v-model="loginFormState.password" />
         </UFormGroup>
 
-        <UButton type="submit" label="Login" block />
+        <div class="text-center my-3">
+          <UButton type="submit" label="Login" block />
+        </div>
+
+        <div class="text-center">
+          Forgot password? <NuxtLink to="/admin/reset-password"><span class="text-green-500">Reset password</span>
+          </NuxtLink>
+        </div>
       </UForm>
     </div>
   </div>

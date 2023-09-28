@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { object, string, number, array } from 'yup'
-import { useFileDialog } from "@vueuse/core";
 
 const { params } = useRoute()
 const productId = params.id
@@ -12,7 +11,7 @@ const productFormState = ref({
   name: undefined,
   price: undefined,
   description: undefined,
-  images: undefined,
+  images: [],
 })
 const productFormSchema = object({
   name: string().required('Product name required'),
@@ -20,32 +19,16 @@ const productFormSchema = object({
   description: string().required('Give some description'),
   images: array().of(string()),
 })
+const imageUrlsError = ref('')
+watch(() => productFormState.value.images, (newList) => {
+  if (newList.length > 0) { imageUrlsError.value = '' }
+  else if (newList.length === 0) { imageUrlsError.value = 'Please choose images' }
+})
 async function submitSaveProduct() {
   await productForm.value!.validate()
-
-}
-
-
-
-
-const { files, open, reset, onChange } = useFileDialog({
-  accept: 'image/*'
-})
-const imgUrls = ref<string[]>([])
-onChange((files) => {
-  if (files) {
-    for (const file of files) {
-      const url = URL.createObjectURL(file)
-      imgUrls.value.push(url)
-    }
+  if (productFormState.value.images.length < 1) {
+    imageUrlsError.value = 'Please choose images'
   }
-})
-const resetImgList = () => {
-  reset()
-  imgUrls.value = []
-}
-const deleteImage = (url: string) => {
-  imgUrls.value = imgUrls.value.filter(u => u !== url)
 }
 
 definePageMeta({
@@ -56,45 +39,29 @@ definePageMeta({
 <template>
   <div>
     <div class="text-2xl font-bold">{{ title }}</div>
-
     <UForm ref="productForm" :state="productFormState" :schema="productFormSchema" :validate-on="['submit']"
-      @submit="submitSaveProduct">
-      <UFormGroup name="name" required label="Product name">
+      @submit="submitSaveProduct" class="flex flex-col gap-3">
+      <UFormGroup name="name" required label="Product name" class="lg:w-2/3 ">
         <UInput v-model="productFormState.name" />
       </UFormGroup>
 
-      <UFormGroup name="price" required label="Price">
+      <UFormGroup name="price" required label="Price" class="lg:w-2/3 ">
         <UInput type="number" v-model="productFormState.price" />
       </UFormGroup>
 
-      <UFormGroup name="description" required label="Description">
+      <UFormGroup name="description" required label="Description" class="lg:w-2/3 ">
         <UTextarea v-model="productFormState.description" />
       </UFormGroup>
 
-      <UFormGroup name="images" required label="Images">
-        <UTextarea v-model="productFormState.images" />
-      </UFormGroup>
+      <div
+        class="text-sm font-medium text-gray-700 dark:text-gray-200 after:content-['*'] after:ms-0.5 after:text-red-500 dark:after:text-red-400">
+        Pictures</div>
+      <UploadImage v-model="productFormState.images" />
+      <div v-if="imageUrlsError" class="mt-2 text-red-500 dark:text-red-400 text-sm">{{ imageUrlsError }}</div>
 
-      <UButton type="button" :disabled="!files" @click="resetImgList">
-        Reset
-      </UButton>
-
-      <div class="flex gap-2 flex-wrap items-center">
-        <template v-if="files">
-          <div v-for="url, i in imgUrls" :key="i" class="relative group border rounded-md p-1">
-            <img :src="url" alt="Uploading Image" class="h-[200px] group-hover:opacity-50">
-            <UButton icon="i-ph-trash" size="lg" color="red"
-              class="invisible group-hover:visible absolute top-1/2 right-1/2 translate-x-1/2"
-              @click="deleteImage(url)" />
-          </div>
-        </template>
-        <div class="w-20 h-20 border-2 border-dashed hover:cursor-pointer flex justify-center items-center"
-          @click="open()">
-          <uIcon name="i-ph-plus" class="text-4xl" />
-        </div>
+      <div>
+        <UButton type="submit" label="Save Product" />
       </div>
-
-      <UButton type="submit" label="Save" />
     </UForm>
   </div>
 </template>
