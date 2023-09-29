@@ -13,25 +13,38 @@ const isAbleToAddImage = computed(() => {
   if (props.maxImage) { return props.modelValue.length < props.maxImage }
   return true
 })
-const { files, open, reset, onChange } = useFileDialog({
+const isUploading = ref(false)
+const { files, open, onChange } = useFileDialog({
   accept: 'image/*',
   reset: false,
+  multiple: props.maxImage !== 1
 })
-onChange((files) => {
+onChange(async (files) => {
   if (files) {
-    const newUrl = []
+    const newUrl: string[] = []
     for (const file of files) {
-      const url = URL.createObjectURL(file)
-      newUrl.push(url)
+      isUploading.value = true
+      const formData = new FormData()
+      formData.append('media_file', file)
+      const {data, error} = await useCustomFetch<string>('/v1/media/upload', {
+        method: 'post',
+        body: formData
+      })
+      if (error.value) {
+        // todo: toast
+      } else if (data.value) {
+        newUrl.push(data.value)
+        isUploading.value = false
+      }
     }
-    console.log('on changes')
     emit('update:modelValue', props.modelValue.concat(newUrl))
   }
 })
 
 const deleteImage = (url: string) => {
+  // todo: confirm delete
+  // todo: call delete api
   const remainUrls = props.modelValue.filter(u => u !== url)
-  console.log('on delete')
   emit('update:modelValue', remainUrls)
 }
 </script> 
@@ -47,7 +60,13 @@ const deleteImage = (url: string) => {
             class="invisible group-hover:visible absolute top-1/2 right-1/2 translate-x-1/2" @click="deleteImage(url)" />
         </div>
       </template>
-      <div v-if="isAbleToAddImage"
+      <template v-if="isUploading">
+        <div class="w-[200px] h-[200px] border-2 border-dashed hover:cursor-pointer flex flex-col justify-center items-center"
+        @click="open()">
+        <UIcon name="i-ph-circle-notch" class="text-4xl animate-spin" />
+      </div>
+      </template>
+      <div v-if="isAbleToAddImage && !isUploading"
         class="w-[200px] h-[200px] border-2 border-dashed hover:cursor-pointer flex flex-col justify-center items-center"
         @click="open()">
         <UIcon name="i-ph-plus" class="text-4xl" />
