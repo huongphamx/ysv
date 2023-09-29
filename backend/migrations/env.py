@@ -34,7 +34,7 @@ def get_url():
     user = os.getenv("POSTGRES_USER", "postgres")
     password = os.getenv("POSTGRES_PASSWORD", "mysecretpassword")
     server = os.getenv("POSTGRES_SERVER", "localhost")
-    db = os.getenv("POSTGRES_DB", "eexam")
+    db = os.getenv("POSTGRES_DB", "ysv")
     return f"postgresql+asyncpg://{user}:{password}@{server}/{db}"
 
 

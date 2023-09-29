@@ -6,9 +6,10 @@ class CommonSettings(BaseSettings):
     FRONTEND_DOMAIN: str = "http://localhost:3000"
     REDIS_URL: str = "redis://localhost:6379"
     POSTGRES_URL: str = (
-        "postgresql+asyncpg://postgres:mysecretpassword@localhost:5432/eexam"
+        "postgresql+asyncpg://postgres:mysecretpassword@localhost:5432/ysv"
     )
-    ORIGIN_REGEXES: str = "http://.*\.localhost:3000"
+    FIRST_ADMIN_EMAIL: str = "admin@example.com"
+    FIRST_ADMIN_PASSWORD: str = "password"
 
 
 class AwsSettings(BaseSettings):

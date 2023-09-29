@@ -25,6 +25,7 @@ services:
 
   db:
     image: postgres:14-alpine
+    container_name: ysv-db
     env_file:
       - docker-compose.env
     restart: unless-stopped
@@ -37,23 +38,26 @@ services:
 
   redis:
     image: redis:7-alpine
+    container_name: ysv-redis
     restart: unless-stopped
     ports:
       - 6379:6379
     networks:
       - internal
-  # api:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   env_file:
-  #     - docker-compose.env
-  #   depends_on:
-  #     - redis
-  #     - db
-  #   restart: unless-stopped
-  #   networks:
-  #     - internal
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    container_name: ysv-api
+    env_file:
+      - docker-compose.env
+    depends_on:
+      - redis
+      - db
+    restart: unless-stopped
+    networks:
+      - internal
 
 volumes:
   # caddy_data:

@@ -5,7 +5,6 @@ pydantic
 pydantic-settings
 fastapi-mail
 passlib
-jwt
 types-redis
 sqlalchemy[asyncio]
 fastapi-pagination
