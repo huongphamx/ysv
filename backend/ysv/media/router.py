@@ -1,7 +1,7 @@
 import uuid
 
 from aiobotocore.session import get_session
-from fastapi import APIRouter, Depends, UploadFile
+from fastapi import APIRouter, Depends, UploadFile, status
 
 from ysv.config import aws_settings
 from ysv.user.deps import current_admin
@@ -23,8 +23,11 @@ async def upload_media(media_file: UploadFile):
     return f"https://{s3_bucket}.s3.{s3_region}.amazonaws.com/{object_key}"
 
 
-# @router.delete("/{media_url}", dependencies=[Depends(get_current_admin)])
-@router.delete("/{media_url}")  # todo: set admin perm
+@router.delete(
+    "/{media_url}",
+    dependencies=[Depends(current_admin)],
+    status_code=status.HTTP_200_OK,
+)
 async def delete_media(media_url: str):
     s3_bucket = aws_settings.AWS_S3_BUCKET
     object_key = media_url
@@ -32,3 +35,5 @@ async def delete_media(media_url: str):
     session = get_session()
     async with session.create_client("s3") as client:
         await client.delete_object(Bucket=s3_bucket, Key=object_key)
+
+    return {"detail": "MEDIA_DELETED"}

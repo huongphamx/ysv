@@ -6,6 +6,7 @@ from fastapi_users.password import PasswordHelper
 
 from ysv.config import common_settings
 from ysv.user.models import User
+from ysv.product.size.models import ClothesSize
 from ysv.database.session import async_session
 
 logging.basicConfig(level=logging.INFO)
@@ -31,10 +32,25 @@ async def create_first_admin():
             await db.commit()
 
 
+async def init_clothes_sizes():
+    async with async_session() as db:
+        sizes = (await db.scalars(select(ClothesSize))).all()
+        if len(sizes) == 0:
+            sizes = ["XS", "S", "M", "L"]
+            for size in sizes:
+                size_obj = ClothesSize(label=size)
+                db.add(size_obj)
+            await db.commit()
+
+
 async def main() -> None:
     logger.info("Creating admin if not existed")
     await create_first_admin()
     logger.info("Admin created")
+
+    logger.info("Init clothes sizes")
+    await init_clothes_sizes()
+    logger.info("Done init clothes sizes")
 
 
 if __name__ == "__main__":
