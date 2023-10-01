@@ -22,6 +22,7 @@ class ProductPictureRead(BaseModel):
 
 class ProductRead(BaseModel):
     id: uuid.UUID
+    collection_id: uuid.UUID  # todo: to remove
     collection: CollectionRead
     name: str
     is_available: bool = True
