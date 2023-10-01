@@ -1,7 +1,7 @@
 import uuid
 
 from aiobotocore.session import get_session
-from fastapi import APIRouter, Depends, UploadFile, status
+from fastapi import APIRouter, Body, Depends, UploadFile, status
 
 from ysv.config import aws_settings
 from ysv.user.deps import current_admin
@@ -10,11 +10,12 @@ router = APIRouter()
 
 
 @router.post("/upload", dependencies=[Depends(current_admin)])
-async def upload_media(media_file: UploadFile):
+async def upload_media(media_file: UploadFile, object_key: str | None = Body(default=None)):
     s3_region = aws_settings.AWS_S3_REGION
     s3_bucket = aws_settings.AWS_S3_BUCKET
     _, _, ext = media_file.filename.partition(".")  # type: ignore
-    object_key = f"{str(uuid.uuid4())}.{ext}"
+    if not object_key:
+        object_key = f"{str(uuid.uuid4())}.{ext}"
     object_data = media_file.file
 
     session = get_session()
