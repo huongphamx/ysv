@@ -1,8 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
-  modules: ['@nuxt/ui', '@nuxt/image'],
+  modules: ['@nuxt/ui', '@nuxt/image', '@nuxtjs/google-fonts'],
+
+  colorMode: { preference: 'light' },
 
   css: ['@/assets/css/main.css'],
 
@@ -21,4 +23,11 @@ export default defineNuxtConfig({
       frontendDomain: process.env.NUXT_PUBLIC_FRONTEND_DOMAIN || 'localhost:3000',
     }
   },
+
+  googleFonts: {
+    families: {
+      'IBM Plex Sans': true,
+      Italiana: true
+    }
+  }
 })

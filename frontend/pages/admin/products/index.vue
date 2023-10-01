@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useConfirmDialog } from '@vueuse/core'
 import { Product } from '@/types'
 
 const productTableCols = [{
@@ -8,14 +9,17 @@ const productTableCols = [{
   key: 'name',
   label: 'Color',
 }, {
+  key: 'is_available',
+  label: 'Available',
+}, {
+  key: 'price',
+  label: 'Price',
+}, {
   key: 'descriptions',
   label: 'Descriptions',
 }, {
   key: 'preview_pic',
   label: 'Preview Picture',
-}, {
-  key: 'is_available',
-  label: 'Available',
 }, {
   key: 'actions',
 }]
@@ -25,6 +29,20 @@ await getProductList()
 const collectionList = useCollectionList()
 await getCollectionList()
 
+const { isRevealed: isShowedDeleteProduct, reveal: showDeleteProduct, confirm: confirmDeleteProduct } = useConfirmDialog()
+async function deleteProduct(productId: string) {
+  const { data: isConfirmed, isCanceled } = await showDeleteProduct()
+  if (!isCanceled && isConfirmed) {
+    const { data, error } = await useCustomFetch(`/v1/products/${productId}`, {
+      method: 'delete',
+    })
+    if (error.value) {
+      // todo: toast
+    } else if (data.value) {
+      await getProductList()
+    }
+  }
+}
 </script>
 
 
@@ -45,6 +63,11 @@ await getCollectionList()
           {{ collectionList.find(c => c.id === row.collection_id)?.name }}
         </template>
 
+        <template #is_available-data="{ row }">
+          <UIcon :name="row.is_available ? 'i-ph-check' : 'i-ph-x'" class="text-3xl"
+            :class="row.is_available ? 'text-green-500' : 'text-red-500'" />
+        </template>
+
         <template #descriptions-data="{ row }: { row: Product }">
           <div class="h-full">
             <li v-for="d, i in row.descriptions.split(/\r?\n/)" :key="i">{{ d }}</li>
@@ -55,24 +78,21 @@ await getCollectionList()
           <img :src="row.preview_pic" alt="Collection preview picture" class="h-[150px]">
         </template>
 
-        <template #is_available-data="{ row }">
-          <UIcon :name="row.is_available ? 'i-ph-check' : 'i-ph-x'" class="text-3xl"
-            :class="row.is_available ? 'text-green-500' : 'text-red-500'" />
-        </template>
+
 
         <template #actions-data="{ row }">
           <div class="max-w-[100px] flex gap-3">
-            <UButton label="Edit" icon="i-ph-pencil" @click="$router.push(`/admin/collections/edit/${row.id}`)" />
-            <UButton label="Delete" icon="i-ph-trash" color="red" @click="deleteCollection(row.id)" />
-            <UModal :modelValue="isShowedDeleteCollection" prevent-close :transition="false">
+            <UButton label="Edit" icon="i-ph-pencil" @click="$router.push(`/admin/products/edit/${row.id}`)" />
+            <UButton label="Delete" icon="i-ph-trash" color="red" @click="deleteProduct(row.id)" />
+            <UModal :modelValue="isShowedDeleteProduct" prevent-close :transition="false">
               <div class="p-5">
-                <div class="text-center text-2xl font-bold">Delete this collection?</div>
-                <div class="my-5 text-center">Deleted collection can not be recovered.
+                <div class="text-center text-2xl font-bold">Delete this product?</div>
+                <div class="my-5 text-center">Deleted product can not be recovered.
                   Are you sure you want to delete?
                 </div>
                 <div class="flex justify-center gap-5">
-                  <UButton @click="confirmDeleteCollection(true)" color="red">Yes, Delete</UButton>
-                  <UButton @click="confirmDeleteCollection(false)" color="gray">Cancel</UButton>
+                  <UButton @click="confirmDeleteProduct(true)" color="red">Yes, Delete</UButton>
+                  <UButton @click="confirmDeleteProduct(false)" color="gray">Cancel</UButton>
                 </div>
               </div>
             </UModal>

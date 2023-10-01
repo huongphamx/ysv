@@ -45,7 +45,7 @@ async function deleteImage(url: string) {
   const { data: isConfirmed, isCanceled } = await showDeleteImage()
   if (!isCanceled && isConfirmed) {
     const imgObjectKey = url.split('/').pop()
-    const { data, error } = useCustomFetch(`/v1/media/${imgObjectKey}`, {
+    const { data, error } = await useCustomFetch(`/v1/media/${imgObjectKey}`, {
       method: 'delete'
     })
     if (error.value) {

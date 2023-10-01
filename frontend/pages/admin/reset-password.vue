@@ -11,7 +11,7 @@ const forgotPasswordFormSchema = object({
 
 async function submitForgotPassword() {
   await forgotPasswordForm.value!.validate()
-  const { data, error } = useCustomFetch('/v1/auth/forgot-password', {
+  const { data, error } = await useCustomFetch('/v1/auth/forgot-password', {
     method: 'post',
     body: { email: forgotPasswordFormState.value.email }
   })

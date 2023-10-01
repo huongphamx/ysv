@@ -31,7 +31,7 @@ const productFormSchema = object({
 })
 // if collectionId not None, i.e. editing -> get collection detail
 if (productId) {
-  const { data, error } = await useCustomFetch<Product>(`/v1/collections/${productId}`)
+  const { data, error } = await useCustomFetch<Product>(`/v1/products/${productId}`)
   if (error.value) {
     // todo: toast
   } else if (data.value) {
@@ -41,7 +41,7 @@ if (productId) {
     productFormState.value.price = data.value.price
     productFormState.value.descriptions = data.value.descriptions
     productFormState.value.preview_pic = [data.value.preview_pic]
-    productFormState.value.pictures = data.value.pictures
+    productFormState.value.pictures = data.value.pictures.map(o => o.url)
   }
 }
 
@@ -70,7 +70,7 @@ async function submitSaveProduct() {
   }
   const url = productId ? `/v1/products/${productId}` : '/v1/products/'
   const method = productId ? 'put' : 'post'
-  const { data, error } = useCustomFetch(url, {
+  const { data, error } = await useCustomFetch(url, {
     method,
     body: productData,
   })

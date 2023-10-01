@@ -36,7 +36,7 @@ definePageMeta({
     <div class="text-2xl font-bold">Config Home Site</div>
 
     <div class="my-5 font-medium text-gray-700 dark:text-gray-200">Home Video</div>
-    <video controls class="w-full h-auto mb-3">
+    <video controls class="w-full lg:w-1/2 h-auto mb-3">
       <source :src="videoSrc" type="video/mp4">
     </video>
     <UButton label="Upload new Video" @click="openSelectVideo" />
