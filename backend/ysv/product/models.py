@@ -9,13 +9,22 @@ if TYPE_CHECKING:
     from ysv.collection.models import Collection
 
 
+class ProductPicture(Base):
+    __tablename__ = "product_picture"
+
+    product_id: Mapped[str] = mapped_column(ForeignKey("product.id"))
+    product: Mapped["Product"] = relationship(back_populates="pictures")
+    url: Mapped[str]
+
+
 class Product(Base):
     __tablename__ = "product"
 
     collection_id: Mapped[str] = mapped_column(ForeignKey("collection.id"))
-    collection: Mapped["Collection"] = relationship(cascade="all, delete-orphan")
+    collection: Mapped["Collection"] = relationship(back_populates="products")
     name: Mapped[str]
+    is_available: Mapped[bool] = mapped_column(default=True)
     price: Mapped[int]
     descriptions: Mapped[str]
     preview_pic: Mapped[str]
-    is_available: Mapped[bool] = mapped_column(default=True)
+    pictures: Mapped[list["ProductPicture"]] = relationship(back_populates="product")

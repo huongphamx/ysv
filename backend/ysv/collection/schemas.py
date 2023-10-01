@@ -18,3 +18,10 @@ class CollectionCreate(BaseModel):
     descriptions: str
     preview_pic: HttpUrl
     is_on_sale: bool = True
+
+
+class CollectionUpdate(BaseModel):
+    name: str
+    descriptions: str
+    preview_pic: HttpUrl
+    is_on_sale: bool

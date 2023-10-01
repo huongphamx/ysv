@@ -22,7 +22,7 @@ export function useCustomFetch<T>(url: string, options: UseFetchOptions<T> = {})
 
     onResponseError(_ctx) {
       if (_ctx.response.status === 401 || _ctx.response.status === 403) {
-        navigateTo('/login')
+        navigateTo('/admin/login')
       }
     }
   }

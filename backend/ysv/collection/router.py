@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ysv.database.session import get_async_db
 from ysv.user.deps import current_admin
 from .models import Collection
-from .schemas import CollectionCreate, CollectionRead
+from .schemas import CollectionCreate, CollectionRead, CollectionUpdate
 
 router = APIRouter()
 
@@ -43,6 +43,41 @@ async def create_collection(
     await db.refresh(collection_obj)
 
     return collection_obj
+
+
+@router.get("/{collection_id}", response_model=CollectionRead)
+async def read_collection(
+    *, db: AsyncSession = Depends(get_async_db), collection_id: str
+):
+    collection_db = await db.scalar(
+        select(Collection).where(Collection.id == collection_id)
+    )
+    return collection_db
+
+
+@router.put("/{collection_id}", status_code=status.HTTP_200_OK)
+async def update_collection(
+    *,
+    db: AsyncSession = Depends(get_async_db),
+    collection_id: str,
+    collection_data: CollectionUpdate,
+):
+    collection_db = await db.scalar(
+        select(Collection).where(Collection.id == collection_id)
+    )
+    if collection_db is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="COLLECTION_NOT_EXISTED"
+        )
+    collection_db.name = collection_data.name
+    collection_db.descriptions = collection_data.descriptions
+    collection_db.is_on_sale = collection_data.is_on_sale
+    collection_db.preview_pic = collection_data.preview_pic.unicode_string()
+
+    db.add(collection_db)
+    await db.commit()
+
+    return {"detail": "COLLECTION_UPDATED"}
 
 
 @router.delete(

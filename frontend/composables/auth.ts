@@ -1,5 +1,6 @@
 export const useIsLoggedIn = () => useState<boolean>('is-logged-in', () => false)
-export const useAccessToken = () => useCookie('access_token', { maxAge: 3600 })
+export const useAccessTokenCookie = () => useCookie('access_token', { maxAge: 3600 })
+export const useAccessToken = () => useState<string>('access-token')
 
 // export async function logOut() {
 //   const isLoggedIn = useIsLoggedIn()

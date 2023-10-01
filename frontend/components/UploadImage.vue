@@ -44,7 +44,8 @@ const { isRevealed: isShowedDeleteImage, reveal: showDeleteImage, confirm: confi
 async function deleteImage(url: string) {
   const { data: isConfirmed, isCanceled } = await showDeleteImage()
   if (!isCanceled && isConfirmed) {
-    const { data, error } = useCustomFetch(`/v1/media/${url}`, {
+    const imgObjectKey = url.split('/').pop()
+    const { data, error } = useCustomFetch(`/v1/media/${imgObjectKey}`, {
       method: 'delete'
     })
     if (error.value) {
@@ -66,10 +67,10 @@ async function deleteImage(url: string) {
           <img :src="url" alt="Uploading Image" class="h-[200px] group-hover:opacity-50">
           <UButton icon="i-ph-trash" size="lg" color="red"
             class="invisible group-hover:visible absolute top-1/2 right-1/2 translate-x-1/2" @click="deleteImage(url)" />
-          <UModal :modelValue="isShowedDeleteImage" prevent-close :transition="false" :overlay="false">
+          <UModal :modelValue="isShowedDeleteImage" prevent-close :transition="false">
             <div class="p-5">
-              <div class="text-center text-2xl font-bold">Delete this collection?</div>
-              <div class="my-5 text-center">Deleted collection can not be recovered.
+              <div class="text-center text-2xl font-bold">Delete this image?</div>
+              <div class="my-5 text-center">Deleted image can not be recovered.
                 Are you sure you want to delete?
               </div>
               <div class="flex justify-center gap-5">
