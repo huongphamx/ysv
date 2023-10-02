@@ -16,7 +16,7 @@ definePageMeta({
     </div>
     <div class="my-5 flex gap-5">
       <div class="w-1/3 text-center">
-        <div class="text-4xl">SIZE GUIDE</div>
+        <div class="text-4xl font-['Italiana']">SIZE GUIDE</div>
         <div class="my-5 text-xl">THE CHART BELOW PROVIDES DETAILED MEASUREMENTS OF THIS GARMENT</div>
         <div>
           <table class="w-full">
@@ -54,7 +54,7 @@ definePageMeta({
         </div>
       </div>
       <div class="w-2/3 text-center">
-        <div class="text-4xl">SIZE CONVERSION</div>
+        <div class="text-4xl font-['Italiana']">SIZE CONVERSION</div>
         <div class="my-5 text-xl">INTERNATIONAL SIZING CONVERSIONS <br> TO HELP SELECT YOUR CORRECT SIZE</div>
         <div>
           <table class="w-4/5 mx-auto">

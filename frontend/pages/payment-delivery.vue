@@ -17,7 +17,7 @@ definePageMeta({
     <div class="my-5 flex gap-5 justify-center">
       <div class="max-w-[412px]">
         <NuxtPicture src="/img/delivery-01.webp" />
-        <div class="text-4xl my-6">DELIVERY/SHIPPING</div>
+        <div class="text-4xl my-6 font-['Italiana']">DELIVERY/SHIPPING</div>
         <div class="text-xl my-6">AFTER “PLACING AN ORDER” WE WILL CONTACT YOU WITHIN 24 HOURS.</div>
         <div class="text-xl my-6">DELIVERY SHIPPING IN UAE WITHIN 1-3 DAYS STARTS FROM 4 $ -15 $</div>
         <div class="text-xl my-6">WORLDWIDE SHIPPING STARTS FROM 54 $ DEPENDING ON YOUR COUNTRY AND DELIVERY COMPANY.

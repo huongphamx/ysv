@@ -5,9 +5,9 @@
 
 <template>
   <div class="border-t py-2">
-    <div class="mycontainer mx-auto grid grid-cols-4">
-      <div>
-        <div class="my-4 text-2xl font-['Italiana']">YSV</div>
+    <div class="mycontainer mx-auto grid grid-cols-2 lg:grid-cols-4">
+      <div class="text-sm lg:text-md">
+        <div class="my-4 text-xl lg:text-2xl font-['Italiana']">YSV</div>
         <div>
           <NuxtLink to="/lookbook">LOOKBOOK</NuxtLink>
         </div>
@@ -27,8 +27,8 @@
           <div>ALL RIGHTS RESERVED</div>
         </div>
       </div>
-      <div>
-        <div class="my-4 text-2xl font-['Italiana']">FOR CLIENT</div>
+      <div class="text-sm lg:text-md">
+        <div class="my-4 text-xl lg:text-2xl font-['Italiana']">FOR CLIENT</div>
         <div>
           <NuxtLink to="/about">ABOUT</NuxtLink>
         </div>
@@ -45,8 +45,8 @@
           <NuxtLink to="/privacy-policy">PRIVACY POLICY</NuxtLink>
         </div>
       </div>
-      <div>
-        <div class="my-4 text-2xl font-['Italiana']">JOIN US</div>
+      <div class="text-sm lg:text-md">
+        <div class="my-4 text-xl lg:text-2xl font-['Italiana']">JOIN US</div>
         <div><a href="https://instagram.com" target="_blank">INSTAGRAM</a></div>
         <div><a href="https://youtube.com" target="_blank">YOUTUBE</a></div>
         <div><a href="https://whatsapp.com" target="_blank">WHATSAPP</a></div>
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div>
-        <div class="my-4 text-2xl font-['Italiana']">SUBSCRIBE</div>
+        <div class="my-4 text-xl lg:text-2xl font-['Italiana']">SUBSCRIBE</div>
         <div class="flex">
           <UInput placeholder="YOUR EMAIL" :ui="{ rounded: '' }" />
           <UButton icon="i-ph-arrow-down-right" variant="outline" color="gray" :ui="{ rounded: '' }" />
