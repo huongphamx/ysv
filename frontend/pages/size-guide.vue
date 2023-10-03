@@ -7,18 +7,17 @@ definePageMeta({
 
 <template>
   <div class="mt-5 mb-24 mycontainer mx-auto">
-    <div>
-      <NuxtLink to="/">
-        <div class="flex items-center gap-2">
-          <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>GO BACK</span>
-        </div>
-      </NuxtLink>
+
+    <div class="hidden lg:flex items-center gap-2 hover:cursor-pointer" @click="$router.back()">
+      <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>GO BACK</span>
     </div>
-    <div class="my-5 flex gap-5">
-      <div class="w-1/3 text-center">
-        <div class="text-4xl font-['Italiana']">SIZE GUIDE</div>
-        <div class="my-5 text-xl">THE CHART BELOW PROVIDES DETAILED MEASUREMENTS OF THIS GARMENT</div>
-        <div>
+
+    <div class="my-5 2xl:flex">
+      <div class="my-5 text-center 2xl:w-1/3">
+        <div class="text-xl md:text-3xl lg:text-4xl font-['Italiana']">SIZE GUIDE</div>
+        <div class="my-5 text-sm md:text-lg 2xl:text-xl">THE CHART BELOW PROVIDES DETAILED MEASUREMENTS OF THIS GARMENT
+        </div>
+        <div class="text-xs sm:text-sm md:text-base">
           <table class="w-full">
             <tr>
               <th>SIZE</th>
@@ -53,10 +52,11 @@ definePageMeta({
           </table>
         </div>
       </div>
-      <div class="w-2/3 text-center">
-        <div class="text-4xl font-['Italiana']">SIZE CONVERSION</div>
-        <div class="my-5 text-xl">INTERNATIONAL SIZING CONVERSIONS <br> TO HELP SELECT YOUR CORRECT SIZE</div>
-        <div>
+      <div class="my-5 text-center 2xl:w-2/3">
+        <div class="text-xl md:text-3xl lg:text-4xl font-['Italiana']">SIZE CONVERSION</div>
+        <div class="my-5 text-sm md:text-lg 2xl:text-xl">INTERNATIONAL SIZING CONVERSIONS <br> TO HELP SELECT YOUR CORRECT
+          SIZE</div>
+        <div class="text-[8px] md:text-base">
           <table class="w-4/5 mx-auto">
             <tr>
               <th>SIZE</th>

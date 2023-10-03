@@ -5,6 +5,24 @@ from pydantic import BaseModel
 from ysv.collection.schemas import CollectionRead
 
 
+class ProductSizeVariantCreate(BaseModel):
+    id: str
+    clothes_size_id: str
+    is_pre_order: bool = False
+
+
+class ProductSizeVariantUpdate(BaseModel):
+    id: str
+    is_pre_order: bool = False
+
+
+class ProductSizeVariantRead(BaseModel):
+    id: uuid.UUID
+    product_id: uuid.UUID
+    clothes_size_id: uuid.UUID
+    is_pre_order: bool
+
+
 class ProductCreate(BaseModel):
     collection_id: str
     name: str
@@ -13,6 +31,7 @@ class ProductCreate(BaseModel):
     descriptions: str
     preview_pic: str
     pictures: list[str]
+    size_variants: list[ProductSizeVariantCreate]
 
 
 class ProductPictureRead(BaseModel):
@@ -33,6 +52,7 @@ class ProductRead(BaseModel):
 
 class ProductDetailRead(ProductRead):
     pictures: list[ProductPictureRead]
+    size_variants: list[ProductSizeVariantRead]
 
 
 class ProductUpdate(BaseModel):
@@ -43,3 +63,4 @@ class ProductUpdate(BaseModel):
     descriptions: str
     preview_pic: str
     pictures: list[str]
+    size_variants: list[ProductSizeVariantUpdate]

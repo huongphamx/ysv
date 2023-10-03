@@ -1,0 +1,62 @@
+<script setup lang="ts">
+import { ProductVariant, ProductVariantExtended } from '@/types'
+
+const props = defineProps<{
+  variants: ProductVariant[],
+}>()
+
+const selectedProductVariant = useSelectedProductVariant()
+
+const sizeList = useSizeList()
+await getSizeList()
+const sizeOrder = ['XS', 'S', 'M', 'L'];
+
+const unSortedSizeVariants = props.variants.map(v => {
+  return {
+    id: v.id,
+    size: sizeList.value.find(s => s.id === v.clothes_size_id)?.label!,
+    product_id: v.product_id,
+    clothes_size_id: v.clothes_size_id,
+    is_pre_order: v.is_pre_order,
+    standard_tall: sizeList.value.find(s => s.id === v.clothes_size_id)?.standard_tall!
+  }
+})
+const sortedSizeVariants: ProductVariantExtended[] = unSortedSizeVariants.sort((a, b) => {
+  const sizeA = sizeOrder.indexOf(a.size)
+  const sizeB = sizeOrder.indexOf(b.size)
+
+  return sizeA - sizeB
+})
+
+const selectSize = (v: ProductVariantExtended) => {
+  selectedProductVariant.value = v
+  console.log(v)
+}
+</script>
+
+<template>
+  <div class="my-5">
+    <table class="border-collapse border">
+      <tr>
+        <td v-for="v in sortedSizeVariants.slice(0, 2)" :key="v.id"
+          class="w-[150px] h-[70px] border-2 text-center hover:cursor-pointer group relative"
+          :class="{ 'bg-gray-200': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+          <div class="group-hover:hidden">{{ v.size }}</div>
+          <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
+        </td>
+      </tr>
+      <tr>
+        <td v-for="v in sortedSizeVariants.slice(2, 4)" :key="v.id"
+          class="w-[150px] h-[70px] border-2 text-center hover:cursor-pointer group relative"
+          :class="{ 'bg-gray-200': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+          <div class="group-hover:hidden">{{ v.size }}</div>
+          <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
+        </td>
+      </tr>
+    </table>
+    <div class="my-2 underline text-gray-500">
+      <NuxtLink to="/size-guide">SIZE GUIDE</NuxtLink>
+    </div>
+  </div>
+</template>
+

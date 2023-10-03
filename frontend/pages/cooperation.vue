@@ -8,11 +8,9 @@ definePageMeta({
 <template>
   <div class="mt-5 mb-24 mycontainer mx-auto">
     <div class="my-6 hidden xl:block">
-      <NuxtLink to="/">
-        <div class="flex items-center gap-2">
-          <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>GO BACK</span>
-        </div>
-      </NuxtLink>
+      <div class="flex items-center gap-2 hover:cursor-pointer" @click="$router.back()">
+        <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>GO BACK</span>
+      </div>
     </div>
     <div class="relative">
       <img src="/img/cooperation-hero.webp" alt="" class="cooperation-hero">

@@ -15,10 +15,6 @@ const links = [{
   label: 'Home site',
   icon: 'i-ph-house',
   to: '/admin/home-site'
-}, {
-  label: 'Event site',
-  icon: 'i-ph-clock',
-  to: '/admin/event-site'
 },]
 </script>
 

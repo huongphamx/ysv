@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ysv.database.session import get_async_db
 from ysv.user.deps import current_admin
+from ysv.product.size.models import ProductSizeVariant
 from .models import Product, ProductPicture
 from .schemas import ProductCreate, ProductRead, ProductDetailRead, ProductUpdate
 
@@ -34,6 +35,13 @@ async def create_product(
     for url in product_in.pictures:
         picture_obj = ProductPicture(url=url)
         product_obj.pictures.append(picture_obj)
+    for variant in product_in.size_variants:
+        variant_obj = ProductSizeVariant(
+            id=variant.id,
+            clothes_size_id=variant.clothes_size_id,
+            is_pre_order=variant.is_pre_order,
+        )
+        product_obj.size_variants.append(variant_obj)
 
     db.add(product_obj)
     await db.commit()
@@ -47,6 +55,7 @@ async def read_product(*, db: AsyncSession = Depends(get_async_db), product_id: 
         .where(Product.id == product_id)
         .options(selectinload(Product.collection))
         .options(selectinload(Product.pictures))
+        .options(selectinload(Product.size_variants))
     )
     if product_db is None:
         raise HTTPException(
@@ -95,6 +104,15 @@ async def update_product(
         picture_obj = ProductPicture(url=url)
         product_db.pictures.append(picture_obj)
 
+    for variant in product_data.size_variants:
+        variant_db = await db.scalar(
+            select(ProductSizeVariant).where(ProductSizeVariant.id == variant.id)
+        )
+        if variant_db is None:
+            pass
+        variant_db.is_pre_order = variant.is_pre_order
+        db.add(variant_db)
+
     db.add(product_db)
     await db.commit()
 
@@ -113,5 +131,6 @@ async def delete_product(*, db: AsyncSession = Depends(get_async_db), product_id
             status_code=status.HTTP_404_NOT_FOUND, detail="PRODUCT_NOT_EXISTED"
         )
     await db.delete(product_db)
+    await db.commit()
 
     return {"detail": "PRODUCT_DELETED"}

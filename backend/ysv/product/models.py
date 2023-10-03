@@ -7,6 +7,7 @@ from ysv.database.base_model import Base
 
 if TYPE_CHECKING:
     from ysv.collection.models import Collection
+    from ysv.product.size.models import ProductSizeVariant
 
 
 class ProductPicture(Base):
@@ -27,4 +28,7 @@ class Product(Base):
     price: Mapped[int]
     descriptions: Mapped[str]
     preview_pic: Mapped[str]
-    pictures: Mapped[list["ProductPicture"]] = relationship(back_populates="product")
+    pictures: Mapped[list["ProductPicture"]] = relationship(
+        back_populates="product", cascade="all, delete-orphan"
+    )
+    size_variants: Mapped[list["ProductSizeVariant"]] = relationship()

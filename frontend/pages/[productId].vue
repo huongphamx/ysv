@@ -3,19 +3,20 @@ import { Product } from '@/types'
 
 const { params } = useRoute()
 const productId = params.productId as string
+const currentProduct = useCurrentProduct()
 
-const productDetail = ref<Product>()
 const { data, error } = await useCustomFetch<Product>(`/v1/products/${productId}`)
 if (error.value) {
   // todo: toast
+  // todo: if product not found, raise 404 page
 } else if (data.value) {
-  productDetail.value = data.value
+  currentProduct.value = data.value
 }
-const showedBigPicture = ref(productDetail.value?.pictures[0].url)
+const showedBigPicture = ref(currentProduct.value?.pictures[0].url)
 
 const startPictureIndex = ref(0)
 const nextPicture = () => {
-  if (startPictureIndex.value + 4 >= productDetail.value?.pictures.length!) return
+  if (startPictureIndex.value + 4 >= currentProduct.value?.pictures.length!) return
   startPictureIndex.value += 1
 }
 const prePicture = () => {
@@ -23,10 +24,8 @@ const prePicture = () => {
   startPictureIndex.value -= 1
 }
 const showedSmallPictures = computed(() => {
-  return productDetail.value?.pictures.slice(startPictureIndex.value, startPictureIndex.value + 4)
+  return currentProduct.value?.pictures.slice(startPictureIndex.value, startPictureIndex.value + 4)
 })
-
-const selectedSize = ref('xs') // todo: replace with actual size
 
 definePageMeta({
   layout: 'default-line-header',
@@ -58,46 +57,20 @@ definePageMeta({
 
       <div id="product-preview-picture">
         <img :src="showedBigPicture" alt="Product proview picture" class="w-[411px]">
-        <div class="my-4 flex gap-5">
-          <UButton label="ADD TO CART" trailing-icon="i-ph-arrow-down-right" color="gray"
-            :ui="{ rounded: '', padding: { 'sm': 'px-16' } }" />
-          <UButton icon="i-ph-heart" color="gray" :ui="{ rounded: '' }" />
-        </div>
-        <div class="underline text-gray-500"><a href="https://whatsapp.com" target="_blank">CONTACT VIA WHATSAPP</a></div>
+        <ProductAddToCart />
       </div>
 
       <div class="max-w-[412px]">
         <div class="text-4xl font-['Italiana']">
-          {{ productDetail?.collection.name.toUpperCase() }}
+          {{ currentProduct?.collection.name.toUpperCase() }}
         </div>
-        <div class="my-5 text-gray-500">AVAILABLE COLORS: {{ productDetail?.name.toUpperCase() }}</div>
-        <div class="my-8 text-4xl">${{ productDetail?.price }}</div>
+        <div class="my-5 text-gray-500">AVAILABLE COLORS: {{ currentProduct?.name.toUpperCase() }}</div>
+        <div class="my-8 text-4xl">${{ currentProduct?.price }}</div>
         <div class="px-5">
-          <li v-for="d, i in productDetail?.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
+          <li v-for="d, i in currentProduct?.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
         </div>
 
-        <!-- <div class="my-5 grid grid-cols-3 w-fit">
-          <div class="w-[100px] h-[70px] border flex justify-center items-center">XS</div>
-          <div class="w-[100px] h-[70px] border flex justify-center items-center">S</div>
-          <div class="w-[100px] h-[70px] border flex justify-center items-center">M</div>
-          <div class="w-[100px] h-[70px] border flex justify-center items-center">L</div>
-        </div> -->
-        <div>
-          <table class="border-collapse border">
-            <tr>
-              <td class="w-[100px] h-[70px] border-2 text-center hover:cursor-pointer hover:bg-gray-500"
-                @click="selectedSize = 'xs'" :class="{ 'bg-gray-500': selectedSize === 'xs' }">XS
-              </td>
-              <td class="w-[100px] h-[70px] border-2 text-center hover:cursor-pointer hover:bg-gray-500">S</td>
-              <td class="w-[100px] h-[70px] border-2 text-center hover:cursor-pointer hover:bg-gray-500">M</td>
-            </tr>
-            <tr>
-              <td class="w-[100px] h-[70px] border-2 text-center hover:cursor-pointer hover:bg-gray-500">L</td>
-              <td class="w-[100px] h-[70px] border-2 text-center hover:cursor-pointer hover:bg-gray-500">XL</td>
-              <td class="w-[100px] h-[70px] border-2 text-center hover:cursor-pointer hover:bg-gray-500">XXL</td>
-            </tr>
-          </table>
-        </div>
+        <ProductSizeTable :variants="currentProduct?.size_variants!" />
       </div>
 
       <div>

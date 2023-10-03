@@ -1,14 +1,43 @@
 <script setup lang="ts">
 import { object, string, number, array, boolean } from 'yup'
+import { v4 as uuidv4 } from 'uuid'
 import { Product } from '@/types'
 
 const collectionList = useCollectionList()
 getCollectionList()
+const sizeList = useSizeList()
+await getSizeList()
+const sizeOrder = ['XS', 'S', 'M', 'L'];
 
 const { params } = useRoute()
 const productId = params.id
 
 const title = productId ? 'Edit Product' : 'Create new Product'
+
+const sizeVariants = ref([{
+  id: uuidv4(),
+  size: 'XS',
+  is_pre_order: false
+}, {
+  id: uuidv4(),
+  size: 'S',
+  is_pre_order: false
+}, {
+  id: uuidv4(),
+  size: 'M',
+  is_pre_order: false
+}, {
+  id: uuidv4(),
+  size: 'L',
+  is_pre_order: true
+},])
+const sizeTableCols = [{
+  key: 'size',
+  label: 'Size',
+}, {
+  key: 'is_pre_order',
+  label: 'Is pre-order',
+},]
 
 const productForm = ref()
 const productFormState = ref({
@@ -42,6 +71,19 @@ if (productId) {
     productFormState.value.descriptions = data.value.descriptions
     productFormState.value.preview_pic = [data.value.preview_pic]
     productFormState.value.pictures = data.value.pictures.map(o => o.url)
+    const unSortedSizeVariants = data.value.size_variants.map(v => {
+      return {
+        id: v.id,
+        size: sizeList.value.find(s => s.id === v.clothes_size_id)?.label!,
+        is_pre_order: v.is_pre_order
+      }
+    })
+    sizeVariants.value = unSortedSizeVariants.sort((a, b) => {
+      const sizeA = sizeOrder.indexOf(a.size)
+      const sizeB = sizeOrder.indexOf(b.size)
+
+      return sizeA - sizeB
+    })
   }
 }
 
@@ -67,6 +109,13 @@ async function submitSaveProduct() {
     descriptions: productFormState.value.descriptions,
     preview_pic: productFormState.value.preview_pic[0],
     pictures: productFormState.value.pictures,
+    size_variants: sizeVariants.value.map((size) => {
+      return {
+        id: size.id,
+        is_pre_order: size.is_pre_order,
+        clothes_size_id: sizeList.value.find(s => s.label === size.size)?.id
+      }
+    }),
   }
   const url = productId ? `/v1/products/${productId}` : '/v1/products/'
   const method = productId ? 'put' : 'post'
@@ -92,7 +141,7 @@ definePageMeta({
       <UButton label="Back" icon="i-ph-arrow-left" to="/admin/products/" variant="ghost" color="gray" /> {{ title }}
     </div>
     <div class="lg:w-2/3 my-5 p-2 border border-gray-500 rounded-lg">
-      <UForm ref="productForm" :state="productFormState" :schema="productFormSchema" :validate-on="['submit']"
+      <UForm ref="productForm" :state="productFormState" :schema="productFormSchema" :validate-on="['submit', 'input']"
         @submit="submitSaveProduct" class="flex flex-col gap-3">
         <UFormGroup name="collection_id" required label="Collection">
           <USelectMenu placeholder="Select Collection" v-model="productFormState.collection_id" :options="collectionList"
@@ -128,6 +177,13 @@ definePageMeta({
         <UploadImage v-model="productFormState.pictures" />
         <div v-if="imageUrlsError" class="mt-2 text-red-500 dark:text-red-400 text-sm">{{ imageUrlsError }}</div>
         <div v-else class="text-sm">Hold 'Cmd (Ctrl on Windows)' to choose multiple pictures</div>
+
+        <div class="text-sm font-medium text-gray-700 dark:text-gray-200">Config Available Size of Product</div>
+        <UTable :rows="sizeVariants" :columns="sizeTableCols">
+          <template #is_pre_order-data="{ row }">
+            <UToggle v-model="row.is_pre_order" />
+          </template>
+        </UTable>
 
         <div class="flex gap-3">
           <UButton type="submit" label="Save Product" />

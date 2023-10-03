@@ -37,8 +37,9 @@ async def init_clothes_sizes():
         sizes = (await db.scalars(select(ClothesSize))).all()
         if len(sizes) == 0:
             sizes = ["XS", "S", "M", "L"]
-            for size in sizes:
-                size_obj = ClothesSize(label=size)
+            standard_talls = ["158-168", "163-174", "169-180", "169-180"]
+            for size, standard_tall in zip(sizes, standard_talls):
+                size_obj = ClothesSize(label=size, standard_tall=standard_tall)
                 db.add(size_obj)
             await db.commit()
 

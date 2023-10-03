@@ -4,6 +4,7 @@ export interface FetchProductParams {
   collection_id?: string,
 }
 
+export const useCurrentProduct = () => useState<Product | null>('current-product', () => null)
 export const useProductList = () => useState<Product[]>('product-list', () => [])
 
 export async function getProductList(params?: FetchProductParams) {

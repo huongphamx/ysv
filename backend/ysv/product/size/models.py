@@ -1,5 +1,5 @@
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Table, Column, ForeignKey, Boolean
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ysv.database.base_model import Base
 
@@ -8,12 +8,15 @@ class ClothesSize(Base):
     __tablename__ = "clothes_size"
 
     label: Mapped[str] = mapped_column(String(3))
-    # bust: Mapped[str]
-    # waist: Mapped[str]
-    # hips: Mapped[str]
-    # converse_to_us: Mapped[str]
-    # converse_to_uk_aus: Mapped[str]
-    # converse_to_france: Mapped[str]
-    # converse_to_italy: Mapped[str]
-    # converse_to_japan: Mapped[str]
-    # converse_to_denmark: Mapped[str]
+    standard_tall: Mapped[str] = mapped_column(nullable=True)
+
+
+class ProductSizeVariant(Base):
+    __tablename__ = "product_size_variant"
+
+    product_id: Mapped[str] = mapped_column(ForeignKey("product.id"), primary_key=True)
+    clothes_size_id: Mapped[str] = mapped_column(
+        ForeignKey("clothes_size.id"), primary_key=True
+    )
+    is_pre_order: Mapped[bool] = mapped_column(default=False)
+    size_variants: Mapped["ClothesSize"] = relationship()
