@@ -11,12 +11,13 @@ export interface ProductVariantExtended extends ProductVariant {
 }
 
 export interface CartItem {
-  collection_name: string,
-  product_variant_id: string,
-  product_variant_name: string,
-  product_variant_size: string,
-  product_preview_pic: string,
-  product_price: number,
+  quantity: number,
+  id: string,
+  preview_pic: string,
+  collection: string,
+  price: number,
+  color: string,
+  size: string,
 }
 
 export interface Collection {

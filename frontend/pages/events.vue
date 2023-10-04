@@ -82,6 +82,7 @@
 
 .text-hero {
   font-size: 60px;
+  line-height: 100%;
 }
 
 .event-text-1 {

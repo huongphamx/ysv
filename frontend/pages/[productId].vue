@@ -3,20 +3,20 @@ import { Product } from '@/types'
 
 const { params } = useRoute()
 const productId = params.productId as string
-const currentProduct = useCurrentProduct()
+const productData = ref<Product>()
 
 const { data, error } = await useCustomFetch<Product>(`/v1/products/${productId}`)
 if (error.value) {
   // todo: toast
   // todo: if product not found, raise 404 page
 } else if (data.value) {
-  currentProduct.value = data.value
+  productData.value = data.value
 }
-const showedBigPicture = ref(currentProduct.value?.pictures[0].url)
+const showedBigPicture = ref(productData.value?.pictures[0].url)
 
 const startPictureIndex = ref(0)
 const nextPicture = () => {
-  if (startPictureIndex.value + 4 >= currentProduct.value?.pictures.length!) return
+  if (startPictureIndex.value + 4 >= productData.value?.pictures.length!) return
   startPictureIndex.value += 1
 }
 const prePicture = () => {
@@ -24,7 +24,7 @@ const prePicture = () => {
   startPictureIndex.value -= 1
 }
 const showedSmallPictures = computed(() => {
-  return currentProduct.value?.pictures.slice(startPictureIndex.value, startPictureIndex.value + 4)
+  return productData.value?.pictures.slice(startPictureIndex.value, startPictureIndex.value + 4)
 })
 
 definePageMeta({
@@ -62,15 +62,15 @@ definePageMeta({
 
       <div class="max-w-[412px]">
         <div class="text-4xl font-['Italiana']">
-          {{ currentProduct?.collection.name.toUpperCase() }}
+          {{ productData?.collection.name.toUpperCase() }}
         </div>
-        <div class="my-5 text-gray-500">AVAILABLE COLORS: {{ currentProduct?.name.toUpperCase() }}</div>
-        <div class="my-8 text-4xl">${{ currentProduct?.price }}</div>
+        <div class="my-5 text-gray-500">AVAILABLE COLORS: {{ productData?.name.toUpperCase() }}</div>
+        <div class="my-8 text-4xl">${{ productData?.price }}</div>
         <div class="px-5">
-          <li v-for="d, i in currentProduct?.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
+          <li v-for="d, i in productData?.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
         </div>
 
-        <ProductSizeTable :variants="currentProduct?.size_variants!" />
+        <ProductSizeTable :variants="productData?.size_variants!" />
       </div>
 
       <div>

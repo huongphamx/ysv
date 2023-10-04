@@ -30,7 +30,6 @@ const sortedSizeVariants: ProductVariantExtended[] = unSortedSizeVariants.sort((
 
 const selectSize = (v: ProductVariantExtended) => {
   selectedProductVariant.value = v
-  console.log(v)
 }
 </script>
 

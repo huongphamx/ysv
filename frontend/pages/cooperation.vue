@@ -14,7 +14,7 @@ definePageMeta({
     </div>
     <div class="relative">
       <img src="/img/cooperation-hero.webp" alt="" class="cooperation-hero">
-      <div class="absolute w-full top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-center">
+      <div class="absolute w-full top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-center text-white">
         <div class="cooperation-text-1 font-['Italiana']">LET'S WORK TOGETHER</div>
         <div class="mt-2 cooperation-email">FOR COOPERATION DROP A MESSAGE ON</div>
         <div class="cooperation-email">ysv.shukshina@gmail.com</div>

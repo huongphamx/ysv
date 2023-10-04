@@ -1,23 +1,22 @@
 <script setup lang="ts">
-import { useCurrentProduct } from '~/composables/product';
-
 const selectedProductVariant = useSelectedProductVariant()
-const cartVariantIds = useCartVariantIdsCookie()
+const cartItemIds = useCartItemIdsCookie()
 const cart = useCart()
-const currentProduct = useCurrentProduct()
 
 const addToCart = () => {
-  cart.value.push(
-    {
-      product_variant_id: selectedProductVariant.value?.id!,
-      collection_name: currentProduct.value?.collection.name!,
-      product_variant_name: currentProduct.value?.name!,
-      product_variant_size: selectedProductVariant.value?.size!,
-      product_preview_pic: currentProduct.value?.preview_pic!,
-      product_price: currentProduct.value?.price!,
-    }
-  )
-  cartVariantIds.value.push({ id: selectedProductVariant.value?.id!, quantity: 1 })
+  const existingItemIds = cartItemIds.value.map(i => i.id)
+  if (existingItemIds.includes(selectedProductVariant.value?.id!)) {
+    cartItemIds.value = cartItemIds.value.map(item => {
+      if (item.id === selectedProductVariant.value?.id) {
+        item.quantity += 1
+      }
+      return item
+    })
+    // todo: update cart item quantify
+  } else {
+    cartItemIds.value.push({ id: selectedProductVariant.value?.id!, quantity: 1 })
+    // todo: get item detail from api and add to cart
+  }
 }
 </script>
 
