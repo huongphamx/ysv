@@ -13,8 +13,12 @@ class CommonSettings(BaseSettings):
 
 
 class AwsSettings(BaseSettings):
-    AWS_S3_REGION: str = "ap-northeast-1"
-    AWS_S3_BUCKET: str = "ysv-dev-static-img"
+    AWS_S3_REGION: str
+    AWS_S3_BUCKET: str
+
+
+class StripeSettings(BaseSettings):
+    STRIPE_API_KEY: str
 
 
 class SMTPSettings(BaseSettings):
@@ -31,5 +35,6 @@ class SMTPSettings(BaseSettings):
 
 
 common_settings = CommonSettings()
-aws_settings = AwsSettings()
+aws_settings = AwsSettings()  # type:ignore
+stripe_settings = StripeSettings()  # type:ignore
 smtp_settings = SMTPSettings()

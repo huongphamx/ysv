@@ -28,7 +28,7 @@ async function submitLogin() {
     isLoggedIn.value = true
     accessTokenCookie.value = data.value.access_token
     accessToken.value = data.value.access_token
-    await navigateTo('/admin/')
+    await navigateTo('/admin/products')
   }
 }
 

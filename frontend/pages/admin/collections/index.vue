@@ -19,7 +19,6 @@ const collectionTableCols = [{
 }]
 
 const collectionList = useCollectionList()
-const loadingCollection = useLoadingCollection()
 await getCollectionList()
 
 const { isRevealed: isShowedDeleteCollection, reveal: showDeleteCollection, confirm: confirmDeleteCollection } = useConfirmDialog()
@@ -49,7 +48,7 @@ async function deleteCollection(collectionId: string) {
     </div>
 
     <div>
-      <UTable :columns="collectionTableCols" :rows="collectionList" :loading="loadingCollection">
+      <UTable :columns="collectionTableCols" :rows="collectionList">
         <template #descriptions-data="{ row }: { row: Collection }">
           <div class="h-full">
             <li v-for="d, i in row.descriptions.split(/\r?\n/)" :key="i">{{ d }}</li>

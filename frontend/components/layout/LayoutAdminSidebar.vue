@@ -1,9 +1,5 @@
 <script lang="ts" setup>
 const links = [{
-  label: 'Statistics',
-  icon: 'i-ph-chart-pie',
-  to: '/admin/statistics'
-}, {
   label: 'Collections',
   icon: 'i-ph-books',
   to: '/admin/collections'
@@ -15,7 +11,11 @@ const links = [{
   label: 'Orders',
   icon: 'i-ph-basket',
   to: '/admin/orders'
-}]
+}, {
+  label: 'Home site',
+  icon: 'i-ph-house',
+  to: '/admin/home-site'
+},]
 </script>
 
 
