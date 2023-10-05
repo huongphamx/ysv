@@ -1,4 +1,15 @@
 <script setup lang="ts">
+const props = defineProps({
+  border: {
+    type: Boolean,
+    default: false,
+  },
+  title: {
+    type: String,
+    default: 'YOUR BAG',
+  }
+})
+
 const cart = useCart()
 
 const totalPrice = computed(() => {
@@ -8,12 +19,14 @@ const totalPrice = computed(() => {
   }
   return total
 })
+
+
 </script>
 
 
 <template>
-  <div class="p-3 max-h-[600px] overflow-auto text-black">
-    <div class="text-lg font-['Italiana']">YOUR BAG ({{ cart.length }})</div>
+  <div class="p-3 max-h-[600px] overflow-auto text-black" :class="{ 'border border-black': border }">
+    <div class="text-lg font-['Italiana']"><span>{{ title }}</span> ({{ cart.length }})</div>
     <div class="divide-y">
       <div v-for="item in cart" :key="item.id" class="flex py-4">
         <img :src="item.preview_pic" alt="" class="w-[66px] h-[84px] object-cover">
@@ -36,9 +49,9 @@ const totalPrice = computed(() => {
       </div>
     </div>
 
-    <div class="border-t">
+    <div class="border-t py-4">
       <div class="flex"><span>TOTAL:</span> <span class="ml-auto">${{ totalPrice }}</span></div>
-      <div class="mt-1 text-gray-500 flex"><span>SHIPPING</span> <span class="ml-auto">FREE</span></div>
+      <!-- <div class="mt-1 text-gray-500 flex"><span>SHIPPING</span> <span class="ml-auto">FREE</span></div> -->
     </div>
   </div>
 </template>

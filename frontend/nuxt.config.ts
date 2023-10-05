@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   colorMode: { preference: 'light' },
 
-  css: ['@/assets/css/main.css'],
+  css: ['@/assets/css/main.css', '@/assets/css/image.css'],
 
   ui: {
     icons: ['heroicons', 'ph']

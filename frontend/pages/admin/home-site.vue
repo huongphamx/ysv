@@ -2,7 +2,7 @@
 import { useFileDialog } from '@vueuse/core'
 
 // todo: config s3 base url
-const videoSrc = ref('https://ysv-dev-static-img.s3.ap-northeast-1.amazonaws.com/hero.mp4')
+const videoSrc = ref('https://ysv-dev.s3.ap-northeast-1.amazonaws.com/hero.mp4')
 
 const { open: openSelectVideo, onChange: onChangeVideo } = useFileDialog({ accept: 'video/mp4' })
 onChangeVideo(async (files) => {
@@ -19,7 +19,7 @@ onChangeVideo(async (files) => {
     if (error.value) {
       // todo: toast
     } else if (data.value) {
-      videoSrc.value = 'https://ysv-dev-static-img.s3.ap-northeast-1.amazonaws.com/hero.mp4'
+      videoSrc.value = 'https://ysv-dev.s3.ap-northeast-1.amazonaws.com/hero.mp4'
     }
   }
 })
