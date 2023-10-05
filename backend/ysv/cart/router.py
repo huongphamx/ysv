@@ -39,6 +39,7 @@ async def get_cart_item_list(
         items.append(
             {
                 "id": id,
+                "product_id": product.id,
                 "preview_pic": product.preview_pic,
                 "collection": product.collection.name,
                 "price": product.price,
@@ -76,6 +77,7 @@ async def get_cart_item(
         return None
     return {
         "id": product_size_variant_id,
+        "product_id": product.id,
         "preview_pic": product.preview_pic,
         "collection": product.collection.name,
         "price": product.price,

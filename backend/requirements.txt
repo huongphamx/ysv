@@ -13,3 +13,4 @@ alembic[tz]
 tenacity
 aiobotocore
 fastapi-users[sqlalchemy,redis]
+stripe

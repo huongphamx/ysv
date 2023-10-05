@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { CartItem } from '@/types'
+
 const selectedProductVariant = useSelectedProductVariant()
 const cartItemIds = useCartItemIdsCookie()
 const cart = useCart()
 
-const addToCart = () => {
+const addToCart = async () => {
   const existingItemIds = cartItemIds.value.map(i => i.id)
   if (existingItemIds.includes(selectedProductVariant.value?.id!)) {
     cartItemIds.value = cartItemIds.value.map(item => {
@@ -12,10 +14,20 @@ const addToCart = () => {
       }
       return item
     })
-    // todo: update cart item quantify
+    cart.value = cart.value.map(item => {
+      if (item.id === selectedProductVariant.value?.id) {
+        item.quantity += 1
+      }
+      return item
+    })
   } else {
     cartItemIds.value.push({ id: selectedProductVariant.value?.id!, quantity: 1 })
-    // todo: get item detail from api and add to cart
+    const { data, error } = await useCustomFetch<CartItem>(`/v1/cart/items/${selectedProductVariant.value?.id}`)
+    if (error.value) {
+      // todo: toast
+    } else if (data.value) {
+      cart.value.push({ ...data.value, quantity: 1 })
+    }
   }
 }
 </script>

@@ -13,6 +13,7 @@ export interface ProductVariantExtended extends ProductVariant {
 export interface CartItem {
   quantity: number,
   id: string,
+  product_id: string,
   preview_pic: string,
   collection: string,
   price: number,

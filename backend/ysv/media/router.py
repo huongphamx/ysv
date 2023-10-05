@@ -10,7 +10,9 @@ router = APIRouter()
 
 
 @router.post("/upload", dependencies=[Depends(current_admin)])
-async def upload_media(media_file: UploadFile, object_key: str | None = Body(default=None)):
+async def upload_media(
+    media_file: UploadFile, object_key: str | None = Body(default=None)
+):
     s3_region = aws_settings.AWS_S3_REGION
     s3_bucket = aws_settings.AWS_S3_BUCKET
     _, _, ext = media_file.filename.partition(".")  # type: ignore
@@ -20,7 +22,13 @@ async def upload_media(media_file: UploadFile, object_key: str | None = Body(def
 
     session = get_session()
     async with session.create_client("s3") as client:
-        await client.put_object(Bucket=s3_bucket, Key=object_key, Body=object_data)
+        await client.put_object(
+            ACL="public-read",
+            Bucket=s3_bucket,
+            Key=object_key,
+            Body=object_data,
+            ContentType=media_file.content_type,
+        )
     return f"https://{s3_bucket}.s3.{s3_region}.amazonaws.com/{object_key}"
 
 

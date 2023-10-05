@@ -110,7 +110,7 @@
   object-fit: cover;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 640px) {
   .about-hero {
     width: 420px;
     height: 500px;

@@ -39,7 +39,7 @@ definePageMeta({
   font-size: 14px;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 640px) {
   .cooperation-hero {
     width: 420px;
     height: 500px;

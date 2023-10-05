@@ -35,7 +35,7 @@ definePageMeta({
 
 <template>
   <div class="mycontainer mx-auto pb-10">
-    <NuxtLink to="/collections/">
+    <NuxtLink to="/lookbook">
       <div class="my-5 flex items-center gap-2">
         <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>LOOK ANOTHER COLLECTIONS</span>
       </div>
