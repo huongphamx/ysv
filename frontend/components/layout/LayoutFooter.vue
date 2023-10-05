@@ -38,9 +38,6 @@
         <div>
           <NuxtLink to="/cooperation">COOPERATION</NuxtLink>
         </div>
-        <div>
-          <NuxtLink to="/contact">CONTACT</NuxtLink>
-        </div>
         <div class="my-4 opacity-50">
           <NuxtLink to="/privacy-policy">PRIVACY POLICY</NuxtLink>
         </div>

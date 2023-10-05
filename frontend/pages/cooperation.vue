@@ -2,6 +2,10 @@
 definePageMeta({
   layout: 'default-line-header',
 })
+
+useHead({
+  title: 'Cooperation - YSV'
+})
 </script>
 
 

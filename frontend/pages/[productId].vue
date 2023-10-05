@@ -30,6 +30,10 @@ const showedSmallPictures = computed(() => {
 definePageMeta({
   layout: 'default-line-header',
 })
+
+useHead({
+  title: productData.value ? productData.value.name.toUpperCase() + ' ' + productData.value.collection.name + '- YSV' : 'Product - YSV'
+})
 </script>
 
 

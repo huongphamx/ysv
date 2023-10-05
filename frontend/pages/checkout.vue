@@ -29,6 +29,10 @@ async function submitCheckout() {
   await checkoutForm.value!.validate()
 
 }
+
+useHead({
+  title: 'Checkout - YSV'
+})
 </script>
 
 
