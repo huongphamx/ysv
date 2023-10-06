@@ -2,7 +2,7 @@
 import { object, string } from 'yup'
 import { countriesCode } from '@/countries'
 
-const currentStep = ref(2)
+const currentStep = ref(1)
 
 const cart = useCart()
 

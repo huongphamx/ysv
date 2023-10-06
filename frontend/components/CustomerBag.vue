@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useConfirmDialog } from '@vueuse/core'
+
 const props = defineProps({
   border: {
     type: Boolean,
@@ -11,6 +13,7 @@ const props = defineProps({
 })
 
 const cart = useCart()
+const cartIdCookie = useCartIdCookie()
 
 const totalPrice = computed(() => {
   let total = 0
@@ -20,7 +23,33 @@ const totalPrice = computed(() => {
   return total
 })
 
-
+async function increaseCartItem(itemId: string) {
+  const { error } = await useCustomFetch(`/v1/carts/${cartIdCookie.value}`, {
+    method: 'put',
+    body: { action: 'increase_item', item_id: itemId }
+  })
+  if (!error.value) {
+    await getCartItems()
+  }
+}
+async function decreaseCartItem(itemId: string) {
+  const { error } = await useCustomFetch(`/v1/carts/${cartIdCookie.value}`, {
+    method: 'put',
+    body: { action: 'decrease_item', item_id: itemId }
+  })
+  if (!error.value) {
+    await getCartItems()
+  }
+}
+async function deleteCartItem(itemId: string) {
+  const { error } = await useCustomFetch(`/v1/carts/${cartIdCookie.value}`, {
+    method: 'put',
+    body: { action: 'delete_item', item_id: itemId }
+  })
+  if (!error.value) {
+    await getCartItems()
+  }
+}
 </script>
 
 
@@ -32,18 +61,19 @@ const totalPrice = computed(() => {
         <img :src="item.preview_pic" alt="" class="w-[66px] h-[84px] object-cover">
         <div class="ml-4">
           <NuxtLink :to="`/${item.product_id}`" class="hover:underline">
-            <div class="flex text-[13px] font-bold">
+            <div class="flex text-[13px] font-bold w-[200px]">
               <div>{{ item.collection }}</div>
-              <div class="ml-3">${{ item.price }}</div>
+              <div class="ml-auto">${{ item.price }}</div>
             </div>
             <div class="text-[11px] text-gray-500">COLOR: {{ item.color.toUpperCase() }}</div>
             <div class="text-[11px] text-gray-500">SIZE: {{ item.size }}</div>
           </NuxtLink>
           <div class="flex items-center">
-            <UButton icon="i-ph-minus" size="xs" color="black" :ui="{ rounded: '' }" />
+            <UButton icon="i-ph-minus" size="xs" color="black" :ui="{ rounded: '' }" @click="decreaseCartItem(item.id)" />
             <span class="mx-2">{{ item.quantity }}</span>
-            <UButton icon="i-ph-plus" size="xs" color="black" :ui="{ rounded: '' }" />
-            <UButton icon="i-ph-trash" size="xs" variant="outline" color="black" :ui="{ rounded: '' }" class="ml-auto" />
+            <UButton icon="i-ph-plus" size="xs" color="black" :ui="{ rounded: '' }" @click="increaseCartItem(item.id)" />
+            <UButton icon="i-ph-trash" size="xs" variant="outline" color="black" :ui="{ rounded: '' }" class="ml-auto"
+              @click="deleteCartItem(item.id)" />
           </div>
         </div>
       </div>

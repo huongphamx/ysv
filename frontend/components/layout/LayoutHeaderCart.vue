@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { CartItem } from '@/types'
+import { v4 as uuidv4 } from 'uuid'
 
 const cart = useCart()
-const cartItemIds = useCartItemIdsCookie()
-const itemIds = cartItemIds.value.map(i => i.id)
+const cartIdCookie = useCartIdCookie()
 
-const { data, error } = await useCustomFetch<CartItem[]>(`/v1/cart/items/`, { params: { ids: itemIds } })
-cart.value = data.value!.map(item => {
-  item.quantity = cartItemIds.value.find(i => i.id === item.id)?.quantity!
-  return item
-})
-
-// todo: handle add/remove button
+if (cartIdCookie.value) {
+  await getCartItems()
+} else {
+  const cartId = uuidv4()
+  const { data, error } = await useCustomFetch('/v1/carts/', {
+    method: 'post',
+    body: { cart_id: cartId }
+  })
+  if (error.value) {
+    // todo: toast
+  } else if (data.value) {
+    cartIdCookie.value = cartId
+  }
+}
 </script>
 
 <template>

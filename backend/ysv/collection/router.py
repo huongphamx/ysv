@@ -55,7 +55,11 @@ async def read_collection(
     return collection_db
 
 
-@router.put("/{collection_id}", status_code=status.HTTP_200_OK)
+@router.put(
+    "/{collection_id}",
+    status_code=status.HTTP_200_OK,
+    dependencies=[Depends(current_admin)],
+)
 async def update_collection(
     *,
     db: AsyncSession = Depends(get_async_db),
