@@ -35,6 +35,9 @@ async function submitLogin() {
 definePageMeta({
   layout: 'blank',
 })
+useHead({
+  title: 'Login - Admin'
+})
 </script>
 
 

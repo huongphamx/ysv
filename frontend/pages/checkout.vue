@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { object, string } from 'yup'
+import { object, string, number } from 'yup'
 import { countriesCode } from '@/countries'
 
 const currentStep = ref(1)
 
 const cart = useCart()
+const cartIdCookie = useCartIdCookie()
 
 const checkoutForm = ref()
 const checkoutFormState = ref({
@@ -15,7 +16,7 @@ const checkoutFormState = ref({
   state: '',
   street_address: '',
   zip_code: '',
-  phone_number: '',
+  phone_number: undefined,
 })
 const checkoutFormSchema = object({
   fname: string().required('Enter first name'),
@@ -27,10 +28,32 @@ const checkoutFormSchema = object({
   zip_code: string().required('Enter Zip/Postal code'),
   phone_number: string().required('Enter phone number'),
 })
+const dialCode = computed(() => {
+  return countriesCode.find(c => c.name ===
+    checkoutFormState.value.country)?.dial_code
+})
 
 async function submitCheckoutInfo() {
-  // await checkoutForm.value!.validate()
+  await checkoutForm.value!.validate()
   currentStep.value = 2
+}
+const isWaitingCheckout = ref(false)
+async function checkout() {
+  isWaitingCheckout.value = true
+  const { data, error } = await useCustomFetch<{ checkout_url: string }>('/v1/orders/', {
+    method: 'post',
+    body: {
+      ...checkoutFormState.value,
+      phone_number: dialCode.value + ' ' + checkoutFormState.value.phone_number,
+      cart_id: cartIdCookie.value
+    }
+  })
+  isWaitingCheckout.value = false
+  if (error.value) {
+    //todo: toast
+  } else if (data.value) {
+    window.location.href = data.value.checkout_url
+  }
 }
 
 const totalPrice = computed(() => {
@@ -108,9 +131,8 @@ useHead({
             </UFormGroup>
             <UFormGroup name="phone_number">
               <div class="relative">
-                <AppInput label="PHONE NUMBER" v-model="checkoutFormState.phone_number" class="pl-10" />
-                <span class="absolute top-1/2 left-0">{{ countriesCode.find(c => c.name ===
-                  checkoutFormState.country)?.dial_code
+                <AppInput type="number" label="PHONE NUMBER" v-model="checkoutFormState.phone_number" class="pl-10" />
+                <span class="absolute top-1/2 left-0">{{ dialCode
                 }}</span>
               </div>
             </UFormGroup>
@@ -132,7 +154,8 @@ useHead({
 
         </template>
         <template v-else>
-          <UButton label="CHECKOUT NOW" block :ui="{ rounded: '' }" color="black" class="my-5" />
+          <UButton :loading="isWaitingCheckout" label="CHECKOUT NOW" block :ui="{ rounded: '' }" color="black"
+            class="my-5" @click="checkout" />
           <div class="border border-black p-3">
             <div class="border-b border-gray-500">ORDER SUMMARY</div>
             <div class="mt-4 flex text-gray-500"><span>SUBTOTAL</span><span class="ml-auto">${{ totalPrice }}</span></div>
@@ -158,7 +181,7 @@ useHead({
             <div class="text-gray-500">{{ `${checkoutFormState.city.toUpperCase()}` }}</div>
             <div class="text-gray-500">{{ `${checkoutFormState.state.toUpperCase()}` }}</div>
             <div class="text-gray-500">{{ `${checkoutFormState.street_address.toUpperCase()}` }}</div>
-            <div class="text-gray-500">{{ `PHONE: ${checkoutFormState.phone_number}` }}</div>
+            <div class="text-gray-500">{{ `PHONE: ${dialCode} ${checkoutFormState.phone_number}` }}</div>
           </div>
         </template>
       </div>

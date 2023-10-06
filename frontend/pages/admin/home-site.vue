@@ -28,6 +28,9 @@ definePageMeta({
   layout: 'admin',
   middleware: 'admin',
 })
+useHead({
+  title: 'Home configuration - Admin',
+})
 </script>
 
 

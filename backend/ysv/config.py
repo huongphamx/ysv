@@ -19,6 +19,7 @@ class AwsSettings(BaseSettings):
 
 class StripeSettings(BaseSettings):
     STRIPE_API_KEY: str
+    STRIPE_ENDPOINT_SECRET: str
 
 
 class SMTPSettings(BaseSettings):

@@ -33,6 +33,9 @@ async function deleteCollection(collectionId: string) {
     }
   }
 }
+useHead({
+  title: 'Collection management - Admin'
+})
 </script>
 
 

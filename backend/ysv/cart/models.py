@@ -23,4 +23,4 @@ class CartItem(Base):
 class Cart(Base):
     __tablename__ = "cart"
 
-    cart_items: Mapped[list["CartItem"]] = relationship()
+    cart_items: Mapped[list["CartItem"]] = relationship(cascade="all, delete-orphan")

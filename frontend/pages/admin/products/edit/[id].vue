@@ -133,6 +133,9 @@ async function submitSaveProduct() {
 definePageMeta({
   alias: ['/admin/products/create']
 })
+useHead({
+  title: 'Product management - Admin'
+})
 </script>
 
 <template>

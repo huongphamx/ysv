@@ -53,3 +53,21 @@ export interface ClothesSize {
   label: string,
   standard_tall: string,
 }
+
+export interface OrderItem {
+
+}
+
+export interface Order {
+  id: string,
+  fname: string,
+  lname: string,
+  country: string,
+  city: string,
+  state: string,
+  street_address: string,
+  zip_code: string,
+  phone_number: string,
+  is_paid: boolean,
+  is_delivered: boolean,
+}
