@@ -71,22 +71,6 @@ useHead({
 
 
 <style scoped>
-.img-hero {
-  width: 300px;
-  height: 400px;
-}
-
-.img-mobile {
-  width: 140px;
-  height: 210px;
-  object-fit: cover;
-}
-
-.text-hero {
-  font-size: 60px;
-  line-height: 100%;
-}
-
 .event-text-1 {
   font-size: 14px;
 }

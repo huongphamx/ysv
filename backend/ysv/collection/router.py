@@ -16,8 +16,9 @@ async def read_collection_list(
     db: AsyncSession = Depends(get_async_db),
 ):
     # todo: add filter to return first 13 collections
-    # todo: order by???
-    collections = (await db.scalars(select(Collection).order_by(Collection.name))).all()
+    collections = (
+        await db.scalars(select(Collection).order_by(Collection.created_at))
+    ).all()
     return collections
 
 

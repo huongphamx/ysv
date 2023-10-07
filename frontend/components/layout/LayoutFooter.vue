@@ -46,7 +46,7 @@
         <div class="my-4 text-xl lg:text-2xl font-['Italiana']">JOIN US</div>
         <div><a href="https://instagram.com/ysv.brand?igshid=MzRlODBiNWFlZA==" target="_blank">INSTAGRAM</a></div>
         <div><a href="https://youtube.com" target="_blank">YOUTUBE</a></div>
-        <div><a href="https://whatsapp.com" target="_blank">WHATSAPP</a></div>
+        <div><a href="https://api.whatsapp.com/send?phone=971545602477" target="_blank">WHATSAPP</a></div>
         <div><a href="https://telegram.com" target="_blank">TELEGRAM</a></div>
         <!-- <div class="my-4 opacity-50">
           WEBSITE DEVELOPMENT

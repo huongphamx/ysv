@@ -79,7 +79,7 @@ useHead({
         <div class="hidden 2xl:block">
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <div class="mb-3 grid grid-cols-2 gap-3">
+              <div class="mb-6 grid grid-cols-2 gap-3">
                 <CollectionCard :collection="collectionList[0]" />
                 <CollectionCard :collection="collectionList[1]" />
               </div>
@@ -87,7 +87,7 @@ useHead({
             </div>
             <div>
               <img src="/img/home-collection-square-2.webp" alt="" class="square-img">
-              <div class="my-3 grid grid-cols-2 gap-3">
+              <div class="my-6 grid grid-cols-2 gap-3">
                 <CollectionCard :collection="collectionList[2]" />
                 <CollectionCard :collection="collectionList[3]" />
               </div>
@@ -95,23 +95,23 @@ useHead({
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <div class="mb-3 grid grid-cols-2 gap-3">
+              <div class="mb-6 grid grid-cols-2 gap-3">
                 <CollectionCard :collection="collectionList[4]" />
                 <CollectionCard :collection="collectionList[5]" />
               </div>
               <img src="/img/home-collection-square-3.webp" alt="" class="square-img">
             </div>
             <div>
-              <div class="mb-3 grid grid-cols-2 gap-3">
+              <div class="mb-6 grid grid-cols-2 gap-3">
                 <CollectionCard :collection="collectionList[6]" />
                 <CollectionCard :collection="collectionList[7]" />
               </div>
-              <div class="mb-3 grid grid-cols-2 gap-3">
+              <div class="mb-6 grid grid-cols-2 gap-3">
                 <CollectionCard :collection="collectionList[8]" />
                 <CollectionCard :collection="collectionList[9]" />
               </div>
               <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-ph-arrow-down-right" to="/lookbook"
-                variant="outline" color="gray" :ui="{ rounded: '', base: 'h-[150px]' }" />
+                variant="outline" color="gray" :ui="{ rounded: '', base: 'h-[145px]' }" />
             </div>
           </div>
         </div>
