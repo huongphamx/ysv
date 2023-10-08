@@ -2,6 +2,7 @@
 const config = useRuntimeConfig()
 
 const collectionList = useCollectionList()
+await getCollectionList()
 const showCollections = collectionList.value.filter(c => c.is_show_in_home)
 
 useHead({
@@ -63,15 +64,15 @@ useHead({
       <div class="my-5">
         <div class="2xl:hidden">
           <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <CollectionCard :collection="collectionList[0]" />
-            <CollectionCard :collection="collectionList[1]" />
-            <CollectionCard :collection="collectionList[2]" />
-            <CollectionCard :collection="collectionList[3]" />
+            <CollectionCard :collection="showCollections[0]" />
+            <CollectionCard :collection="showCollections[1]" />
+            <CollectionCard :collection="showCollections[2]" />
+            <CollectionCard :collection="showCollections[3]" />
           </div>
           <div class="my-4 mx-auto"><img src="/img/home-collection-square-1.webp" alt="" class="square-img"></div>
           <div class="grid grid-cols-2 gap-4 justify-items-center mb-4">
-            <CollectionCard :collection="collectionList[4]" />
-            <CollectionCard :collection="collectionList[5]" />
+            <CollectionCard :collection="showCollections[4]" />
+            <CollectionCard :collection="showCollections[5]" />
           </div>
           <div>
             <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-ph-arrow-down-right" to="/lookbook"

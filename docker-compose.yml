@@ -31,17 +31,8 @@ services:
     restart: unless-stopped
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    networks:
-      - internal
-
-  redis:
-    image: redis:7-alpine
-    container_name: ysv-redis
-    restart: unless-stopped
-    ports:
-      - 6379:6379
+    # ports:
+    #   - 5432:5432
     networks:
       - internal
 
@@ -53,9 +44,24 @@ services:
     env_file:
       - docker-compose.env
     depends_on:
-      - redis
       - db
     restart: unless-stopped
+    ports:
+      - 8000:8000
+    networks:
+      - internal
+      - web
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    container_name: ysv-frontend
+    env_file:
+      - docker-compose.env
+    restart: unless-stopped
+    ports:
+      - 3000:3000
     networks:
       - internal
 

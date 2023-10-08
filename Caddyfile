@@ -1,5 +1,14 @@
-https:// {
+api.wizzykit.com {
 	tls huong.px01@gmail.com
 	reverse_proxy api:8000
 }
-
+www.api.wizzykit.com {
+	redir https://api.wizzykit.com{uri}
+}
+wizzykit.com {
+	tls huong.px01@gmail.com
+	reverse_proxy frontend:3000
+}
+www.wizzykit.com {
+	redir https://wizzykit.com{uri}
+}
