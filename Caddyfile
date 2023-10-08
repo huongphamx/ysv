@@ -1,14 +1,14 @@
-api.wizzykit.com {
+api.pxh-dev.online {
 	tls huong.px01@gmail.com
 	reverse_proxy api:8000
 }
-www.api.wizzykit.com {
-	redir https://api.wizzykit.com{uri}
+www.api.pxh-dev.online {
+	redir https://api.pxh-dev.online{uri}
 }
-wizzykit.com {
+pxh-dev.online {
 	tls huong.px01@gmail.com
 	reverse_proxy frontend:3000
 }
-www.wizzykit.com {
-	redir https://wizzykit.com{uri}
+www.pxh-dev.online {
+	redir https://pxh-dev.online{uri}
 }
