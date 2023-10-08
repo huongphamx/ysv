@@ -33,10 +33,17 @@ await getCollectionList()
 selectedMainCollection.value = collectionList.value.find(c => c.is_main_collection)
 selectedHomeCollections.value = collectionList.value.filter(c => c.is_show_in_home)
 
+const mainCollectionPics = selectedMainCollection.value?.main_collection_pics?.split('$')
 const mainCollectionPic1 = ref<string[]>([])
 const mainCollectionPic2 = ref<string[]>([])
 const mainCollectionPic3 = ref<string[]>([])
-const mainCollectionDescription = ref('')
+if (mainCollectionPics) {
+  mainCollectionPic1.value = [mainCollectionPics[0]]
+  mainCollectionPic2.value = [mainCollectionPics[1]]
+  mainCollectionPic3.value = [mainCollectionPics[2]]
+}
+const mainCollectionDescription = ref(selectedMainCollection.value?.main_collection_description)
+
 async function addMainCollection() {
   if (selectedMainCollection.value) {
     const { data, error } = await useCustomFetch('/v1/collections/add-main-collection', {
