@@ -49,6 +49,11 @@ async function deliverOrder(orderId: string) {
   }
 }
 
+const searchPhoneNumber = ref('')
+async function searchOrderByPhone() {
+  await getOrderList({ phone_number: searchPhoneNumber.value })
+}
+
 definePageMeta({
   layout: 'admin',
   middleware: 'admin',
@@ -64,8 +69,8 @@ useHead({
     <div class="text-2xl font-bold">Orders</div>
     <div class="my-2 flex gap-5">
       <div class="flex">
-        <UInput placeholder="Search Order" />
-        <UButton icon="i-ph-magnifying-glass" />
+        <UInput placeholder="Search by Phone number" v-model="searchPhoneNumber" />
+        <UButton icon="i-ph-magnifying-glass" @click="searchOrderByPhone" />
       </div>
     </div>
 

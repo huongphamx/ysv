@@ -1,7 +1,7 @@
 import { Order, OrderItem } from '@/types'
 
 export interface FetchOrderParams {
-  name: string,
+  phone_number: string,
 }
 
 export const useOrderList = () => useState<Order[]>('order-list', () => [])

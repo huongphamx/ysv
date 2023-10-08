@@ -104,8 +104,13 @@ async def create_order(
 
 
 @router.get("/", dependencies=[Depends(current_admin)], response_model=list[OrderRead])
-async def get_order_list(*, db: AsyncSession = Depends(get_async_db)):
-    orders = (await db.scalars(select(Order).order_by(Order.created_at.desc()))).all()
+async def get_order_list(
+    *, db: AsyncSession = Depends(get_async_db), phone_number: str | None = None
+):
+    stmt = select(Order).order_by(Order.created_at.desc())
+    if phone_number is not None:
+        stmt = stmt.filter(Order.phone_number == phone_number)
+    orders = (await db.scalars(stmt)).all()
     return orders
 
 
