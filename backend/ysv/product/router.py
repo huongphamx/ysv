@@ -1,3 +1,5 @@
+import uuid
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
@@ -37,8 +39,8 @@ async def create_product(
         product_obj.pictures.append(picture_obj)
     for variant in product_in.size_variants:
         variant_obj = ProductSizeVariant(
-            id=variant.id,
-            clothes_size_id=variant.clothes_size_id,
+            id=uuid.UUID(variant.id),
+            clothes_size_id=uuid.UUID(variant.clothes_size_id),
             is_pre_order=variant.is_pre_order,
         )
         product_obj.size_variants.append(variant_obj)

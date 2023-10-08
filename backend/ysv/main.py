@@ -5,7 +5,7 @@ from ysv.router_v1 import router as router_v1
 
 app = FastAPI()
 
-origins = ["http://localhost:3000", "https://pxh-dev.online/"]
+origins = ["http://localhost:3000", "https://pxh-dev.online"]
 
 app.add_middleware(
     CORSMiddleware,
