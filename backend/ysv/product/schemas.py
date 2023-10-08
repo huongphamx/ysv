@@ -64,3 +64,7 @@ class ProductUpdate(BaseModel):
     preview_pic: str
     pictures: list[str]
     size_variants: list[ProductSizeVariantUpdate]
+
+
+class CollectionProductsRead(CollectionRead):
+    products: list[ProductRead] | None = None

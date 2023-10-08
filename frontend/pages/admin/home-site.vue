@@ -33,11 +33,19 @@ await getCollectionList()
 selectedMainCollection.value = collectionList.value.find(c => c.is_main_collection)
 selectedHomeCollections.value = collectionList.value.filter(c => c.is_show_in_home)
 
+const mainCollectionPic1 = ref<string[]>([])
+const mainCollectionPic2 = ref<string[]>([])
+const mainCollectionPic3 = ref<string[]>([])
+const mainCollectionDescription = ref('')
 async function addMainCollection() {
   if (selectedMainCollection.value) {
     const { data, error } = await useCustomFetch('/v1/collections/add-main-collection', {
       method: 'post',
-      body: { collection_id: selectedMainCollection.value.id }
+      body: {
+        collection_id: selectedMainCollection.value.id,
+        main_collection_description: mainCollectionDescription.value,
+        main_collection_pics: mainCollectionPic1.value[0] + '$' + mainCollectionPic2.value[0] + '$' + mainCollectionPic3.value[0]
+      }
     })
   }
 }
@@ -79,6 +87,14 @@ useHead({
 
       <div class="my-5 font-medium text-gray-700 dark:text-gray-200">Main Collection</div>
       <USelectMenu searchable v-model="selectedMainCollection" :options="collectionList" option-attribute="name" />
+      <div class="my-2">
+        <UTextarea v-model="mainCollectionDescription" placeholder="Main collection description" />
+      </div>
+      <div class="my-5 flex">
+        <UploadImage v-model="mainCollectionPic1" :max-image="1" />
+        <UploadImage v-model="mainCollectionPic2" :max-image="1" />
+        <UploadImage v-model="mainCollectionPic3" :max-image="1" />
+      </div>
       <UButton label="Save" class="my-2" @click="addMainCollection" />
 
       <div class="my-5 border-b"></div>

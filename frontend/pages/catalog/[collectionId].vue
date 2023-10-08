@@ -19,13 +19,13 @@ await getProductList({ collection_id: collectionId })
 
 <template>
   <div class="mycontainer mx-auto mb-10">
-    <NuxtLink to="/collections/">
+    <NuxtLink to="/lookbook">
       <div class="my-5 items-center gap-2 hidden xl:flex">
         <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>LOOK ANOTHER COLLECTIONS</span>
       </div>
     </NuxtLink>
 
-    <div class="my-5 flex flex-col items-center">
+    <div class="my-5 flex flex-col gap-5 items-center">
       <div v-for="p in productList" :key="p.id"
         class="grid grid-cols-2 gap-4 w-[300px] sm:w-[420px] md:w-[620px] lg:w-[768px] hover:cursor-pointer group"
         @click="$router.push(`/p/${p.id}`)">

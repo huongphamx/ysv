@@ -3,8 +3,11 @@ const config = useRuntimeConfig()
 
 const collectionList = useCollectionList()
 await getCollectionList()
+const mainCollection = collectionList.value.find(c => c.is_main_collection)
 const showCollections = collectionList.value.filter(c => c.is_show_in_home)
-
+const mainCollectionPics = computed(() => {
+  return mainCollection?.main_collection_pics?.split('$')
+})
 useHead({
   title: 'Home - YSV'
 })
@@ -25,39 +28,25 @@ useHead({
     <div class="text-6xl sm:text-8xl md:text-9xl 2xl:text-[200px] pl-16 md:pl-32 font-['Italiana']">BRAND</div>
 
     <div class="mt-10 mb-5 grid 2xl:grid-cols-2 gap-5">
-      <div class="hidden 2xl:block"><img src="/img/main-prod-01.webp" alt=""></div>
+      <div class="hidden 2xl:block"><img :src="mainCollectionPics![0]" alt=""></div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <img src="/img/main-prod-02.webp" alt="main prod 1" class="rect-img">
-          <div class="text-sm sm:text-base md:text-lg">THE FLOWING SILHOUETTE AND ETHEREAL DESIGN MAKE IT THE PERFECT
-            CHOICE FOR ANY
-            SPECIAL
-            OCCASION.</div>
-          <div class="hidden 2xl:block">WHETHER YOU'RE ATTENDING A GLAMOROUS EVENT OR SIMPLY
-            WANT TO FEEL
-            LIKE A
-            PRINCESS, THIS
-            DRESS
-            WILL MAKE YOU FEEL LIKE YOU'RE WALKING ON AIR. GET READY TO DAZZLE AND MAKE A STATEMENT.</div>
+          <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-img">
+          <div class="text-sm sm:text-base md:text-lg">{{ mainCollection?.main_collection_description?.toUpperCase() }}
+          </div>
         </div>
 
         <div>
-          <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-['Italiana']">EXCLUSIVE SIHOUETTE COLLECTION</div>
+          <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-['Italiana']">{{ mainCollection?.name }} COLLECTION
+          </div>
           <div class="text-sm sm:text-base my-5">NEW OF 2023</div>
-          <UButton label="VIEW ALL" trailing-icon="i-ph-arrow-down-right" variant="outline" color="gray"
-            :ui="{ rounded: '' }" />
-          <img src="/img/main-prod-03.webp" alt="main prod 2" class="mt-8 rect-img">
+          <UButton :to="`/catalog/${mainCollection?.id}`" label="VIEW ALL" trailing-icon="i-ph-arrow-down-right"
+            variant="outline" color="gray" :ui="{ rounded: '' }" />
+          <img :src="mainCollectionPics![2]" alt="main prod 2" class="mt-8 rect-img">
         </div>
       </div>
     </div>
-
-    <div class="mb-10 text-sm sm:text-base md:text-lg 2xl:hidden">WHETHER YOU'RE ATTENDING A GLAMOROUS EVENT OR SIMPLY
-      WANT TO FEEL
-      LIKE A
-      PRINCESS, THIS
-      DRESS
-      WILL MAKE YOU FEEL LIKE YOU'RE WALKING ON AIR. GET READY TO DAZZLE AND MAKE A STATEMENT.</div>
 
     <div>
       <div class="text-[40px] sm:text-6xl md:text-8xl xl:text-9xl text-center font-['Italiana']">COLLECTIONS</div>

@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ysv.database.session import get_async_db
+from ysv.product.schemas import CollectionProductsRead
 from ysv.user.deps import current_admin
 from .models import Collection
 from .schemas import (
@@ -16,7 +18,7 @@ from .schemas import (
 router = APIRouter()
 
 
-@router.get("/", response_model=list[CollectionRead])
+@router.get("/", response_model=list[CollectionProductsRead])
 async def read_collection_list(
     *,
     db: AsyncSession = Depends(get_async_db),
@@ -25,6 +27,7 @@ async def read_collection_list(
         await db.scalars(
             select(Collection)
             .where(Collection.is_on_sale)
+            .options(selectinload(Collection.products))
             .order_by(Collection.created_at)
         )
     ).all()
@@ -132,6 +135,10 @@ async def add_main_collection(
         select(Collection).where(Collection.id == data.collection_id)
     )
     new_main_collection.is_main_collection = True  # type:ignore
+    new_main_collection.main_collection_description = (  # type:ignore
+        data.main_collection_description
+    )
+    new_main_collection.main_collection_pics = data.main_collection_pics  # type:ignore
 
     db.add(new_main_collection)
     await db.commit()

@@ -23,6 +23,11 @@
 }
 
 @media screen and (min-width: 480px) {
+  .img-hero {
+    width: 420px;
+    height: 500px;
+  }
+
   .rect-img {
     width: 200px;
     height: 300px;
@@ -35,13 +40,32 @@
 }
 
 @media screen and (min-width: 768px) {
+  .img-hero {
+    width: 620px;
+    height: 540px;
+  }
+
   .rect-img {
-    width: 300px;
+    width: 303px;
     height: 450px;
   }
 
   .square-img {
     width: 622px;
     height: 622px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .img-hero {
+    width: 1020px;
+    height: 640px;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  .img-hero {
+    width: 1276px;
+    height: 836px;
   }
 }
