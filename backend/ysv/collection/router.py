@@ -5,7 +5,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ysv.database.session import get_async_db
 from ysv.user.deps import current_admin
 from .models import Collection
-from .schemas import CollectionCreate, CollectionRead, CollectionUpdate
+from .schemas import (
+    CollectionCreate,
+    CollectionRead,
+    CollectionUpdate,
+    CollectionAddMain,
+    CollectionShowHome,
+)
 
 router = APIRouter()
 
@@ -15,9 +21,13 @@ async def read_collection_list(
     *,
     db: AsyncSession = Depends(get_async_db),
 ):
-    # todo: add filter to return first 13 collections
-    # todo: order by???
-    collections = (await db.scalars(select(Collection).order_by(Collection.name))).all()
+    collections = (
+        await db.scalars(
+            select(Collection)
+            .where(Collection.is_on_sale)
+            .order_by(Collection.created_at)
+        )
+    ).all()
     return collections
 
 
@@ -55,7 +65,11 @@ async def read_collection(
     return collection_db
 
 
-@router.put("/{collection_id}", status_code=status.HTTP_200_OK)
+@router.put(
+    "/{collection_id}",
+    status_code=status.HTTP_200_OK,
+    dependencies=[Depends(current_admin)],
+)
 async def update_collection(
     *,
     db: AsyncSession = Depends(get_async_db),
@@ -98,3 +112,49 @@ async def delete_collection(
     await db.delete(collection_db)
     await db.commit()
     return {"detail": "DELETED_COLLECTION"}
+
+
+@router.post(
+    "/add-main-collection",
+    dependencies=[Depends(current_admin)],
+    status_code=status.HTTP_200_OK,
+)
+async def add_main_collection(
+    *, db: AsyncSession = Depends(get_async_db), data: CollectionAddMain
+):
+    existing_main_collection = await db.scalar(
+        select(Collection).where(Collection.is_main_collection)
+    )
+    if existing_main_collection is not None:
+        existing_main_collection.is_main_collection = False
+        db.add(existing_main_collection)
+    new_main_collection = await db.scalar(
+        select(Collection).where(Collection.id == data.collection_id)
+    )
+    new_main_collection.is_main_collection = True  # type:ignore
+
+    db.add(new_main_collection)
+    await db.commit()
+    return {"detail": "MAIN_COLLECTION_ADDED"}
+
+
+@router.post(
+    "/add-home-collections",
+    dependencies=[Depends(current_admin)],
+    status_code=status.HTTP_200_OK,
+)
+async def add_home_collections(
+    *, db: AsyncSession = Depends(get_async_db), data: CollectionShowHome
+):
+    existing_home_collections = (
+        await db.scalars(select(Collection).where(Collection.is_show_in_home))
+    ).all()
+    for collection in existing_home_collections:
+        collection.is_show_in_home = False
+        db.add(collection)
+    for id in data.collection_ids:
+        new_collection = await db.scalar(select(Collection).where(Collection.id == id))
+        new_collection.is_show_in_home = True  # type:ignore
+        db.add(new_collection)
+    await db.commit()
+    return {"detail": "HOME_COLLECTIONS_ADDED"}

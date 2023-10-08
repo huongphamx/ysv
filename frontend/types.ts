@@ -27,6 +27,8 @@ export interface Collection {
   descriptions: string,
   preview_pic: string,
   is_on_sale: boolean,
+  is_main_collection: boolean,
+  is_show_in_home: boolean,
 }
 
 export interface ProductPicture {
@@ -52,4 +54,22 @@ export interface ClothesSize {
   id: string,
   label: string,
   standard_tall: string,
+}
+
+export interface OrderItem {
+
+}
+
+export interface Order {
+  id: string,
+  fname: string,
+  lname: string,
+  country: string,
+  city: string,
+  state: string,
+  street_address: string,
+  zip_code: string,
+  phone_number: string,
+  is_paid: boolean,
+  is_delivered: boolean,
 }

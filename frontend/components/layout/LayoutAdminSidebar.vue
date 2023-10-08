@@ -15,6 +15,10 @@ const links = [{
   label: 'Home site',
   icon: 'i-ph-house',
   to: '/admin/home-site'
+}, {
+  label: 'Change password',
+  icon: 'i-ph-lock',
+  to: '/admin/change-password'
 },]
 </script>
 

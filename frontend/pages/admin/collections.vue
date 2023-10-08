@@ -7,7 +7,7 @@ definePageMeta({
 
 
 <template>
-  <div class="h-screen p-5">
+  <div class="h-screen p-5 overflow-auto">
     <NuxtPage />
   </div>
 </template>

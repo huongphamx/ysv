@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+await navigateTo('/admin/products')
 definePageMeta({
   layout: 'admin',
   middleware: 'admin',

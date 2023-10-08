@@ -9,7 +9,11 @@ export interface CollectionGroup {
 const collectionList = useCollectionList()
 
 const sortedCollectionGroups = computed(() => {
-  const sortedCollections = collectionList.value.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }))
+  const upperCasedCollections = collectionList.value.map(c => {
+    c.name = c.name.toUpperCase()
+    return c
+  })
+  const sortedCollections = upperCasedCollections.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }))
   const data = sortedCollections.reduce((r, e) => {
     // get first letter of name of current element
     let alphabet = e.name[0]
@@ -17,7 +21,7 @@ const sortedCollectionGroups = computed(() => {
     // @ts-ignore
     if (!r[alphabet]) r[alphabet] = { alphabet, collections: [e] }
     // @ts-ignore
-    else r[alphabet].record.push(e)
+    else r[alphabet].collections.push(e)
 
     return r
   }, {})
@@ -32,7 +36,7 @@ const sortedCollectionGroups = computed(() => {
       <UIcon name="i-ph-arrow-down-right" />
     </div>
     <template #panel>
-      <div class="p-2">
+      <div class="p-2 w-[300px] max-h-[580px] overflow-auto">
         <div v-for="g, i in (sortedCollectionGroups as CollectionGroup[])" :key="i">
           <div class="border-b text-gray-500">{{ g.alphabet }}</div>
           <div v-for="c, i in g.collections" class="my-2 text-black">

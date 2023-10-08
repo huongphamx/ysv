@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { object, string } from 'yup'
+import { object, string, number } from 'yup'
+import { countriesCode } from '@/countries'
+
+const currentStep = ref(1)
 
 const cart = useCart()
+const cartIdCookie = useCartIdCookie()
 
 const checkoutForm = ref()
 const checkoutFormState = ref({
-  fname: undefined,
-  lname: undefined,
-  country: undefined,
-  city: undefined,
-  state: undefined,
-  street_address: undefined,
-  zip_code: undefined,
+  fname: '',
+  lname: '',
+  country: '',
+  city: '',
+  state: '',
+  street_address: '',
+  zip_code: '',
   phone_number: undefined,
 })
 const checkoutFormSchema = object({
@@ -24,11 +28,49 @@ const checkoutFormSchema = object({
   zip_code: string().required('Enter Zip/Postal code'),
   phone_number: string().required('Enter phone number'),
 })
+const dialCode = computed(() => {
+  return countriesCode.find(c => c.name ===
+    checkoutFormState.value.country)?.dial_code
+})
 
-async function submitCheckout() {
+async function submitCheckoutInfo() {
   await checkoutForm.value!.validate()
-
+  currentStep.value = 2
 }
+const isWaitingCheckout = ref(false)
+async function checkout() {
+  isWaitingCheckout.value = true
+  const { data, error } = await useCustomFetch<{ checkout_url: string }>('/v1/orders/', {
+    method: 'post',
+    body: {
+      ...checkoutFormState.value,
+      phone_number: dialCode.value + ' ' + checkoutFormState.value.phone_number,
+      cart_id: cartIdCookie.value
+    }
+  })
+  isWaitingCheckout.value = false
+  if (error.value) {
+    //todo: toast
+  } else if (data.value) {
+    window.location.href = data.value.checkout_url
+  }
+}
+
+const totalPrice = computed(() => {
+  let total = 0
+  for (const item of cart.value) {
+    total += item.price * item.quantity
+  }
+  return total
+})
+const shippingFee = computed(() => {
+  return checkoutFormState.value.country === 'United Arab Emirates' ? 5 : 20
+})
+const showCartItems = ref(false)
+
+useHead({
+  title: 'Checkout - YSV'
+})
 </script>
 
 
@@ -42,52 +84,142 @@ async function submitCheckout() {
 
     <div class="w-[400px] mx-auto flex flex-col justify-center">
       <div>
-        <UForm ref="checkoutForm" :state="checkoutFormState" :schema="checkoutFormSchema" @submit="submitCheckout"
-          class="flex flex-col gap-3">
-          <div class="my-4 pb-2 text-4xl text-center font-['Italiana'] border-b">SHIPPING ADDRESS</div>
+        <div class="grid grid-cols-2">
+          <div class="hover:cursor-pointer" @click="currentStep = 1">
+            <div class="text-4xl stepper" :class="{ 'stepper-active': currentStep === 1 }">
+              <UIcon :name="currentStep === 1 ? 'i-ph-number-circle-one' : 'i-ph-check-circle'" />
+            </div>
+            <div class="text-center" :class="{ 'text-[#c3c3c3]': currentStep !== 1 }">INFO</div>
+          </div>
+          <div>
+            <div class="text-4xl stepper" :class="{ 'stepper-active': currentStep === 2 }">
+              <UIcon name="i-ph-number-circle-two" />
+            </div>
+            <div class="text-center" :class="{ 'text-[#c3c3c3]': currentStep !== 2 }">CHECKOUT</div>
+          </div>
+        </div>
 
-          <UFormGroup name="fname">
-            <AppInput label="FIRST NAME" v-model="checkoutFormState.fname" />
-          </UFormGroup>
+        <template v-if="currentStep === 1">
+          <UForm ref="checkoutForm" :state="checkoutFormState" :schema="checkoutFormSchema" @submit="submitCheckoutInfo"
+            class="flex flex-col gap-3">
+            <div class="my-4 pb-2 text-4xl text-center font-['Italiana'] border-b">SHIPPING ADDRESS</div>
+            <UFormGroup name="fname">
+              <AppInput label="FIRST NAME" v-model="checkoutFormState.fname" />
+            </UFormGroup>
+            <UFormGroup name="lname">
+              <AppInput label="LAST NAME" v-model="checkoutFormState.lname" />
+            </UFormGroup>
+            <UFormGroup name="country">
+              <USelectMenu searchable v-model="checkoutFormState.country" :options="countriesCode" option-attribute="name"
+                value-attribute="name">
+                <div class="w-full">
+                  <AppInput readonly label="COUNTRY" :model-value="checkoutFormState.country" />
+                </div>
+              </USelectMenu>
+            </UFormGroup>
+            <UFormGroup name="city">
+              <AppInput label="CITY" v-model="checkoutFormState.city" />
+            </UFormGroup>
+            <UFormGroup name="state">
+              <AppInput label="STATE/PROVINCE" v-model="checkoutFormState.state" />
+            </UFormGroup>
+            <UFormGroup name="street_address">
+              <AppInput label="STREET ADDRESS" v-model="checkoutFormState.street_address" />
+            </UFormGroup>
+            <UFormGroup name="zip_code">
+              <AppInput label="ZIP/POSTAL CODE" v-model="checkoutFormState.zip_code" />
+            </UFormGroup>
+            <UFormGroup name="phone_number">
+              <div class="relative">
+                <AppInput type="number" label="PHONE NUMBER" v-model="checkoutFormState.phone_number" class="pl-10" />
+                <span class="absolute top-1/2 left-0">{{ dialCode
+                }}</span>
+              </div>
+            </UFormGroup>
+            <div class="my-4 pb-2 text-4xl text-center font-['Italiana'] border-b">SHIPPING FEE</div>
+            <div>
+              <template v-if="checkoutFormState.country === 'United Arab Emirates'">
+                <div>You are in United Arab Emirates.</div>
+                <div>SHIPPING FEE: ${{ shippingFee }}</div>
+              </template>
+              <template v-else>
+                <div>You are outside of United Arab Emirates.</div>
+                <div>SHIPPING FEE: ${{ shippingFee }}</div>
+              </template>
+            </div>
+            <UButton type="submit" label="GO TO CHECKOUT" block color="black" />
+          </UForm>
 
-          <UFormGroup name="lname">
-            <AppInput label="LAST NAME" v-model="checkoutFormState.lname" />
-          </UFormGroup>
+          <CustomerBag class="my-5" border />
 
-          <UFormGroup name="country">
-            <AppInput label="COUNTRY" v-model="checkoutFormState.lname" />
-          </UFormGroup>
+        </template>
+        <template v-else>
+          <UButton :loading="isWaitingCheckout" label="CHECKOUT NOW" block :ui="{ rounded: '' }" color="black"
+            class="my-5" @click="checkout" />
+          <div class="border border-black p-3">
+            <div class="border-b border-gray-500">ORDER SUMMARY</div>
+            <div class="mt-4 flex text-gray-500"><span>SUBTOTAL</span><span class="ml-auto">${{ totalPrice }}</span></div>
+            <div class="flex text-gray-500"><span>SHIPPING</span><span class="ml-auto">${{ shippingFee }}</span></div>
+            <div class="my-4 pb-5 border-b flex"><span>TOTAL</span><span class="ml-auto">${{ totalPrice + shippingFee
+            }}</span></div>
+            <div class="flex items-center">{{ cart.length }} ITEM(S) IN CART
+              <span class="ml-auto">
+                <UButton @click="showCartItems = !showCartItems" icon="i-ph-arrow-down-right" variant="ghost"
+                  color="black" />
+              </span>
+            </div>
+          </div>
+          <CustomerBag v-if="showCartItems" class="my-2" border title="YOUR ORDER" />
+          <div>
+            <div class="py-3 border-b flex items-center"><span>SHIP TO:</span>
+              <UButton label="EDIT" variant="ghost" color="blue" @click="currentStep = 1" class="ml-auto" />
+            </div>
 
-          <UFormGroup name="city">
-            <AppInput label="CITY" v-model="checkoutFormState.lname" />
-          </UFormGroup>
-
-          <UFormGroup name="state">
-            <AppInput label="STATE/PROVINCE" v-model="checkoutFormState.lname" />
-          </UFormGroup>
-
-          <UFormGroup name="street_address">
-            <AppInput label="STREET ADDRESS" v-model="checkoutFormState.lname" />
-          </UFormGroup>
-
-          <UFormGroup name="zip_code">
-            <AppInput label="ZIP/POSTAL CODE" v-model="checkoutFormState.lname" />
-          </UFormGroup>
-
-          <UFormGroup name="phone_number">
-            <AppInput label="PHONE NUMBER" v-model="checkoutFormState.lname" />
-          </UFormGroup>
-
-          <div class="my-4 pb-2 text-4xl text-center font-['Italiana'] border-b">SHIPPING METHODS</div>
-          <div></div>
-
-          <UButton type="submit" label="GO TO CHECKOUT" block color="black" />
-        </UForm>
-
+            <div class="text-gray-500">{{ `${checkoutFormState.fname.toUpperCase()}
+                          ${checkoutFormState.lname.toUpperCase()}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.country.toUpperCase()}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.city.toUpperCase()}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.state.toUpperCase()}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.street_address.toUpperCase()}` }}</div>
+            <div class="text-gray-500">{{ `PHONE: ${dialCode} ${checkoutFormState.phone_number}` }}</div>
+          </div>
+        </template>
       </div>
-
-      <CustomerBag />
     </div>
   </div>
 </template>
 
+
+<style scoped>
+.stepper {
+  display: flex;
+  align-items: center;
+  color: #C3C3C3;
+}
+
+.stepper::before {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background-color: #C3C3C3;
+}
+
+.stepper::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background-color: #C3C3C3;
+}
+
+.stepper-active {
+  color: black;
+}
+
+.stepper-active::before {
+  background-color: #000;
+}
+
+.stepper-active::after {
+  background-color: #000;
+}
+</style>

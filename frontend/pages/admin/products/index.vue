@@ -43,6 +43,9 @@ async function deleteProduct(productId: string) {
     }
   }
 }
+useHead({
+  title: 'Product management - Admin'
+})
 </script>
 
 

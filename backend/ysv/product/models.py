@@ -31,4 +31,6 @@ class Product(Base):
     pictures: Mapped[list["ProductPicture"]] = relationship(
         back_populates="product", cascade="all, delete-orphan"
     )
-    size_variants: Mapped[list["ProductSizeVariant"]] = relationship()
+    size_variants: Mapped[list["ProductSizeVariant"]] = relationship(
+        cascade="all, delete-orphan"
+    )

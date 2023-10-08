@@ -57,6 +57,9 @@ async function submitSaveCollection() {
 definePageMeta({
   alias: ['/admin/collections/create']
 })
+useHead({
+  title: 'Collection management - Admin'
+})
 </script>
 
 

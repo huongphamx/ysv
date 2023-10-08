@@ -11,6 +11,8 @@ class CollectionRead(BaseModel):
     descriptions: str
     preview_pic: HttpUrl
     is_on_sale: bool
+    is_main_collection: bool
+    is_show_in_home: bool
 
 
 class CollectionCreate(BaseModel):
@@ -25,3 +27,11 @@ class CollectionUpdate(BaseModel):
     descriptions: str
     preview_pic: HttpUrl
     is_on_sale: bool
+
+
+class CollectionAddMain(BaseModel):
+    collection_id: str
+
+
+class CollectionShowHome(BaseModel):
+    collection_ids: list[str]

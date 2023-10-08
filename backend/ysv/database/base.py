@@ -6,3 +6,5 @@ from ysv.user.models import User  # noqa:F401
 from ysv.collection.models import Collection  # noqa:F401
 from ysv.product.size.models import ClothesSize, ProductSizeVariant  # noqa:F401
 from ysv.product.models import Product, ProductPicture  # noqa:F401
+from ysv.cart.models import Cart, CartItem  # noqa:F401
+from ysv.order.models import Order, OrderItem  # noqa:F401

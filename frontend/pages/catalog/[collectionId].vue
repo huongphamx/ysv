@@ -28,7 +28,7 @@ await getProductList({ collection_id: collectionId })
     <div class="my-5 flex flex-col items-center">
       <div v-for="p in productList" :key="p.id"
         class="grid grid-cols-2 gap-4 w-[300px] sm:w-[420px] md:w-[620px] lg:w-[768px] hover:cursor-pointer group"
-        @click="$router.push(`/${p.id}`)">
+        @click="$router.push(`/p/${p.id}`)">
         <div><img :src="p.preview_pic" alt="Product picture" class="w-[140px] sm:w-[200px] md:w-[220px] lg:w-[420px]">
         </div>
         <div class="flex flex-col justify-center group-hover:underline">
