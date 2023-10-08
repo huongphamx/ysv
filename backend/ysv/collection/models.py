@@ -16,6 +16,8 @@ class Collection(Base):
     descriptions: Mapped[str] = mapped_column(String(1000))
     preview_pic: Mapped[str]
     is_on_sale: Mapped[bool] = mapped_column(default=True)
+    is_main_collection: Mapped[bool] = mapped_column(default=False)
+    is_show_in_home: Mapped[bool] = mapped_column(default=False)
     products: Mapped[list["Product"]] = relationship(
         back_populates="collection", cascade="all, delete-orphan"
     )

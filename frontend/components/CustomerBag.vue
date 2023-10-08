@@ -60,7 +60,7 @@ async function deleteCartItem(itemId: string) {
       <div v-for="item in cart" :key="item.id" class="flex py-4">
         <img :src="item.preview_pic" alt="" class="w-[66px] h-[84px] object-cover">
         <div class="ml-4">
-          <NuxtLink :to="`/${item.product_id}`" class="hover:underline">
+          <NuxtLink :to="`/p/${item.product_id}`" class="hover:underline">
             <div class="flex text-[13px] font-bold w-[200px]">
               <div>{{ item.collection }}</div>
               <div class="ml-auto">${{ item.price }}</div>

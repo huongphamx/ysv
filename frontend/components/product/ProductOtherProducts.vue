@@ -37,7 +37,7 @@ const randomCollection = computed(() => {
       <div class="text-sm sm:text-base">ANOTHER FROM THE COLLECTION</div>
       <div class="flex gap-2 2xl:block">
         <div v-for="product in randomProduct" :key="product.id" class="my-2 relative hover:cursor-pointer"
-          @click="$router.push(`/${product.id}`)">
+          @click="$router.push(`/p/${product.id}`)">
           <img :src="product.preview_pic" alt="" class="preview-pic">
           <div class="absolute w-full bottom-0 left-2 font-['Italiana'] 2xl:text-xl">{{ product.name.toUpperCase() }}
           </div>

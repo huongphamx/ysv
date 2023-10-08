@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+const config = useRuntimeConfig()
+
 const collectionList = useCollectionList()
+const showCollections = collectionList.value.filter(c => c.is_show_in_home)
 
 useHead({
   title: 'Home - YSV'
@@ -10,7 +13,7 @@ useHead({
 <template>
   <div class="-mt-16 relative">
     <video controls class="hero-video">
-      <source src="https://ysv-dev.s3.ap-northeast-1.amazonaws.com/hero.mp4" type="video/mp4">
+      <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
     </video>
     <div class="mycontainer mx-auto">
       <div class="absolute bottom-0 text-6xl sm:text-8xl md:text-9xl 2xl:text-[200px] text-white font-['Italiana']">YSV
@@ -80,35 +83,35 @@ useHead({
           <div class="grid grid-cols-2 gap-3">
             <div>
               <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="collectionList[0]" />
-                <CollectionCard :collection="collectionList[1]" />
+                <CollectionCard :collection="showCollections[0]" />
+                <CollectionCard :collection="showCollections[1]" />
               </div>
               <img src="/img/home-collection-square-1.webp" alt="" class="square-img">
             </div>
             <div>
               <img src="/img/home-collection-square-2.webp" alt="" class="square-img">
               <div class="my-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="collectionList[2]" />
-                <CollectionCard :collection="collectionList[3]" />
+                <CollectionCard :collection="showCollections[2]" />
+                <CollectionCard :collection="showCollections[3]" />
               </div>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
               <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="collectionList[4]" />
-                <CollectionCard :collection="collectionList[5]" />
+                <CollectionCard :collection="showCollections[4]" />
+                <CollectionCard :collection="showCollections[5]" />
               </div>
               <img src="/img/home-collection-square-3.webp" alt="" class="square-img">
             </div>
             <div>
               <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="collectionList[6]" />
-                <CollectionCard :collection="collectionList[7]" />
+                <CollectionCard :collection="showCollections[6]" />
+                <CollectionCard :collection="showCollections[7]" />
               </div>
               <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="collectionList[8]" />
-                <CollectionCard :collection="collectionList[9]" />
+                <CollectionCard :collection="showCollections[8]" />
+                <CollectionCard :collection="showCollections[9]" />
               </div>
               <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-ph-arrow-down-right" to="/lookbook"
                 variant="outline" color="gray" :ui="{ rounded: '', base: 'h-[145px]' }" />

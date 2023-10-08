@@ -2,9 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true, viteInspect: false, },
 
-  modules: ['@nuxt/ui', '@nuxt/image', '@nuxtjs/google-fonts'],
-
-  colorMode: { preference: 'light' },
+  modules: ['@nuxt/ui', '@nuxtjs/google-fonts'],
 
   css: ['@/assets/css/main.css', '@/assets/css/image.css'],
 
@@ -12,16 +10,17 @@ export default defineNuxtConfig({
     icons: ['heroicons', 'ph']
   },
 
-  image: {
-    format: ['webp'],
-    quality: 50,
-  },
-
   runtimeConfig: {
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000/api',
       frontendDomain: process.env.NUXT_PUBLIC_FRONTEND_DOMAIN || 'localhost:3000',
+      s3BaseUrl: 'https://ysv-dev.s3.ap-northeast-1.amazonaws.com'
     }
+  },
+
+  routeRules: {
+    // Admin dashboard renders only on client-side
+    '/admin/**': { ssr: false },
   },
 
   googleFonts: {

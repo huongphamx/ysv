@@ -27,6 +27,8 @@ export interface Collection {
   descriptions: string,
   preview_pic: string,
   is_on_sale: boolean,
+  is_main_collection: boolean,
+  is_show_in_home: boolean,
 }
 
 export interface ProductPicture {
