@@ -6,7 +6,7 @@ useHead({
 
 
 <template>
-  <div class="mycontainer mx-auto mb-10">
+  <div class="mb-10">
     <div class="relative">
       <img src="/img/about-hero.webp" alt="event hero" class="about-hero" />
       <div class="hero-text in-image">ABOUT
@@ -16,22 +16,19 @@ useHead({
 
     <div class="my-10 grid grid-cols-2 gap-3">
       <div class="2xl:w-[300px] text-center mx-auto">
-        <div class="text-sm sm:text-base md:text-lg xl:text-xl">SENSUALITY WITH STYLE. LUXURY FOR THE WOMAN WHO DESERVES
-          IT. FOR YOUR
-          INNER
-          GODDESS. YOUR
-          KIND OF LUXURY. SENSUAL. ELEGANT. CLASSY. EXTRAORDINARY. JUST LIKE YOU.</div>
-        <img src="/img/about-1.webp" alt="about 1" class="about-img-1">
+        <div class="text-sm sm:text-base md:text-lg xl:text-xl">
+          SENSUALITY WITH STYLE. LUXURY FOR THE WOMAN WHO DESERVES IT. FOR YOUR INNER GODDESS. YOUR
+          KIND OF LUXURY. SENSUAL. ELEGANT. CLASSY. EXTRAORDINARY. JUST LIKE YOU.
+        </div>
+        <img src="/img/about-1.webp" alt="about 1" class="rect-image">
       </div>
-      <img src="/img/about-2.webp" alt="about 2" class="about-img">
+      <img src="/img/about-2.webp" alt="about 2" class="rect-image">
     </div>
 
-    <div class="text-xl sm:text-2xl md:text-3xl xl:text-4xl text-center font-['Italiana']">“YOUR LIFE IS A STAGE. YOU
-      DESERVE TO SHINE
-      ON IT. YSV
-      IS NOT YOUR
-      ORDINARY
-      DRESS. IT’S EXQUISITE, IT’S SENSUAL, IT’S YOU.”</div>
+    <div class="text-medium text-center">
+      “YOUR LIFE IS A STAGE. YOU DESERVE TO SHINE ON IT. YSV IS NOT YOUR ORDINARY
+      DRESS. IT’S EXQUISITE, IT’S SENSUAL, IT’S YOU.”
+    </div>
     <div class="mt-2 flex justify-center"><img src="/img/about-sign.svg" alt="about sign" class="w-[200px] md:w-[300px]">
     </div>
 
@@ -80,20 +77,27 @@ useHead({
 
     <div class="xl:relative">
       <img src="/img/about-6.webp" alt="about 6" class="my-3 about-end">
-      <div
-        class="text-xl sm:text-2xl md:text-3xl xl:text-4xl text-center font-['Italiana'] xl:absolute xl:top-1/2 xl:left-1/2 xl:-translate-x-1/2 xl:-translate-y-1/2 xl:text-white xl:w-[600px]">
-        INDULGE IN LUXURY LIKE NEVER
-        BEFORE WITH
-        YSV BRAND.
-        IT’S YOUR TIME
-        TO SHINE, DARLING.
+      <div class="text-medium text-center quoto-2">
+        INDULGE IN LUXURY LIKE NEVER BEFORE WITH YSV BRAND.
+        IT’S YOUR TIME TO SHINE, DARLING.
       </div>
     </div>
   </div>
 </template>
 
 
-<style scoped lang="postcss">
+<style scoped>
+.quoto-2 {
+  @media screen and (min-width: 1280px) {
+    width: 604px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+}
+
 .hero-text {
   font-family: Italiana;
   font-size: 40px;
@@ -150,12 +154,6 @@ useHead({
   object-fit: cover;
 }
 
-.about-img,
-.about-img-1 .about-img-4 {
-  width: 140px;
-  height: 210px;
-  object-fit: cover;
-}
 
 .about-end {
   width: 300px;
@@ -190,12 +188,6 @@ useHead({
     height: 540px;
   }
 
-  .about-img,
-  .about-img-1 {
-    width: 300px;
-    height: 500px;
-  }
-
   .about-img-4 {
     width: 220px;
     height: 270px;
@@ -213,11 +205,6 @@ useHead({
     height: 540px;
   }
 
-  .about-img,
-  .about-img-1 {
-    width: 340px;
-    height: 520px;
-  }
 
   .about-end {
     width: 680px;

@@ -65,7 +65,7 @@ useHead({
             <CollectionCard :collection="showCollections[5]" />
           </div>
           <div>
-            <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-ph-arrow-down-right" to="/lookbook"
+            <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-iconamoon-arrow-bottom-right-1" to="/lookbook"
               variant="outline" color="gray" :ui="{ rounded: '' }" />
           </div>
         </div>
@@ -104,7 +104,7 @@ useHead({
                 <CollectionCard :collection="showCollections[8]" />
                 <CollectionCard :collection="showCollections[9]" />
               </div>
-              <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-ph-arrow-down-right" to="/lookbook"
+              <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-iconamoon-arrow-bottom-right-1" to="/lookbook"
                 variant="outline" color="gray" :ui="{ rounded: '', base: 'h-[145px]' }" />
             </div>
           </div>

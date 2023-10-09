@@ -43,3 +43,36 @@
     }
   }
 }
+
+.text-medium {
+  font-size: 20px;
+  font-family: 'Italiana';
+
+  @media screen and (min-width: 480px) {
+    font-size: 26px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 36px;
+  }
+}
+
+.text-small {
+  font-size: 14px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+  }
+}
