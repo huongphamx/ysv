@@ -16,16 +16,17 @@ useHead({
 
 <template>
   <div class="-mt-16 relative">
-    <video autoplay class="hero-video" poster="/img/poster.webp">
+    <!-- <video autoplay class="hero-video" poster="/img/poster.webp"> -->
+    <video autoplay class="hero-video">
       <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
     </video>
     <div class="mycontainer mx-auto">
-      <div class="absolute bottom-0 text-6xl sm:text-8xl md:text-9xl 2xl:text-[200px] text-white font-['Italiana']">YSV
+      <div class="hero-text in-image">YSV
       </div>
     </div>
   </div>
   <div class="mycontainer mx-auto">
-    <div class="text-6xl sm:text-8xl md:text-9xl 2xl:text-[200px] pl-16 md:pl-32 font-['Italiana']">BRAND</div>
+    <div class="hero-text out-image">BRAND</div>
 
     <div class="mt-10 mb-5 grid 2xl:grid-cols-2 gap-5">
       <div class="hidden 2xl:block"><img :src="mainCollectionPics![0]" alt=""></div>
@@ -114,7 +115,7 @@ useHead({
 </template>
 
 
-<style scoped>
+<style scoped lang="postcss">
 .hero-video {
   width: 100%;
   height: 550px;

@@ -9,10 +9,10 @@ useHead({
   <div class="mycontainer mx-auto mb-10">
     <div class="relative">
       <img src="/img/about-hero.webp" alt="event hero" class="about-hero" />
-      <div class="absolute bottom-0 text-5xl sm:text-6xl md:text-8xl xl:text-[200px] text-white font-['Italiana']">ABOUT
+      <div class="hero-text in-image">ABOUT
       </div>
     </div>
-    <div class="pl-16 text-5xl sm:text-6xl md:text-8xl xl:text-[200px] font-['Italiana']">THE BRAND</div>
+    <div class="hero-text out-image">THE BRAND</div>
 
     <div class="my-10 grid grid-cols-2 gap-3">
       <div class="2xl:w-[300px] text-center mx-auto">
@@ -93,7 +93,57 @@ useHead({
 </template>
 
 
-<style scoped>
+<style scoped lang="postcss">
+.hero-text {
+  font-family: Italiana;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 28px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 60px;
+    line-height: 42px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 100px;
+    line-height: 68px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 200px;
+    line-height: 135px;
+  }
+
+  &.in-image {
+    color: white;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &.out-image {
+    margin-top: 10px;
+    margin-left: 80px;
+
+    @media screen and (min-width: 480px) {
+      margin-left: 110px;
+    }
+
+    @media screen and (min-width: 768px) {
+      margin-top: 16px;
+    }
+
+    @media screen and (min-width: 768px) {
+      margin-left: 80px;
+    }
+
+    @media screen and (min-width: 1276px) {
+      margin-top: 35px;
+      margin-left: 108px;
+    }
+  }
+}
+
 .about-hero {
   width: 300px;
   height: 400px;

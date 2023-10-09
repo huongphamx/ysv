@@ -4,10 +4,16 @@ export default defineNuxtConfig({
 
   modules: ['@nuxt/ui', '@nuxtjs/google-fonts'],
 
-  css: ['@/assets/css/main.css', '@/assets/css/image.css'],
+  css: ['@/assets/css/main.css', '@/assets/css/image.css', '@/assets/css/container.css', '@/assets/css/text.css'],
+
+  postcss: {
+    plugins: {
+      'postcss-nested': {},
+    }
+  },
 
   ui: {
-    icons: ['heroicons', 'ph']
+    icons: ['heroicons', 'ph', 'iconamoon']
   },
 
   runtimeConfig: {
@@ -19,9 +25,9 @@ export default defineNuxtConfig({
   },
 
   //routeRules: {
-    // Admin dashboard renders only on client-side
-   // '/admin/**': { ssr: false },
- // },
+  // Admin dashboard renders only on client-side
+  // '/admin/**': { ssr: false },
+  // },
   ssr: false,
 
   googleFonts: {

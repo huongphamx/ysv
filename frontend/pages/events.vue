@@ -11,7 +11,7 @@ useHead({
   <div class="mycontainer mx-auto mb-10">
     <div class="relative">
       <img src="/img/event-hero.webp" alt="event hero" class="img-hero object-cover" />
-      <div class="absolute bottom-0 text-white font-['Italiana'] text-hero">EVENTS</div>
+      <div class="hero-text in-image">EVENTS</div>
     </div>
 
     <div class="my-12 grid grid-cols-2 gap-1">
@@ -105,10 +105,6 @@ useHead({
     object-fit: cover;
   }
 
-  .text-hero {
-    font-size: 100px;
-  }
-
   .event-text-1 {
     font-size: 16px;
   }
@@ -130,10 +126,6 @@ useHead({
     object-fit: cover;
   }
 
-  .text-hero {
-    font-size: 100px;
-  }
-
   .event-text-1 {
     font-size: 18px;
   }
@@ -153,10 +145,6 @@ useHead({
     width: 628px;
     height: 943px;
     object-fit: cover;
-  }
-
-  .text-hero {
-    font-size: 200px;
   }
 
   .event-text-1 {

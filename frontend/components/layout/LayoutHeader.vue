@@ -77,11 +77,11 @@ const isShowedMobileMenu = ref(false)
 
 <style scoped>
 .active {
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
 }
 
 .link {
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
 }
 
 .link:hover {

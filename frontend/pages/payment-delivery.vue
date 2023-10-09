@@ -11,9 +11,7 @@ useHead({
 
 <template>
   <div class="mt-5 mb-24 mycontainer mx-auto">
-    <div class="hidden xl:flex items-center gap-2 hover:cursor-pointer" @click="$router.back()">
-      <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>GO BACK</span>
-    </div>
+    <GoBackArrow />
 
     <div class="my-5 flex flex-col-reverse md:flex-row gap-5 justify-center">
       <div class="md:w-1/2 2xl:w-1/3">
