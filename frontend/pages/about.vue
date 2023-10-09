@@ -15,13 +15,13 @@ useHead({
     <div class="pl-16 text-5xl sm:text-6xl md:text-8xl xl:text-[200px] font-['Italiana']">THE BRAND</div>
 
     <div class="my-10 grid grid-cols-2 gap-3">
-      <div>
+      <div class="2xl:w-[300px] text-center mx-auto">
         <div class="text-sm sm:text-base md:text-lg xl:text-xl">SENSUALITY WITH STYLE. LUXURY FOR THE WOMAN WHO DESERVES
           IT. FOR YOUR
           INNER
           GODDESS. YOUR
           KIND OF LUXURY. SENSUAL. ELEGANT. CLASSY. EXTRAORDINARY. JUST LIKE YOU.</div>
-        <img src="/img/about-1.webp" alt="about 1" class="about-img">
+        <img src="/img/about-1.webp" alt="about 1" class="about-img-1">
       </div>
       <img src="/img/about-2.webp" alt="about 2" class="about-img">
     </div>
@@ -35,9 +35,9 @@ useHead({
     <div class="mt-2 flex justify-center"><img src="/img/about-sign.svg" alt="about sign" class="w-[200px] md:w-[300px]">
     </div>
 
-    <div class="my-5 grid grid-cols-2 gap-3">
+    <div class="my-5 grid grid-cols-2 gap-3 items-end">
       <img src="/img/about-3.webp" alt="about 3" class="about-img">
-      <img src="/img/about-5.webp" alt="about 5" class="about-img">
+      <img src="/img/about-5.webp" alt="about 5" class="about-img-4">
     </div>
 
     <div class="flex flex-col gap-5 text-sm sm:text-base md:text-lg xl:text-xl">
@@ -100,7 +100,8 @@ useHead({
   object-fit: cover;
 }
 
-.about-img {
+.about-img,
+.about-img-1 .about-img-4 {
   width: 140px;
   height: 210px;
   object-fit: cover;
@@ -112,43 +113,47 @@ useHead({
   object-fit: cover;
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 480px) {
   .about-hero {
     width: 420px;
     height: 500px;
     object-fit: cover;
   }
 
-  .about-img {
+  .about-img,
+  .about-img-1,
+  .about-img-4 {
     width: 200px;
     height: 300px;
-    object-fit: cover;
   }
 
   .about-end {
     width: 422px;
     height: 300px;
-    object-fit: cover;
   }
+
 }
 
 @media screen and (min-width: 768px) {
   .about-hero {
     width: 620px;
     height: 540px;
-    object-fit: cover;
   }
 
-  .about-img {
+  .about-img,
+  .about-img-1 {
     width: 300px;
     height: 500px;
-    object-fit: cover;
+  }
+
+  .about-img-4 {
+    width: 220px;
+    height: 270px;
   }
 
   .about-end {
     width: 620px;
     height: 300px;
-    object-fit: cover;
   }
 }
 
@@ -156,19 +161,17 @@ useHead({
   .about-hero {
     width: 700px;
     height: 540px;
-    object-fit: cover;
   }
 
-  .about-img {
+  .about-img,
+  .about-img-1 {
     width: 340px;
     height: 520px;
-    object-fit: cover;
   }
 
   .about-end {
     width: 680px;
     height: 300px;
-    object-fit: cover;
   }
 }
 
@@ -176,19 +179,24 @@ useHead({
   .about-hero {
     width: 1276px;
     height: 836px;
-    object-fit: cover;
   }
 
-  .about-img {
+  .about-img,
+  .about-img-1 {
     width: 628px;
     height: 785px;
-    object-fit: cover;
   }
 
   .about-end {
     width: 1276px;
     height: 592px;
-    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  .about-img-1 {
+    width: 300px;
+    height: 380px;
   }
 }
 </style>

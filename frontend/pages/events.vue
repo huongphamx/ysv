@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+const config = useRuntimeConfig()
+
 useHead({
   title: 'Events - YSV'
 })
@@ -62,7 +64,7 @@ useHead({
     <div class="grid grid-cols-2 gap-3">
       <img src="/img/event-12.webp" alt="Event 12" class="img-mobile">
       <video autoplay loop class="img-mobile">
-        <source src="https://ysv-dev-static-img.s3.ap-northeast-1.amazonaws.com/event-13.mp4" type="video/mp4">
+        <source :src="`${config.public.s3BaseUrl}/event-13.mp4`" type="video/mp4">
       </video>
 
     </div>
