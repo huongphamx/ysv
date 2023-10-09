@@ -16,7 +16,7 @@ useHead({
 
 <template>
   <div class="-mt-16 relative">
-    <video controls class="hero-video">
+    <video autoplay class="hero-video" poster="/img/poster.webp">
       <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
     </video>
     <div class="mycontainer mx-auto">
