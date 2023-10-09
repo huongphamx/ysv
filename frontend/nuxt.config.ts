@@ -18,11 +18,11 @@ export default defineNuxtConfig({
     }
   },
 
-  routeRules: {
+  //routeRules: {
     // Admin dashboard renders only on client-side
-    '/admin/**': { ssr: false },
-  },
-  // ssr: false,
+   // '/admin/**': { ssr: false },
+ // },
+  ssr: false,
 
   googleFonts: {
     families: {

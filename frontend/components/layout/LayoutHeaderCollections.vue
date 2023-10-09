@@ -31,7 +31,7 @@ const sortedCollectionGroups = computed(() => {
 
 
 <template>
-  <UPopover mode="hover">
+  <UPopover>
     <div class="flex items-center">COLLECTIONS
       <UIcon name="i-ph-arrow-down-right" />
     </div>

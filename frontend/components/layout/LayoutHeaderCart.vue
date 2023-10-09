@@ -21,7 +21,7 @@ if (cartIdCookie.value) {
 </script>
 
 <template>
-  <UPopover mode="hover" :ui="{ rounded: '' }">
+  <UPopover :ui="{ rounded: '' }">
     <UButton icon="i-ph-shopping-cart" color="black" variant="ghost" :ui="{ icon: { size: { sm: 'h-6 w-6' } } }" />
 
     <template #panel>
