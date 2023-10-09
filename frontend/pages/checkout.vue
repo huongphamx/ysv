@@ -82,7 +82,7 @@ useHead({
       </div>
     </div>
 
-    <div class="w-[400px] mx-auto flex flex-col justify-center">
+    <div class="w-full max-w-[400px] mx-auto flex flex-col justify-center">
       <div>
         <div class="grid grid-cols-2">
           <div class="hover:cursor-pointer" @click="currentStep = 1">

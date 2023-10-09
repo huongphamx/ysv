@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core'
 import { Collection } from '@/types'
 
 export interface CollectionGroup {
   alphabet: string,
   collections: Collection[]
 }
+
+const { width, height } = useWindowSize()
 
 const collectionList = useCollectionList()
 
@@ -31,7 +34,7 @@ const sortedCollectionGroups = computed(() => {
 
 
 <template>
-  <UPopover>
+  <UPopover :mode="width > 1280 ? 'hover' : 'click'">
     <div class="flex items-center">COLLECTIONS
       <UIcon name="i-ph-arrow-down-right" />
     </div>

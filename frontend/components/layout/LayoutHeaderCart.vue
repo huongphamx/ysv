@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid'
+import { useWindowSize } from '@vueuse/core'
+
+const { width, height } = useWindowSize()
 
 const cart = useCart()
 const cartIdCookie = useCartIdCookie()
@@ -21,7 +24,7 @@ if (cartIdCookie.value) {
 </script>
 
 <template>
-  <UPopover :ui="{ rounded: '' }">
+  <UPopover :mode="width > 1280 ? 'hover' : 'click'" :ui="{ rounded: '' }">
     <UButton icon="i-ph-shopping-cart" color="black" variant="ghost" :ui="{ icon: { size: { sm: 'h-6 w-6' } } }" />
 
     <template #panel>
