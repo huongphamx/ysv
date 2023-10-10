@@ -3,6 +3,8 @@ import { object, string, number, array, boolean } from 'yup'
 import { v4 as uuidv4 } from 'uuid'
 import { Product } from '@/types'
 
+const toast = useToast()
+
 const collectionList = useCollectionList()
 getCollectionList()
 const sizeList = useSizeList()
@@ -124,8 +126,9 @@ async function submitSaveProduct() {
     body: productData,
   })
   if (error.value) {
-    // todo: toast
+    toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
   } else if (data.value) {
+    toast.add({ title: 'Success', description: 'Product saved', icon: 'i-ph-check-circle', color: 'green' })
     return navigateTo('/admin/products/')
   }
 }

@@ -2,6 +2,7 @@
 import { object, string, boolean, array } from 'yup'
 import { Collection } from '@/types'
 
+const toast = useToast()
 const { params } = useRoute()
 const collectionId = params.id as string
 
@@ -48,8 +49,9 @@ async function submitSaveCollection() {
     body: collectionData
   })
   if (error.value) {
-    // todo: toast
+    toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
   } else if (data.value) {
+    toast.add({ title: 'Success', description: 'Collection saved', icon: 'i-ph-check-circle', color: 'green' })
     return navigateTo('/admin/collections/')
   }
 }
