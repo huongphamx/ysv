@@ -68,6 +68,9 @@ const shippingFee = computed(() => {
 })
 const showCartItems = ref(false)
 
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = false
+
 useHead({
   title: 'Checkout - YSV'
 })
@@ -128,11 +131,8 @@ useHead({
               <AppInput label="ZIP/POSTAL CODE" v-model="checkoutFormState.zip_code" />
             </UFormGroup>
             <UFormGroup name="phone_number">
-              <div class="relative">
-                <AppInput type="number" label="PHONE NUMBER" v-model="checkoutFormState.phone_number" class="pl-10" />
-                <span class="absolute top-1/2 left-0">{{ dialCode
-                }}</span>
-              </div>
+              <AppInput type="number" label="PHONE NUMBER" v-model="checkoutFormState.phone_number"
+                :dial-code="dialCode" />
             </UFormGroup>
             <div class="mt-10 mb-4 pb-2 text-medium text-center border-b">SHIPPING FEE</div>
             <div class="text-small">

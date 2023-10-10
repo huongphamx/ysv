@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-definePageMeta({
-  layout: 'default-line-header',
-})
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = true
 
 useHead({
   title: 'Payment & Delivery - YSV'
@@ -19,7 +18,7 @@ useHead({
         <div class="mt-[30px] md:mt-0 xl:mt-[20px] text-medium">DELIVERY/SHIPPING</div>
         <div class="mt-1 mb-10 text-small uppercase delivery-description">
           <p>After “placing an order” we will contact you within 24 hours.</p>
-          <p>Delivery shipping in UAE within 1-3 days starts from 4 $ -15 $</p>
+          <p>Delivery shipping in UAE within 1-3 days starts from 4 $ TO 15 $</p>
           <p>Worldwide shipping starts from 54 $ depending on your country and Delivery company. Delivery time up to 10-15
             days. </p>
           <p>It is possible to pay by Cryptocurrency.</p>

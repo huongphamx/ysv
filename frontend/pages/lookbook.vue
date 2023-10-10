@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-
 const collectionList = useCollectionList()
 await getCollectionList()
+
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = false
 
 useHead({
   title: 'Lookbook - YSV'

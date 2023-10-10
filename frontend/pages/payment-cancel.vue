@@ -1,7 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'default-line-header',
-})
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = true
 
 useHead({
   title: 'Payment cancel - YSV'

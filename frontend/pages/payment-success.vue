@@ -1,7 +1,6 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'default-line-header',
-})
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = true
 
 useHead({
   title: 'Payment success - YSV'
@@ -17,7 +16,8 @@ useHead({
     <div class="text-lg md:text-3xl 2xl:text-4xl">
       PAYMENT SUCCESSFUL
     </div>
-    <div class="text-base md:text-lg 2xl:text-xl">YOUR ORDER HAS BEEN PLACED</div>
+    <div class="text-small text-center">YOUR ORDER HAS BEEN PLACED. MANAGER WILL CONTACT YOU SOON VIA WHATSAPP.
+    </div>
     <div>
       <UButton @click="$router.back()" label="GO BACK" variant="outline" color="black"
         :ui="{ rounded: '', base: 'w-[300px] h-[60px] flex justify-center' }" />
