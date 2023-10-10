@@ -10,60 +10,61 @@ useHead({
 <template>
   <div class="mycontainer mx-auto mb-10">
     <div class="relative">
-      <img src="/img/event-hero.webp" alt="event hero" class="img-hero object-cover" />
-      <div class="absolute bottom-0 text-white font-['Italiana'] text-hero">EVENTS</div>
+      <img src="/img/event-hero.webp" alt="event hero" class="hero-image" />
+      <div class="hero-text in-image">EVENTS</div>
     </div>
 
-    <div class="my-12 grid grid-cols-2 gap-1">
+    <div class="mt-32 mb-12 flex justify-center">
       <div>
-        <div class="event-text-1">FOR THE FIRST TIME FASHION FACTOR TOOK PLACE IN DUBAI AND THEREFORE, THE LOCATION WAS
+        <div class="text-small mb-5 event-text">FOR THE FIRST TIME FASHION FACTOR TOOK PLACE IN DUBAI AND THEREFORE,
+          THE LOCATION WAS
           CHOSEN
           TO SHOWCASE THE WONDERS OF THE CAPITAL OF FASHION OF THE MIDDLE EAST.</div>
-        <img src="/img/event-1.webp" alt="Event 1" class="img-mobile">
+        <img src="/img/event-1.webp" alt="Event 1" class="rect-image image-1">
       </div>
-      <div><img src="/img/event-2.webp" alt="Event 2" class="img-mobile"></div>
+      <div><img src="/img/event-2.webp" alt="Event 2" class="rect-image image-2"></div>
     </div>
 
-    <div class="my-12 event-text-2 font-['Italiana'] text-center">
+    <div class="my-12 mx-auto text-medium text-center max-w-[756px]">
       YSV BRAND IS SHINING LIKE A DIAMOND IN NEW EDITION OF FASHION FACTOR WITH TOP DESIGNERS
     </div>
 
-    <div class="xl:hidden grid grid-cols-2 gap-3">
-      <div class="flex flex-col gap-3">
-        <img src="/img/event-3.webp" alt="Event 3" class="img-mobile">
-        <img src="/img/event-8.webp" alt="Event 8" class="img-mobile">
-        <img src="/img/event-4.webp" alt="Event 4" class="img-mobile">
+    <div class="xl:hidden grid grid-cols-2 gap-5">
+      <div class="flex flex-col gap-5">
+        <img src="/img/event-3.webp" alt="Event 3" class="rect-image event-image-small md:ml-auto">
+        <img src="/img/event-8.webp" alt="Event 8" class="rect-image">
+        <img src="/img/event-4.webp" alt="Event 4" class="rect-image">
       </div>
-      <div class="mt-16 flex flex-col gap-3">
-        <img src="/img/event-7.webp" alt="Event 7" class="img-mobile">
-        <img src="/img/event-10.webp" alt="Event 10" class="img-mobile">
-        <img src="/img/event-9.webp" alt="Event 9" class="img-mobile">
+      <div class="mt-16 md:mt-0 flex flex-col gap-5">
+        <img src="/img/event-7.webp" alt="Event 7" class="rect-image">
+        <img src="/img/event-10.webp" alt="Event 10" class="rect-image">
+        <img src="/img/event-9.webp" alt="Event 9" class="rect-image event-image-small">
       </div>
     </div>
-    <div class="hidden xl:grid xl:grid-cols-2 xl:gap-3">
-      <div class="flex flex-col gap-3">
-        <img src="/img/event-3.webp" alt="" class="img-desktop">
-        <img src="/img/event-4.webp" alt="" class="img-desktop">
-        <div class="grid grid-cols-2 gap-3">
-          <img src="/img/event-5.webp" alt="" class="img-desktop-small">
-          <img src="/img/event-6.webp" alt="" class="img-desktop-small">
+    <div class="hidden xl:grid xl:grid-cols-2 xl:gap-5">
+      <div class="flex flex-col gap-5">
+        <img src="/img/event-3.webp" alt="" class="image-3">
+        <img src="/img/event-4.webp" alt="" class="image-4">
+        <div class="grid grid-cols-2 gap-5">
+          <img src="/img/event-5.webp" alt="" class="image-5">
+          <img src="/img/event-6.webp" alt="" class="image-6">
         </div>
       </div>
-      <div class="flex flex-col gap-3">
-        <div class="grid grid-cols-2 gap-3">
-          <img src="/img/event-7.webp" alt="" class="img-desktop-small">
-          <img src="/img/event-8.webp" alt="" class="img-desktop-small">
+      <div class="flex flex-col gap-5">
+        <div class="grid grid-cols-2 gap-5">
+          <img src="/img/event-7.webp" alt="" class="image-7">
+          <img src="/img/event-8.webp" alt="" class="image-8">
         </div>
-        <img src="/img/event-9.webp" alt="" class="img-desktop">
-        <img src="/img/event-10.webp" alt="" class="img-desktop">
+        <img src="/img/event-9.webp" alt="" class="image-9">
+        <img src="/img/event-10.webp" alt="" class="image-10">
       </div>
     </div>
 
-    <div class="my-3"><img src="/img/event-11.webp" alt="Event 11"></div>
+    <div class="my-5"><img src="/img/event-11.webp" alt="Event 11" class="image-11"></div>
 
-    <div class="grid grid-cols-2 gap-3">
-      <img src="/img/event-12.webp" alt="Event 12" class="img-mobile">
-      <video autoplay loop class="img-mobile">
+    <div class="mb-20 grid grid-cols-2 gap-5">
+      <img src="/img/event-12.webp" alt="Event 12" class="rect-image event-image-small ml-auto image-12">
+      <video autoplay loop class="rect-image video-13">
         <source :src="`${config.public.s3BaseUrl}/event-13.mp4`" type="video/mp4">
       </video>
 
@@ -73,98 +74,86 @@ useHead({
 
 
 <style scoped>
-.event-text-1 {
-  font-size: 14px;
-}
-
-.event-text-2 {
-  font-size: 20px;
-}
-
-.img-desktop {
-  width: 628px;
-  height: 943px;
-  object-fit: cover;
-}
-
-.img-desktop-small {
-  width: 304px;
-  height: 457px;
-  object-fit: cover;
-}
-
-@media screen and (min-width: 640px) {
-  .img-hero {
-    width: 420px;
-    height: 500px;
-  }
-
-  .img-mobile {
-    width: 200px;
-    height: 300px;
-    object-fit: cover;
-  }
-
-  .text-hero {
-    font-size: 100px;
-  }
-
-  .event-text-1 {
-    font-size: 16px;
-  }
-
-  .event-text-2 {
-    font-size: 26px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .img-hero {
-    width: 620px;
-    height: 540px;
-  }
-
-  .img-mobile {
-    width: 300px;
-    height: 450px;
-    object-fit: cover;
-  }
-
-  .text-hero {
-    font-size: 100px;
-  }
-
-  .event-text-1 {
-    font-size: 18px;
-  }
-
-  .event-text-2 {
-    font-size: 32px;
-  }
-}
-
 @media screen and (min-width: 1280px) {
-  .img-hero {
-    width: 1276px;
-    height: 836px;
+  .image-1 {
+    width: 304px;
+    height: 433px;
   }
 
-  .img-mobile {
+  .image-2 {
+    margin-top: 13px;
+    width: 412px;
+    height: 619px;
+  }
+
+  .image-3 {
+    width: 628px;
+    height: 846px;
+  }
+
+  .image-4 {
+    width: 628px;
+    height: 962px;
+  }
+
+  .image-5,
+  .image-6 {
+    width: 304px;
+    height: 536px;
+  }
+
+  .image-7,
+  .image-8 {
+    width: 304px;
+    height: 457px;
+  }
+
+  .image-9,
+  .image-10,
+  .image-12,
+  .video-13 {
     width: 628px;
     height: 943px;
-    object-fit: cover;
+  }
+}
+
+.event-text {
+  max-width: 155px;
+  margin-right: 5px;
+
+  @media screen and (min-width: 480px) {
+    max-width: 200px;
+    margin-right: 12px;
   }
 
-  .text-hero {
-    font-size: 200px;
+  @media screen and (min-width: 768px) {
+    max-width: 293px;
+    margin-right: 20px;
   }
 
-  .event-text-1 {
-    font-size: 20px;
+  @media screen and (min-width: 1280px) {
+    max-width: 324px;
+    margin-right: 15px;
+  }
+}
+
+.image-11 {
+  width: 300px;
+  height: 220px;
+
+  @media screen and (min-width: 480px) {
+    width: 420px;
+    height: 300px;
   }
 
-  .event-text-2 {
-    font-size: 36px;
+  @media screen and (min-width: 768px) {
+    width: 620px;
+    height: 430px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 1276px;
+    height: 892px;
   }
 }
 </style>

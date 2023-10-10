@@ -16,98 +16,51 @@ useHead({
 
 <template>
   <div class="-mt-16 relative">
-    <video autoplay class="hero-video" poster="/img/poster.webp">
+    <!-- <video autoplay class="hero-video" poster="/img/poster.webp"> -->
+    <video autoplay class="hero-video">
       <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
     </video>
     <div class="mycontainer mx-auto">
-      <div class="absolute bottom-0 text-6xl sm:text-8xl md:text-9xl 2xl:text-[200px] text-white font-['Italiana']">YSV
+      <div class="hero-text in-image">YSV
       </div>
     </div>
   </div>
   <div class="mycontainer mx-auto">
-    <div class="text-6xl sm:text-8xl md:text-9xl 2xl:text-[200px] pl-16 md:pl-32 font-['Italiana']">BRAND</div>
+    <div class="hero-text out-image">BRAND</div>
 
-    <div class="mt-10 mb-5 grid 2xl:grid-cols-2 gap-5">
-      <div class="hidden 2xl:block"><img :src="mainCollectionPics![0]" alt=""></div>
+    <div class="mt-10 md:mt-20 xl:mt-32 grid xl:grid-cols-2 gap-3">
+      <div class="hidden xl:block"><img :src="mainCollectionPics![0]" alt=""></div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-img">
-          <div class="text-sm sm:text-base md:text-lg">{{ mainCollection?.main_collection_description?.toUpperCase() }}
+          <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image">
+          <div class="mt-4 text-small">
+            {{ mainCollection?.main_collection_description }}
+            <div class="hidden xl:block">{{ mainCollection?.main_collection_description_2 }}</div>
           </div>
         </div>
-
         <div>
-          <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-['Italiana']">{{ mainCollection?.name }} COLLECTION
+          <div class="text-medium">{{ mainCollection?.name }} COLLECTION
           </div>
-          <div class="text-sm sm:text-base my-5">NEW OF 2023</div>
-          <UButton :to="`/catalog/${mainCollection?.id}`" label="VIEW ALL" trailing-icon="i-ph-arrow-down-right"
-            variant="outline" color="gray" :ui="{ rounded: '' }" />
-          <img :src="mainCollectionPics![2]" alt="main prod 2" class="mt-8 rect-img">
+          <div class="text-small my-5">NEW OF 2023</div>
+          <UButton :to="`/catalog/${mainCollection?.id}`" label="VIEW ALL" variant="outline" color="black"
+            :ui="{ rounded: '', gap: { sm: 'gap-x-0' } }">
+            <template #trailing>
+              <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl" />
+            </template>
+          </UButton>
+          <img :src="mainCollectionPics![2]" alt="main prod 2" class="mt-8 rect-image">
         </div>
       </div>
+      <div class="text-small mt-2 xl:hidden">{{ mainCollection?.main_collection_description_2 }}</div>
     </div>
 
-    <div>
-      <div class="text-[40px] sm:text-6xl md:text-8xl xl:text-9xl text-center font-['Italiana']">COLLECTIONS</div>
-      <div class="my-5">
-        <div class="2xl:hidden">
-          <div class="grid grid-cols-2 gap-4 justify-items-center">
-            <CollectionCard :collection="showCollections[0]" />
-            <CollectionCard :collection="showCollections[1]" />
-            <CollectionCard :collection="showCollections[2]" />
-            <CollectionCard :collection="showCollections[3]" />
-          </div>
-          <div class="my-4 mx-auto"><img src="/img/home-collection-square-1.webp" alt="" class="square-img"></div>
-          <div class="grid grid-cols-2 gap-4 justify-items-center mb-4">
-            <CollectionCard :collection="showCollections[4]" />
-            <CollectionCard :collection="showCollections[5]" />
-          </div>
-          <div>
-            <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-ph-arrow-down-right" to="/lookbook"
-              variant="outline" color="gray" :ui="{ rounded: '' }" />
-          </div>
-        </div>
+    <div class="mt-12">
+      <div class="collections-text">COLLECTIONS</div>
+      <div class="my-3">
+        <HomeCollectionsMobile :show-collections="showCollections" />
 
-        <div class="hidden 2xl:block">
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="showCollections[0]" />
-                <CollectionCard :collection="showCollections[1]" />
-              </div>
-              <img src="/img/home-collection-square-1.webp" alt="" class="square-img">
-            </div>
-            <div>
-              <img src="/img/home-collection-square-2.webp" alt="" class="square-img">
-              <div class="my-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="showCollections[2]" />
-                <CollectionCard :collection="showCollections[3]" />
-              </div>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="showCollections[4]" />
-                <CollectionCard :collection="showCollections[5]" />
-              </div>
-              <img src="/img/home-collection-square-3.webp" alt="" class="square-img">
-            </div>
-            <div>
-              <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="showCollections[6]" />
-                <CollectionCard :collection="showCollections[7]" />
-              </div>
-              <div class="mb-6 grid grid-cols-2 gap-3">
-                <CollectionCard :collection="showCollections[8]" />
-                <CollectionCard :collection="showCollections[9]" />
-              </div>
-              <UButton block size="xl" label="LOOKBOOK" trailing-icon="i-ph-arrow-down-right" to="/lookbook"
-                variant="outline" color="gray" :ui="{ rounded: '', base: 'h-[145px]' }" />
-            </div>
-          </div>
-        </div>
+        <HomeCollectionsDesktop :show-collections="showCollections" />
       </div>
     </div>
   </div>
@@ -119,23 +72,36 @@ useHead({
   width: 100%;
   height: 550px;
   object-fit: cover;
-}
 
-@media screen and (min-width: 640px) {
-  .hero-video {
+  @media screen and (min-width: 480px) {
     height: 615px;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .hero-video {
-    height: 800px;
+  @media screen and (min-width: 1280px) {
+    height: 1180px;
   }
 }
 
-@media screen and (min-width: 1536px) {
-  .hero-video {
-    height: 1000px;
+.collections-text {
+  font-family: 'Italiana';
+  font-size: 40px;
+  line-height: 1;
+
+  @media screen and (min-width: 480px) {
+    font-size: 60px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  @media screen and (min-width: 640px) {
+    font-size: 100px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 200px;
+    margin-top: 150px;
+    margin-bottom: 20px;
   }
 }
 </style>

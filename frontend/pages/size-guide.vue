@@ -11,104 +11,97 @@ useHead({
 
 <template>
   <div class="mt-5 mb-24 mycontainer mx-auto">
-
-    <div class="hidden lg:flex items-center gap-2 hover:cursor-pointer" @click="$router.back()">
-      <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>GO BACK</span>
-    </div>
-
-    <div class="my-5 2xl:flex">
-      <div class="my-5 text-center 2xl:w-1/3">
-        <div class="text-xl md:text-3xl lg:text-4xl font-['Italiana']">SIZE GUIDE</div>
-        <div class="my-5 text-sm md:text-lg 2xl:text-xl">THE CHART BELOW PROVIDES DETAILED MEASUREMENTS OF THIS GARMENT
+    <GoBackArrow />
+    <div class="my-5 xl:flex justify-between">
+      <div class="my-5 text-center">
+        <div class="text-medium">SIZE GUIDE</div>
+        <div class="my-3 mx-auto text-small max-w-[390px]">THE CHART BELOW PROVIDES DETAILED MEASUREMENTS OF THIS
+          GARMENT
         </div>
-        <div class="text-xs sm:text-sm md:text-base">
-          <table class="w-full">
-            <tr>
-              <th>SIZE</th>
-              <th>BUST</th>
-              <th>WAIST</th>
-              <th>HIPS</th>
-            </tr>
-            <tr>
-              <td>XS</td>
-              <td>83-86</td>
-              <td>63-66</td>
-              <td>90-93</td>
-            </tr>
-            <tr>
-              <td>S</td>
-              <td>86-89</td>
-              <td>66-69</td>
-              <td>93-96</td>
-            </tr>
-            <tr>
-              <td>M</td>
-              <td>89-92</td>
-              <td>69-72</td>
-              <td>96-99</td>
-            </tr>
-            <tr>
-              <td>L</td>
-              <td>92-95</td>
-              <td>72-75</td>
-              <td>99-102</td>
-            </tr>
-          </table>
-        </div>
+        <table class="table-guide">
+          <tr>
+            <td>SIZE</td>
+            <td>BUST</td>
+            <td>WAIST</td>
+            <td>HIPS</td>
+          </tr>
+          <tr>
+            <td>XS</td>
+            <td>83-86</td>
+            <td>63-66</td>
+            <td>90-93</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>86-89</td>
+            <td>66-69</td>
+            <td>93-96</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>89-92</td>
+            <td>69-72</td>
+            <td>96-99</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>92-95</td>
+            <td>72-75</td>
+            <td>99-102</td>
+          </tr>
+        </table>
       </div>
-      <div class="my-5 text-center 2xl:w-2/3">
-        <div class="text-xl md:text-3xl lg:text-4xl font-['Italiana']">SIZE CONVERSION</div>
-        <div class="my-5 text-sm md:text-lg 2xl:text-xl">INTERNATIONAL SIZING CONVERSIONS <br> TO HELP SELECT YOUR CORRECT
+      <div class="my-5 text-center">
+        <div class="mt-10 xl:mt-0 text-medium">SIZE CONVERSION</div>
+        <div class="my-3 text-small">INTERNATIONAL SIZING CONVERSIONS <br> TO HELP SELECT YOUR CORRECT
           SIZE</div>
-        <div class="text-[8px] md:text-base">
-          <table class="w-4/5 mx-auto">
-            <tr>
-              <th>SIZE</th>
-              <th>US</th>
-              <th>UK/AUS</th>
-              <th>FRANCE</th>
-              <th>ITALY</th>
-              <th>JAPAN</th>
-              <th>DENMARK</th>
-            </tr>
-            <tr>
-              <td>XS</td>
-              <td>0-2</td>
-              <td>6</td>
-              <td>34</td>
-              <td>38</td>
-              <td>5</td>
-              <td>32</td>
-            </tr>
-            <tr>
-              <td>S</td>
-              <td>2-4</td>
-              <td>8</td>
-              <td>36</td>
-              <td>40</td>
-              <td>7</td>
-              <td>34</td>
-            </tr>
-            <tr>
-              <td>M</td>
-              <td>6-8</td>
-              <td>10</td>
-              <td>38</td>
-              <td>42</td>
-              <td>9</td>
-              <td>36</td>
-            </tr>
-            <tr>
-              <td>L</td>
-              <td>8-10</td>
-              <td>12</td>
-              <td>40</td>
-              <td>44</td>
-              <td>11</td>
-              <td>38</td>
-            </tr>
-          </table>
-        </div>
+        <table class="table-conversion">
+          <tr>
+            <td>SIZE</td>
+            <td>US</td>
+            <td>UK/AUS</td>
+            <td>FRANCE</td>
+            <td>ITALY</td>
+            <td>JAPAN</td>
+            <td>DENMARK</td>
+          </tr>
+          <tr>
+            <td>XS</td>
+            <td>0-2</td>
+            <td>6</td>
+            <td>34</td>
+            <td>38</td>
+            <td>5</td>
+            <td>32</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>2-4</td>
+            <td>8</td>
+            <td>36</td>
+            <td>40</td>
+            <td>7</td>
+            <td>34</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>6-8</td>
+            <td>10</td>
+            <td>38</td>
+            <td>42</td>
+            <td>9</td>
+            <td>36</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>8-10</td>
+            <td>12</td>
+            <td>40</td>
+            <td>44</td>
+            <td>11</td>
+            <td>38</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -119,12 +112,48 @@ useHead({
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0 auto;
 }
 
 td,
 th {
-  border: 2px solid #dddddd;
+  border: 2px solid #888888;
   text-align: center;
-  padding: 8px;
+  padding: 14px 0;
+}
+
+.table-guide {
+  font-size: 14px;
+  width: 300px;
+
+  @media screen and (min-width: 480px) {
+    width: 390px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 400px;
+    font-size: 16px;
+  }
+}
+
+.table-conversion {
+  font-size: 8px;
+  width: 300px;
+
+  @media screen and (min-width: 480px) {
+    font-size: 10px;
+    width: 420px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+    width: 618px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
+    width: 681px;
+  }
 }
 </style>

@@ -18,6 +18,7 @@ class Collection(Base):
     is_on_sale: Mapped[bool] = mapped_column(default=True)
     is_main_collection: Mapped[bool] = mapped_column(default=False)
     main_collection_description: Mapped[str] = mapped_column(nullable=True)
+    main_collection_description_2: Mapped[str] = mapped_column(nullable=True)
     main_collection_pics: Mapped[str] = mapped_column(nullable=True)
     is_show_in_home: Mapped[bool] = mapped_column(default=False)
     products: Mapped[list["Product"]] = relationship(

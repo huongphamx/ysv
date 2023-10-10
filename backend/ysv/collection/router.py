@@ -138,6 +138,9 @@ async def add_main_collection(
     new_main_collection.main_collection_description = (  # type:ignore
         data.main_collection_description
     )
+    new_main_collection.main_collection_description_2 = (  # type:ignore
+        data.main_collection_description_2
+    )
     new_main_collection.main_collection_pics = data.main_collection_pics  # type:ignore
 
     db.add(new_main_collection)

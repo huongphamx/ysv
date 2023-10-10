@@ -33,9 +33,12 @@ const lookbookPics = computed(() => {
           <div class="text-3xl font-['Italiana']">{{ collection.name.toUpperCase() }}</div>
           <div class="text-lg">{{ collection.descriptions.toUpperCase() }}</div>
         </div>
-        <UButton :to="`/catalog/${collection.id}`" label="VIEW ALL" variant="outline" color="black"
-          trailing-icon="i-ph-arrow-down-right"
-          :ui="{ rounded: '', base: 'w-full h-[40px] sm:h-[60px] md:h-[80px] flex justify-center' }" />
+        <UButton :to="`/catalog/${collection.id}`" label="VIEW ALL" variant="outline" color="black" class="xl:mt-5"
+          :ui="{ rounded: '', base: 'w-full h-[40px] sm:h-[60px] md:h-[80px] flex justify-center' }">
+          <template #trailing>
+            <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl" />
+          </template>
+        </UButton>
       </div>
     </div>
   </div>

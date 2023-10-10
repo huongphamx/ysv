@@ -39,7 +39,8 @@ const randomCollection = computed(() => {
         <div v-for="product in randomProduct" :key="product.id" class="my-2 relative hover:cursor-pointer"
           @click="$router.push(`/p/${product.id}`)">
           <img :src="product.preview_pic" alt="" class="preview-pic">
-          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] 2xl:text-xl">{{ product.name.toUpperCase() }}
+          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] 2xl:text-xl text-white">{{
+            product.name.toUpperCase() }}
           </div>
         </div>
       </div>
@@ -50,7 +51,8 @@ const randomCollection = computed(() => {
         <div v-for="collection in randomCollection" :key="collection.id" class="my-2 relative hover:cursor-pointer"
           @click="$router.push(`/catalog/${collection.id}`)">
           <img :src="collection.preview_pic" alt="" class="preview-pic">
-          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] 2xl:text-xl">{{ collection.name.toUpperCase() }}
+          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] 2xl:text-xl text-white">{{
+            collection.name.toUpperCase() }}
           </div>
         </div>
       </div>

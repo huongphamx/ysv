@@ -14,30 +14,66 @@ if (getCollectionError.value) {
 
 const productList = useProductList()
 await getProductList({ collection_id: collectionId })
+
+definePageMeta({
+  layout: 'default-line-header'
+})
 </script>
 
 
 <template>
-  <div class="mycontainer mx-auto mb-10">
+  <div class="mycontainer mx-auto mb-12 xl:mb-24">
     <NuxtLink to="/lookbook">
-      <div class="my-5 items-center gap-2 hidden xl:flex">
-        <UIcon name="i-ph-arrow-up-left" class="text-xl" /><span>LOOK ANOTHER COLLECTIONS</span>
+      <div class="my-10 items-center gap-2 hidden xl:flex text-gray-500">
+        <UIcon name="i-iconamoon-arrow-top-left-1" class="text-2xl" /><span>LOOK ANOTHER COLLECTIONS</span>
       </div>
     </NuxtLink>
 
-    <div class="my-5 flex flex-col gap-5 items-center">
-      <div v-for="p in productList" :key="p.id"
-        class="grid grid-cols-2 gap-4 w-[300px] sm:w-[420px] md:w-[620px] lg:w-[768px] hover:cursor-pointer group"
+    <div class="mt-5 mb-5 md:mb-14 flex flex-col gap-5 md:gap-10 xl:gap-20 xl:items-center">
+      <div v-for="p in productList" :key="p.id" class="flex gap-4 hover:cursor-pointer group"
         @click="$router.push(`/p/${p.id}`)">
-        <div><img :src="p.preview_pic" alt="Product picture" class="w-[140px] sm:w-[200px] md:w-[220px] lg:w-[420px]">
+        <div><img :src="p.preview_pic" alt="Product picture" class="rect-image collection-catalog">
         </div>
         <div class="flex flex-col justify-center group-hover:underline">
-          <div class="text-2xl md:text-3xl lg:text-4xl font-['Italiana']">{{ p.collection.name.toUpperCase() }}</div>
-          <div class="my-4 text-sm md:text-md lg:">AVAILABLE COLOR: {{ p.name.toUpperCase() }}</div>
-          <div class="text-2xl md:text-3xl lg:text-4xl">${{ p.price }}</div>
+          <div class="text-medium">{{ p.collection.name }} COLLECTION</div>
+          <div class="my-4 product-color">AVAILABLE COLOR: {{ p.name }}</div>
+          <div class="product-price">${{ p.price }}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
+
+<style scoped>
+.product-color {
+  color: #888888;
+  font-size: 12px;
+  text-transform: uppercase;
+
+  @media screen and (min-width: 480px) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.product-price {
+  font-size: 20px;
+  text-transform: uppercase;
+
+  @media screen and (min-width: 480px) {
+    font-size: 26px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 36px;
+  }
+}
+</style>

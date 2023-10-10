@@ -36,7 +36,7 @@ const sortedCollectionGroups = computed(() => {
 <template>
   <UPopover :mode="width > 1280 ? 'hover' : 'click'">
     <div class="flex items-center">COLLECTIONS
-      <UIcon name="i-ph-arrow-down-right" />
+      <UIcon name="i-iconamoon-arrow-bottom-right-1" class="ml-2 text-2xl" />
     </div>
     <template #panel>
       <div class="p-2 w-[300px] max-h-[580px] overflow-auto">

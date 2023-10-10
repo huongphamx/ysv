@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@iconify-json/iconamoon':
+    specifier: ^1.1.1
+    version: 1.1.1
   '@iconify-json/ph':
     specifier: ^1.1.6
     version: 1.1.6
@@ -14,6 +17,9 @@ dependencies:
   '@types/uuid':
     specifier: ^9.0.4
     version: 9.0.4
+  postcss-nested:
+    specifier: ^6.0.1
+    version: 6.0.1(postcss@8.4.31)
   uuid:
     specifier: ^9.0.1
     version: 9.0.1
@@ -841,6 +847,12 @@ packages:
 
   /@iconify-json/heroicons@1.1.12:
     resolution: {integrity: sha512-9tsn/xUU+HX56OngEDRTej4LzVm2qcMVLvEJ+q+1ZJBO4sjMDxycmbHq16HGl1LOeVG21fq4jNZHslVveVCwSQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify-json/iconamoon@1.1.1:
+    resolution: {integrity: sha512-tgypCU1PxdUXCjSbzyCRyINEDqkGIZDx82x+p69yBAD8WJlEH8hUetHtD6ZHRBcDp1mfs3AcpdmUk88JgTOp2Q==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false

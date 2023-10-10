@@ -1,12 +1,66 @@
-.img-hero {
+.hero-image {
   width: 300px;
   height: 400px;
   object-fit: cover;
+
+  @media screen and (min-width: 480px) {
+    width: 420px;
+    height: 500px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 620px;
+    height: 540px;
+
+    &.cooperation-hero {
+      width: 620px;
+      height: 433px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 1276px;
+    height: 836px;
+
+    &.cooperation-hero {
+      width: 1276px;
+      height: 892px;
+    }
+
+  }
 }
 
-.text-hero {
-  font-size: 60px;
-  line-height: 100%;
+.rect-image {
+  width: 140px;
+  height: 210px;
+  object-fit: cover;
+
+  @media screen and (min-width: 480px) {
+    width: 200px;
+    height: 300px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 300px;
+    height: 450px;
+
+    &.event-image-small {
+      width: 220px;
+      height: 300px;
+    }
+
+    &.collection-catalog {
+      width: 220px;
+      height: 330px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    &.collection-catalog {
+      width: 411px;
+      height: 618px;
+    }
+  }
 }
 
 .rect-img,
@@ -20,6 +74,16 @@
   width: 300px;
   height: 300px;
   object-fit: cover;
+
+  @media screen and (min-width: 480px) {
+    width: 420px;
+    height: 420px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 622px;
+    height: 622px;
+  }
 }
 
 @media screen and (min-width: 480px) {
@@ -32,11 +96,6 @@
     width: 200px;
     height: 300px;
   }
-
-  .square-img {
-    width: 420px;
-    height: 420px;
-  }
 }
 
 @media screen and (min-width: 768px) {
@@ -48,11 +107,6 @@
   .rect-img {
     width: 303px;
     height: 450px;
-  }
-
-  .square-img {
-    width: 622px;
-    height: 622px;
   }
 }
 
