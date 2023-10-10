@@ -28,10 +28,8 @@ if (error.value) {
 // const showedSmallPictures = computed(() => {
 //   return productData.value?.pictures.slice(startPictureIndex.value, startPictureIndex.value + 4)
 // })
-
-definePageMeta({
-  layout: 'default-line-header',
-})
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = true
 
 useHead({
   title: productData.value ? productData.value.name.toUpperCase() + ' ' + productData.value.collection.name + '- YSV' : 'Product - YSV'

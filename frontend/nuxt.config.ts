@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true, viteInspect: false, },
 
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+  },
+
   modules: ['@nuxt/ui', '@nuxtjs/google-fonts'],
 
   css: ['@/assets/css/main.css', '@/assets/css/image.css', '@/assets/css/container.css', '@/assets/css/text.css'],

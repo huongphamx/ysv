@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-definePageMeta({
-  layout: 'default-line-header',
-})
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = true
 
 useHead({
   title: 'Cooperation - YSV'

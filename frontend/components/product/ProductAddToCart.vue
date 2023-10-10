@@ -19,9 +19,9 @@ const addToCart = async () => {
       <UButton label="ADD TO CART" trailing-icon="i-ph-arrow-down-right" color="black"
         :ui="{ rounded: '', padding: { 'sm': 'px-16 py-4' } }" @click="addToCart" />
     </div>
-    <div class="mb-5 underline text-gray-500 text-sm md:text-base"><a href="https://whatsapp.com" target="_blank">CONTACT
-        VIA
-        WHATSAPP</a></div>
+    <div class="mb-5 underline text-gray-500 text-sm md:text-base">
+      <a href="https://api.whatsapp.com/send?phone=971545602477" target="_blank">CONTACT VIA WHATSAPP</a>
+    </div>
   </div>
 </template>
 

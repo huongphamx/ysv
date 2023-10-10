@@ -1,13 +1,6 @@
 <script lang="ts" setup>
 const route = useRoute()
 
-const props = defineProps({
-  isShowBottomLine: {
-    type: Boolean,
-    default: false,
-  }
-})
-
 const borderColor = computed(() => {
   return route.path === '/' ? 'white' : 'black'
 })
@@ -20,11 +13,12 @@ const links = [
 ]
 
 const isShowedMobileMenu = ref(false)
+const isShowedHeaderLine = useIsShowedHeaderLine()
 </script>
 
 
 <template>
-  <div class="z-10 py-2" :class="{ 'xl:border-b xl:border-black': isShowBottomLine }">
+  <div class="z-10 py-2" :class="{ 'xl:border-b xl:border-black': isShowedHeaderLine }">
     <div class="h-12 mycontainer mx-auto flex justify-between items-center"
       :class="{ 'text-white': $route.path === '/' }">
       <div class="text-2xl font-['Italiana']">

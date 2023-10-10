@@ -15,9 +15,8 @@ if (getCollectionError.value) {
 const productList = useProductList()
 await getProductList({ collection_id: collectionId })
 
-definePageMeta({
-  layout: 'default-line-header'
-})
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = true
 </script>
 
 

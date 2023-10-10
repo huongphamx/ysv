@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 const config = useRuntimeConfig()
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = false
 
 useHead({
   title: 'Events - YSV'

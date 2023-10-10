@@ -3,6 +3,9 @@ import { useWindowSize } from '@vueuse/core'
 
 const { width, height } = useWindowSize()
 
+const isShowedHeaderLine = useIsShowedHeaderLine()
+isShowedHeaderLine.value = false
+
 useHead({
   title: 'About - YSV'
 })
@@ -59,7 +62,7 @@ useHead({
         </div>
       </div>
       <div class="my-5 flex gap-3 text-small">
-        <div class="md:max-w-[207px]">
+        <div class="max-w-[155px] md:max-w-[207px]">
           <div class="my-3">WITH NO EXCEPTION, WE TAKE GREAT CARE OF THE DETAILS FROM FABRICS TO INDIVIDUAL MEASUREMENTS
             AND
             BEYOND TO

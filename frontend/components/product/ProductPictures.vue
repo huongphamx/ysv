@@ -17,7 +17,7 @@ const showedBigPicture = ref(props.pictures[0].url)
         <img :src="showedBigPicture" alt="Product proview picture" class="img-preview">
         <ProductAddToCart class="hidden xl:block" />
       </div>
-      <div class="mt-5 px-4 description">
+      <div class="mt-5 md:mt-0 leading-none px-4 description">
         <div class="text-medium">
           {{ productData?.collection.name.toUpperCase() }} COLLECTION
         </div>
