@@ -24,6 +24,8 @@ export default defineNuxtConfig({
     }
   },
 
+  colorMode: { preference: 'light' },
+
   //routeRules: {
   // Admin dashboard renders only on client-side
   // '/admin/**': { ssr: false },
