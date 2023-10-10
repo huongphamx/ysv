@@ -17,10 +17,7 @@ const addToCart = async () => {
   <div>
     <div class="my-4 flex items-center gap-5">
       <UButton label="ADD TO CART" trailing-icon="i-ph-arrow-down-right" color="black"
-        :ui="{ rounded: '', padding: { 'sm': 'px-16' } }" :disabled="selectedProductVariant === null"
-        @click="addToCart" />
-      <!-- <UButton icon="i-ph-heart" color="gray" :ui="{ rounded: '' }" /> -->
-      <span v-if="selectedProductVariant === null" class="text-gray-500">Select a size</span>
+        :ui="{ rounded: '', padding: { 'sm': 'px-16 py-4' } }" @click="addToCart" />
     </div>
     <div class="mb-5 underline text-gray-500 text-sm md:text-base"><a href="https://whatsapp.com" target="_blank">CONTACT
         VIA

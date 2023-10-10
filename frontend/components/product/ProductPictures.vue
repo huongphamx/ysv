@@ -15,18 +15,18 @@ const showedBigPicture = ref(props.pictures[0].url)
     <div class="md:flex">
       <div>
         <img :src="showedBigPicture" alt="Product proview picture" class="img-preview">
-        <ProductAddToCart class="hidden 2xl:block" />
+        <ProductAddToCart class="hidden xl:block" />
       </div>
       <div class="mt-5 px-4 description">
-        <div class="text-xl sm:text-2xl xl:text-3xl font-['Italiana']">
+        <div class="text-medium">
           {{ productData?.collection.name.toUpperCase() }} COLLECTION
         </div>
         <div class="my-5 text-sm xl:text-base text-gray-500">AVAILABLE COLORS: {{ productData?.name.toUpperCase() }}</div>
         <div class="my-4 text-xl sm:text-2xl xl:text-3xl">${{ productData?.price }}</div>
-        <div class="px-5 text-sm xl:text-base">
+        <div class="px-5 text-sm xl:text-base text-gray-500">
           <li v-for="d, i in productData?.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
         </div>
-        <ProductSizeTable :variants="productData?.size_variants!" class="hidden 2xl:block" />
+        <ProductSizeTable :variants="productData?.size_variants!" class="hidden xl:block" />
       </div>
     </div>
     <div
@@ -83,7 +83,13 @@ const showedBigPicture = ref(props.pictures[0].url)
 
 }
 
-@media screen and (min-width: 1536px) {
+@media screen and (min-width: 768px) {
+  .description {
+    max-width: 310px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
   .img-preview {
     width: 380px;
     height: 570px;
@@ -93,15 +99,4 @@ const showedBigPicture = ref(props.pictures[0].url)
     max-width: 510px;
   }
 }
-
-/* @media screen and (min-width: 150px) {
-  .img-preview {
-    width: 380px;
-    height: 570px;
-  }
-
-  .description {
-    max-width: 510px;
-  }
-} */
 </style>
