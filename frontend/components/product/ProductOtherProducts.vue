@@ -15,6 +15,9 @@ const randomProduct = computed(() => {
 })
 
 const collectionList = useCollectionList()
+if (collectionList.value.length === 0) {
+  await getCollectionList()
+}
 const randomCollection = computed(() => {
   const randomCount = 2 // get only 2 random collections
   const result = [];
@@ -45,7 +48,7 @@ const randomCollection = computed(() => {
         </div>
       </div>
     </template>
-    <template v-else>
+    <template>
       <div class="text-sm sm:text-base">ANOTHER COLLECTIONS</div>
       <div>
         <div v-for="collection in randomCollection" :key="collection.id" class="my-2 relative hover:cursor-pointer"

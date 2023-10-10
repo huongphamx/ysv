@@ -21,7 +21,7 @@ useHead({
 <template>
   <div>
     <div class="-mt-16 relative">
-      <video autoplay class="hero-video">
+      <video autoplay muted loop class="hero-video">
         <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
