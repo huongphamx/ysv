@@ -36,6 +36,18 @@
   @media screen and (min-width: 768px) {
     width: 300px;
     height: 450px;
+
+    &.collection-catalog {
+      width: 220px;
+      height: 330px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    &.collection-catalog {
+      width: 411px;
+      height: 618px;
+    }
   }
 }
 

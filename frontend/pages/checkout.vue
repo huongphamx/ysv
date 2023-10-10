@@ -80,7 +80,7 @@ useHead({
       <GoBackArrow />
     </div>
 
-    <div class="w-full max-w-[400px] mx-auto flex flex-col justify-center">
+    <div class="w-full max-w-[420px] mx-auto flex flex-col justify-center">
       <div>
         <div class="grid grid-cols-2">
           <div class="hover:cursor-pointer" @click="currentStep = 1">
@@ -100,7 +100,7 @@ useHead({
         <template v-if="currentStep === 1">
           <UForm ref="checkoutForm" :state="checkoutFormState" :schema="checkoutFormSchema" @submit="submitCheckoutInfo"
             class="flex flex-col gap-3">
-            <div class="my-4 pb-2 text-4xl text-center font-['Italiana'] border-b">SHIPPING ADDRESS</div>
+            <div class="my-4 pb-2 text-medium text-center border-b">SHIPPING ADDRESS</div>
             <UFormGroup name="fname">
               <AppInput label="FIRST NAME" v-model="checkoutFormState.fname" />
             </UFormGroup>
@@ -134,8 +134,8 @@ useHead({
                 }}</span>
               </div>
             </UFormGroup>
-            <div class="my-4 pb-2 text-4xl text-center font-['Italiana'] border-b">SHIPPING FEE</div>
-            <div>
+            <div class="mt-10 mb-4 pb-2 text-medium text-center border-b">SHIPPING FEE</div>
+            <div class="text-small">
               <template v-if="checkoutFormState.country === 'United Arab Emirates'">
                 <div>You are in United Arab Emirates.</div>
                 <div>SHIPPING FEE: ${{ shippingFee }}</div>
@@ -145,16 +145,18 @@ useHead({
                 <div>SHIPPING FEE: ${{ shippingFee }}</div>
               </template>
             </div>
-            <UButton type="submit" label="GO TO CHECKOUT" block color="black" />
+            <UButton type="submit" label="GO TO CHECKOUT" block color="black"
+              :ui="{ rounded: '', padding: { sm: 'py-2.5 md:py-4 xl:py-5' } }" />
           </UForm>
 
-          <CustomerBag class="my-5" border />
+          <CustomerBag class="my-16" border />
 
         </template>
         <template v-else>
-          <UButton :loading="isWaitingCheckout" label="CHECKOUT NOW" block :ui="{ rounded: '' }" color="black"
-            class="my-5" @click="checkout" />
-          <div class="border border-black p-3">
+          <UButton :loading="isWaitingCheckout" label="CHECKOUT NOW" block
+            :ui="{ rounded: '', padding: { sm: 'py-2.5 md:py-4 xl:py-5' } }" color="black" class="my-5"
+            @click="checkout" />
+          <div class="mt-12 border border-black p-3 text-small">
             <div class="border-b border-gray-500">ORDER SUMMARY</div>
             <div class="mt-4 flex text-gray-500"><span>SUBTOTAL</span><span class="ml-auto">${{ totalPrice }}</span></div>
             <div class="flex text-gray-500"><span>SHIPPING</span><span class="ml-auto">${{ shippingFee }}</span></div>
@@ -162,23 +164,23 @@ useHead({
             }}</span></div>
             <div class="flex items-center">{{ cart.length }} ITEM(S) IN CART
               <span class="ml-auto">
-                <UButton @click="showCartItems = !showCartItems" icon="i-ph-arrow-down-right" variant="ghost"
-                  color="black" />
+                <UIcon @click="showCartItems = !showCartItems" name="i-iconamoon-arrow-bottom-right-1-light"
+                  class="text-2xl hover:cursor-pointer" />
               </span>
             </div>
           </div>
           <CustomerBag v-if="showCartItems" class="my-2" border title="YOUR ORDER" />
-          <div>
+          <div class="text-small mt-3 mb-16">
             <div class="py-3 border-b flex items-center"><span>SHIP TO:</span>
               <UButton label="EDIT" variant="ghost" color="blue" @click="currentStep = 1" class="ml-auto" />
             </div>
 
-            <div class="text-gray-500">{{ `${checkoutFormState.fname.toUpperCase()}
-                          ${checkoutFormState.lname.toUpperCase()}` }}</div>
-            <div class="text-gray-500">{{ `${checkoutFormState.country.toUpperCase()}` }}</div>
-            <div class="text-gray-500">{{ `${checkoutFormState.city.toUpperCase()}` }}</div>
-            <div class="text-gray-500">{{ `${checkoutFormState.state.toUpperCase()}` }}</div>
-            <div class="text-gray-500">{{ `${checkoutFormState.street_address.toUpperCase()}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.fname}
+                          ${checkoutFormState.lname}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.country}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.city}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.state}` }}</div>
+            <div class="text-gray-500">{{ `${checkoutFormState.street_address}` }}</div>
             <div class="text-gray-500">{{ `PHONE: ${dialCode} ${checkoutFormState.phone_number}` }}</div>
           </div>
         </template>
@@ -193,31 +195,41 @@ useHead({
   display: flex;
   align-items: center;
   color: #C3C3C3;
+
+  &::before {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background-color: #C3C3C3;
+  }
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background-color: #C3C3C3;
+  }
+
+  &-active {
+    color: black;
+
+    &::before {
+      background-color: #000;
+    }
+
+    &::after {
+      background-color: #000;
+    }
+  }
 }
 
-.stepper::before {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background-color: #C3C3C3;
-}
 
-.stepper::after {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background-color: #C3C3C3;
-}
+.text-small {
+  font-size: 14px;
+  text-transform: uppercase;
 
-.stepper-active {
-  color: black;
-}
-
-.stepper-active::before {
-  background-color: #000;
-}
-
-.stepper-active::after {
-  background-color: #000;
+  @media screen and (min-width: 480px) {
+    font-size: 16px;
+  }
 }
 </style>
