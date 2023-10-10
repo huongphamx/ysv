@@ -31,6 +31,7 @@ export interface Collection {
   is_show_in_home: boolean,
   products?: Product[],
   main_collection_description?: string,
+  main_collection_description_2?: string,
   main_collection_pics?: string,
 }
 

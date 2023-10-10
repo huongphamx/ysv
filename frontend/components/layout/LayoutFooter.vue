@@ -4,7 +4,7 @@
 
 
 <template>
-  <div class="border-t py-2">
+  <div class="border-t border-black py-2">
     <div class="mycontainer mx-auto grid grid-cols-2 lg:grid-cols-3 justify-items-center">
       <div class="text-sm lg:text-md">
         <div class="my-4 text-xl lg:text-2xl font-['Italiana']">YSV</div>

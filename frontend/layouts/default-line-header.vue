@@ -6,7 +6,7 @@ getCollectionList()
 <template>
   <div class="h-screen flex flex-col">
     <LayoutHeader :is-show-bottom-line="true" />
-    <div class="flex-1 mycontainer mx-auto">
+    <div class="flex-1">
       <slot />
     </div>
     <LayoutFooter />

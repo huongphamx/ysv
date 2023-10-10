@@ -10,18 +10,20 @@ useHead({
 
 
 <template>
-  <GoBackArrow />
-  <div class="mt-5 delivery-main">
-    <img src="/img/delivery-02.webp" class="delivery-hero-image">
-    <div class="xl:max-w-[412px]">
-      <img src="/img/delivery-01.webp" class="delivery-sub-hero-image">
-      <div class="mt-[30px] md:mt-0 xl:mt-[20px] text-medium">DELIVERY/SHIPPING</div>
-      <div class="mt-1 mb-10 text-small uppercase delivery-description">
-        <p>After “placing an order” we will contact you within 24 hours.</p>
-        <p>Delivery shipping in UAE within 1-3 days starts from 4 $ -15 $</p>
-        <p>Worldwide shipping starts from 54 $ depending on your country and Delivery company. Delivery time up to 10-15
-          days. </p>
-        <p>It is possible to pay by Cryptocurrency.</p>
+  <div class="mb-10 mycontainer mx-auto">
+    <GoBackArrow />
+    <div class="mt-5 delivery-main">
+      <img src="/img/delivery-02.webp" class="delivery-hero-image">
+      <div class="xl:max-w-[412px]">
+        <img src="/img/delivery-01.webp" class="delivery-sub-hero-image">
+        <div class="mt-[30px] md:mt-0 xl:mt-[20px] text-medium">DELIVERY/SHIPPING</div>
+        <div class="mt-1 mb-10 text-small uppercase delivery-description">
+          <p>After “placing an order” we will contact you within 24 hours.</p>
+          <p>Delivery shipping in UAE within 1-3 days starts from 4 $ -15 $</p>
+          <p>Worldwide shipping starts from 54 $ depending on your country and Delivery company. Delivery time up to 10-15
+            days. </p>
+          <p>It is possible to pay by Cryptocurrency.</p>
+        </div>
       </div>
     </div>
   </div>

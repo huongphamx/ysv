@@ -15,10 +15,13 @@ router = APIRouter()
 
 
 @router.get("/", response_model=list[ProductRead])
-async def read_product_list(*, db: AsyncSession = Depends(get_async_db)):
-    products = (
-        await db.scalars(select(Product).options(selectinload(Product.collection)))
-    ).all()
+async def read_product_list(
+    *, db: AsyncSession = Depends(get_async_db), collection_id: str | None = None
+):
+    stmt = select(Product).options(selectinload(Product.collection))
+    if collection_id is not None:
+        stmt = stmt.filter(Product.collection_id == collection_id)
+    products = (await db.scalars(stmt)).all()
     return products
 
 

@@ -43,6 +43,7 @@ if (mainCollectionPics) {
   mainCollectionPic3.value = [mainCollectionPics[2]]
 }
 const mainCollectionDescription = ref(selectedMainCollection.value?.main_collection_description)
+const mainCollectionDescription2 = ref(selectedMainCollection.value?.main_collection_description_2)
 
 async function addMainCollection() {
   if (selectedMainCollection.value) {
@@ -51,6 +52,7 @@ async function addMainCollection() {
       body: {
         collection_id: selectedMainCollection.value.id,
         main_collection_description: mainCollectionDescription.value,
+        main_collection_description_2: mainCollectionDescription2.value,
         main_collection_pics: mainCollectionPic1.value[0] + '$' + mainCollectionPic2.value[0] + '$' + mainCollectionPic3.value[0]
       }
     })
@@ -95,7 +97,8 @@ useHead({
       <div class="my-5 font-medium text-gray-700 dark:text-gray-200">Main Collection</div>
       <USelectMenu searchable v-model="selectedMainCollection" :options="collectionList" option-attribute="name" />
       <div class="my-2">
-        <UTextarea v-model="mainCollectionDescription" placeholder="Main collection description" />
+        <UTextarea v-model="mainCollectionDescription" placeholder="Main collection description part 1" />
+        <UTextarea v-model="mainCollectionDescription2" placeholder="Main collection description part 2" class="mt-2" />
       </div>
       <div class="my-5 flex">
         <UploadImage v-model="mainCollectionPic1" :max-image="1" />
