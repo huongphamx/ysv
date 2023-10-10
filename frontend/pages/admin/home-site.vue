@@ -2,6 +2,7 @@
 import { useFileDialog } from '@vueuse/core'
 import { Collection } from '@/types'
 
+const toast = useToast()
 const config = useRuntimeConfig()
 const videoSrc = ref(`${config.public.s3BaseUrl}/hero.mp4`)
 
@@ -17,8 +18,9 @@ onChangeVideo(async (files) => {
       body: formData,
     })
     if (error.value) {
-      // todo: toast
+      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
+      toast.add({ title: 'Success', description: 'New video has been uploaded', icon: 'i-ph-check-circle', color: 'green' })
       videoSrc.value = `${config.public.s3BaseUrl}/hero.mp4`
     }
   }
@@ -56,6 +58,7 @@ async function addMainCollection() {
         main_collection_pics: mainCollectionPic1.value[0] + '$' + mainCollectionPic2.value[0] + '$' + mainCollectionPic3.value[0]
       }
     })
+    toast.add({ title: 'Success', description: 'Main collection saved', icon: 'i-ph-check-circle', color: 'green' })
   }
 }
 const homeCollectionsError = ref('')
@@ -70,11 +73,17 @@ async function addHomeCollections() {
       method: 'post',
       body: { collection_ids: selectedHomeCollections.value.map(c => c.id) }
     })
+    if (error.value) {
+      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
+    } else if (data.value) {
+      toast.add({ title: 'Success', description: 'Home collections saved', icon: 'i-ph-check-circle', color: 'green' })
+    }
   }
 }
 definePageMeta({
   layout: 'admin',
   middleware: 'admin',
+  pageTransition: false,
 })
 useHead({
   title: 'Home configuration - Admin',

@@ -2,6 +2,8 @@
 import { useConfirmDialog } from '@vueuse/core'
 import { Collection } from '@/types'
 
+const toast = useToast()
+
 const collectionTableCols = [{
   key: 'name',
   label: 'Name',
@@ -27,8 +29,9 @@ async function deleteCollection(collectionId: string) {
   if (!isCanceled && isConfirmed) {
     const { data, error } = await useCustomFetch(`/v1/collections/${collectionId}`, { method: 'delete' })
     if (error.value) {
-      // todo: toast
+      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
+      toast.add({ title: 'Success', description: 'Collection deleted', icon: 'i-ph-check-circle', color: 'green' })
       await getCollectionList()
     }
   }

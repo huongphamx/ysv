@@ -2,6 +2,8 @@
 import { useConfirmDialog } from '@vueuse/core'
 import { Product } from '@/types'
 
+const toast = useToast()
+
 const productTableCols = [{
   key: 'collection',
   label: 'Collection',
@@ -37,8 +39,9 @@ async function deleteProduct(productId: string) {
       method: 'delete',
     })
     if (error.value) {
-      // todo: toast
+      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
+      toast.add({ title: 'Success', description: 'Product deleted', icon: 'i-ph-check-circle', color: 'green' })
       await getProductList()
     }
   }

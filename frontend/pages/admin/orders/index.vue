@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { useConfirmDialog } from '@vueuse/core'
 
+const toast = useToast()
+
 const orderList = useOrderList()
 await getOrderList()
 
@@ -42,8 +44,9 @@ async function deliverOrder(orderId: string) {
       body: { is_delivered: true }
     })
     if (error.value) {
-      // todo: toast
+      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
+      toast.add({ title: 'Success', description: 'Order saved', icon: 'i-ph-check-circle', color: 'green' })
       await getOrderList()
     }
   }

@@ -9,6 +9,8 @@ const emit = defineEmits<{
   'update:modelValue': [data: string[]],
 }>()
 
+const toast = useToast()
+
 const isAbleToAddImage = computed(() => {
   if (props.maxImage) { return props.modelValue.length < props.maxImage }
   return true
@@ -31,8 +33,9 @@ onChange(async (files) => {
         body: formData
       })
       if (error.value) {
-        // todo: toast
+        toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
       } else if (data.value) {
+        toast.add({ title: 'Success', description: 'Media file uploaded', icon: 'i-ph-check-circle', color: 'green' })
         newUrl.push(data.value)
         isUploading.value = false
       }
@@ -49,8 +52,9 @@ async function deleteImage(url: string) {
       method: 'delete'
     })
     if (error.value) {
-      // todo: toast
+      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
+      toast.add({ title: 'Success', description: 'Media file deleted', icon: 'i-ph-check-circle', color: 'green' })
       const remainUrls = props.modelValue.filter(u => u !== url)
       emit('update:modelValue', remainUrls)
     }
