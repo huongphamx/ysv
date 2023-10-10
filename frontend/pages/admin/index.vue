@@ -3,6 +3,7 @@ await navigateTo('/admin/products')
 definePageMeta({
   layout: 'admin',
   middleware: 'admin',
+  pageTransition: false,
 })
 </script>
 

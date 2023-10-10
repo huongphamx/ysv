@@ -75,6 +75,7 @@ async function addHomeCollections() {
 definePageMeta({
   layout: 'admin',
   middleware: 'admin',
+  pageTransition: false,
 })
 useHead({
   title: 'Home configuration - Admin',

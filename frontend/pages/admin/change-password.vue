@@ -30,6 +30,7 @@ async function submitChangePassword() {
 definePageMeta({
   layout: 'admin',
   middleware: 'admin',
+  pageTransition: false,
 })
 </script>
 
