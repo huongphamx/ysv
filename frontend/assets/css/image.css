@@ -60,6 +60,11 @@
       width: 411px;
       height: 618px;
     }
+
+    &.home-image {
+      width: 304px;
+      height: 466px;
+    }
   }
 }
 

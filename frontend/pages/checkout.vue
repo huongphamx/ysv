@@ -78,10 +78,8 @@ useHead({
 
 
 <template>
-  <div class="mycontainer mx-auto">
-    <div class="my-6 hidden xl:block">
-      <GoBackArrow />
-    </div>
+  <div class="checkout-body mycontainer mx-auto">
+    <GoBackArrow />
 
     <div class="w-full max-w-[420px] mx-auto flex flex-col justify-center">
       <div>
@@ -145,17 +143,16 @@ useHead({
                 <div>SHIPPING FEE: ${{ shippingFee }}</div>
               </template>
             </div>
-            <UButton type="submit" label="GO TO CHECKOUT" block color="black"
-              :ui="{ rounded: '', padding: { sm: 'py-2.5 md:py-4 xl:py-5' } }" />
+            <button type="submit">
+              <div class="go-checkout-btn">GO TO CHECKOUT</div>
+            </button>
           </UForm>
 
-          <CustomerBag class="my-16" border />
+          <CustomerBag class="mt-12" border />
 
         </template>
         <template v-else>
-          <UButton :loading="isWaitingCheckout" label="CHECKOUT NOW" block
-            :ui="{ rounded: '', padding: { sm: 'py-2.5 md:py-4 xl:py-5' } }" color="black" class="my-5"
-            @click="checkout" />
+          <div class="mt-4 go-checkout-btn" @click="checkout">CHECKOUT NOW</div>
           <div class="mt-12 border border-black p-3 text-small">
             <div class="border-b border-gray-500">ORDER SUMMARY</div>
             <div class="mt-4 flex text-gray-500"><span>SUBTOTAL</span><span class="ml-auto">${{ totalPrice }}</span></div>
@@ -191,6 +188,22 @@ useHead({
 
 
 <style scoped>
+.checkout-body {
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 480px) {
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 100px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 150px;
+  }
+}
+
 .stepper {
   display: flex;
   align-items: center;
@@ -223,6 +236,23 @@ useHead({
   }
 }
 
+.go-checkout-btn {
+  width: 100%;
+  height: 40px;
+  background-color: #272727;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (min-width: 480px) {
+    height: 45px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 .text-small {
   font-size: 14px;

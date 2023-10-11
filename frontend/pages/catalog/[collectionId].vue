@@ -22,20 +22,21 @@ isShowedHeaderLine.value = true
 
 <template>
   <div class="mycontainer mx-auto mb-12 xl:mb-24">
-    <NuxtLink to="/lookbook">
-      <div class="my-10 items-center gap-2 hidden xl:flex text-gray-500">
-        <UIcon name="i-iconamoon-arrow-top-left-1" class="text-2xl" /><span>LOOK ANOTHER COLLECTIONS</span>
-      </div>
-    </NuxtLink>
-
-    <div class="mt-5 mb-5 md:mb-14 flex flex-col gap-5 md:gap-10 xl:gap-20 xl:items-center">
-      <div v-for="p in productList" :key="p.id" class="flex gap-4 hover:cursor-pointer group"
-        @click="$router.push(`/p/${p.id}`)">
-        <div><img :src="p.preview_pic" alt="Product picture" class="rect-image collection-catalog">
+    <div class="w-fit">
+      <NuxtLink to="/lookbook">
+        <div class="my-10 items-center gap-2 hidden xl:flex text-gray-500 hover:border-b hover:border-[#272727]">
+          <UIcon name="i-iconamoon-arrow-top-left-1" class="text-2xl" /><span>LOOK ANOTHER COLLECTIONS</span>
         </div>
-        <div class="flex flex-col justify-center group-hover:underline">
+      </NuxtLink>
+    </div>
+
+    <div class="product-card xl:items-center">
+      <div v-for="p in productList" :key="p.id" class="flex hover:cursor-pointer group"
+        @click="$router.push(`/p/${p.id}`)">
+        <img :src="p.preview_pic" alt="Product picture" class="rect-image collection-catalog">
+        <div class="product-description group-hover:underline">
           <div class="text-medium">{{ p.collection.name }} COLLECTION</div>
-          <div class="my-4 product-color">AVAILABLE COLOR: {{ p.name }}</div>
+          <div class="product-color">AVAILABLE COLOR: {{ p.name }}</div>
           <div class="product-price">${{ p.price }}</div>
         </div>
       </div>
@@ -45,6 +46,39 @@ isShowedHeaderLine.value = true
 
 
 <style scoped>
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 480px) {
+    gap: 30px;
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    gap: 80px;
+    margin-bottom: 150px;
+  }
+}
+
+.product-description {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  margin-left: 20px;
+
+  @media screen and (min-width: 480px) {
+    gap: 20px;
+  }
+
+  @media screen and (min-width: 768px) {
+    gap: 30px;
+  }
+}
+
 .product-color {
   color: #888888;
   font-size: 12px;

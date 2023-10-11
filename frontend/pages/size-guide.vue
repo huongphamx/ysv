@@ -9,12 +9,13 @@ useHead({
 
 
 <template>
-  <div class="mt-5 mb-24 mycontainer mx-auto">
+  <div class="sizeguide-body mycontainer mx-auto">
     <GoBackArrow />
-    <div class="my-5 xl:flex justify-between">
-      <div class="my-5 text-center">
+    <div class="mb-5 xl:flex justify-between">
+      <div class="mb-5 text-center">
         <div class="text-medium">SIZE GUIDE</div>
-        <div class="my-3 mx-auto text-small max-w-[390px]">THE CHART BELOW PROVIDES DETAILED MEASUREMENTS OF THIS
+        <div class="table-description mx-auto text-small max-w-[390px]">THE CHART BELOW PROVIDES DETAILED MEASUREMENTS OF
+          THIS
           GARMENT
         </div>
         <table class="table-guide">
@@ -50,9 +51,9 @@ useHead({
           </tr>
         </table>
       </div>
-      <div class="my-5 text-center">
+      <div class="mb-5 text-center">
         <div class="mt-10 xl:mt-0 text-medium">SIZE CONVERSION</div>
-        <div class="my-3 text-small">INTERNATIONAL SIZING CONVERSIONS <br> TO HELP SELECT YOUR CORRECT
+        <div class="table-description text-small">INTERNATIONAL SIZING CONVERSIONS <br> TO HELP SELECT YOUR CORRECT
           SIZE</div>
         <table class="table-conversion">
           <tr>
@@ -108,6 +109,36 @@ useHead({
 
 
 <style scoped>
+.sizeguide-body {
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 480px) {
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 100px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 150px;
+  }
+}
+
+.table-description {
+  width: 264px;
+  margin: 15px auto;
+
+  @media screen and (min-width: 480px) {
+    width: 341px;
+    margin: 20px auto;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 400px;
+  }
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

@@ -16,6 +16,7 @@ class CollectionRead(BaseModel):
     main_collection_description: str | None = None
     main_collection_description_2: str | None = None
     main_collection_pics: str | None = None
+    lookbook_layout_code: str
 
 
 class CollectionCreate(BaseModel):
@@ -23,6 +24,7 @@ class CollectionCreate(BaseModel):
     descriptions: str
     preview_pic: HttpUrl
     is_on_sale: bool = True
+    lookbook_layout_code: str
 
 
 class CollectionUpdate(BaseModel):
@@ -30,6 +32,7 @@ class CollectionUpdate(BaseModel):
     descriptions: str
     preview_pic: HttpUrl
     is_on_sale: bool
+    lookbook_layout_code: str
 
 
 class CollectionAddMain(BaseModel):

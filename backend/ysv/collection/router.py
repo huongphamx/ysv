@@ -50,6 +50,7 @@ async def create_collection(
         descriptions=collection_in.descriptions,
         preview_pic=collection_in.preview_pic.unicode_string(),
         is_on_sale=collection_in.is_on_sale,
+        lookbook_layout_code=collection_in.lookbook_layout_code,
     )
     db.add(collection_obj)
     await db.commit()
@@ -90,6 +91,7 @@ async def update_collection(
     collection_db.descriptions = collection_data.descriptions
     collection_db.is_on_sale = collection_data.is_on_sale
     collection_db.preview_pic = collection_data.preview_pic.unicode_string()
+    collection_db.lookbook_layout_code = collection_data.lookbook_layout_code
 
     db.add(collection_db)
     await db.commit()
