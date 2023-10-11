@@ -46,7 +46,7 @@
 
 .text-medium {
   font-size: 20px;
-  line-height: 23px;
+  line-height: normal;
   font-family: 'Italiana';
   text-transform: uppercase;
 

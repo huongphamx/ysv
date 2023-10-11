@@ -13,6 +13,7 @@ const links = [
   { to: '/events', text: 'EVENTS' },
   { to: '/payment-delivery', text: 'PAYMENT & DELIVERY' },
   { to: '/cooperation', text: 'COOPERATION' },
+  { to: '/lookbook', text: 'LOOKBOOK' },
 ]
 
 const isShowedMobileMenu = ref(false)

@@ -130,6 +130,8 @@ useHead({
 
   &:hover {
     cursor: pointer;
+    background-color: #272727;
+    color: white;
   }
 
   @media screen and (min-width: 480px) {

@@ -33,6 +33,7 @@ export interface Collection {
   main_collection_description?: string,
   main_collection_description_2?: string,
   main_collection_pics?: string,
+  lookbook_layout_code: 'two' | 'two_reversed' | 'three',
 }
 
 export interface ProductPicture {

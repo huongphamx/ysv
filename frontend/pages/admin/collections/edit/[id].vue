@@ -13,13 +13,15 @@ const collectionFormState = ref({
   name: '',
   descriptions: '',
   preview_pic: [] as string[],
-  is_on_sale: true
+  is_on_sale: true,
+  lookbook_layout_code: 'two',
 })
 const collectionFormSchema = object({
   name: string().required('Collection name is required'),
   descriptions: string().required('Add more descriptions'),
   preview_pic: array().of(string()),
   is_on_sale: boolean(),
+  lookbook_layout_code: string(),
 })
 // if collectionId not None, i.e. editing -> get collection detail
 if (collectionId) {
@@ -31,6 +33,7 @@ if (collectionId) {
     collectionFormState.value.descriptions = data.value.descriptions
     collectionFormState.value.preview_pic = [data.value.preview_pic]
     collectionFormState.value.is_on_sale = data.value.is_on_sale
+    collectionFormState.value.lookbook_layout_code = data.value.lookbook_layout_code
   }
 }
 
@@ -41,6 +44,7 @@ async function submitSaveCollection() {
     descriptions: collectionFormState.value.descriptions,
     is_on_sale: collectionFormState.value.is_on_sale,
     preview_pic: collectionFormState.value.preview_pic[0],
+    lookbook_layout_code: collectionFormState.value.lookbook_layout_code,
   }
   const url = collectionId ? `/v1/collections/${collectionId}` : '/v1/collections/'
   const method = collectionId ? 'put' : 'post'
@@ -55,6 +59,17 @@ async function submitSaveCollection() {
     return navigateTo('/admin/collections/')
   }
 }
+
+const lookbookLayouts = [{
+  code: 'two',
+  name: 'Two Pictures',
+}, {
+  code: 'two_reversed',
+  name: 'Two Pictures Reversed',
+}, {
+  code: 'three',
+  name: 'Three Pictures',
+},]
 
 definePageMeta({
   alias: ['/admin/collections/create']
@@ -88,6 +103,14 @@ useHead({
 
         <UFormGroup name="preview_pic" label="Preview Picture"></UFormGroup>
         <UploadImage v-model="collectionFormState.preview_pic" :max-image="1" />
+
+        <UFormGroup name="lookbook_layout_code" label="Lookbook Layout"></UFormGroup>
+        <USelectMenu v-model="collectionFormState.lookbook_layout_code" :options="lookbookLayouts"
+          placeholder="Select layout for lookbook" value-attribute="code" option-attribute="name">
+          <template #label> {{
+            lookbookLayouts.find(l => l.code === collectionFormState.lookbook_layout_code)?.name }}
+          </template>
+        </USelectMenu>
 
         <div class="flex gap-3">
           <UButton type="submit" label="Save Collection" />

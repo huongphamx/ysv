@@ -61,5 +61,10 @@ const props = defineProps<{
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    background-color: #272727;
+    color: white;
+  }
 }
 </style>
