@@ -31,9 +31,9 @@ useHead({
     </div>
     <div class="mycontainer mx-auto">
       <div class="hero-text out-image">BRAND</div>
-      <div class="mt-10 md:mt-20 xl:mt-32 grid xl:grid-cols-2 gap-3">
-        <div class="hidden xl:block"><img :src="mainCollectionPics![0]" alt=""></div>
-        <div class="grid grid-cols-2 gap-3">
+      <div class="block-main-collection grid xl:grid-cols-2 gap-5">
+        <div class="hidden xl:block w-[628px] h-[962px]"><img :src="mainCollectionPics![0]" alt=""></div>
+        <div class="grid grid-cols-2 gap-3 xl:hidden">
           <div>
             <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image">
             <div class="mt-4 text-small">
@@ -44,14 +44,35 @@ useHead({
           <div>
             <div class="text-medium">{{ mainCollection?.name }} COLLECTION
             </div>
-            <div class="text-small my-5">NEW OF 2023</div>
-            <UButton :to="`/catalog/${mainCollection?.id}`" label="VIEW ALL" variant="outline" color="black"
-              :ui="{ rounded: '', gap: { sm: 'gap-x-0' } }">
-              <template #trailing>
+            <div class="text-small my-5 xl:my-8">NEW OF 2023</div>
+            <NuxtLink :to="`/catalog/${mainCollection?.id}`">
+              <div class="view-all-btn">VIEW ALL
                 <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl" />
-              </template>
-            </UButton>
+              </div>
+            </NuxtLink>
             <img :src="mainCollectionPics![2]" alt="main prod 2" class="mt-8 rect-image">
+          </div>
+        </div>
+        <div class="hidden xl:block">
+          <div class="flex gap-5">
+            <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image home-image">
+            <div>
+              <div class="text-medium">{{ mainCollection?.name }} COLLECTION
+              </div>
+              <div class="text-small my-5 xl:my-8">NEW OF 2023</div>
+              <NuxtLink :to="`/catalog/${mainCollection?.id}`">
+                <div class="view-all-btn">VIEW ALL
+                  <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl" />
+                </div>
+              </NuxtLink>
+            </div>
+          </div>
+          <div class="mt-[30px] flex gap-5">
+            <div class="text-small">
+              {{ mainCollection?.main_collection_description }}
+              <div class="hidden xl:block">{{ mainCollection?.main_collection_description_2 }}</div>
+            </div>
+            <img :src="mainCollectionPics![2]" alt="main prod 2" class="rect-image home-image">
           </div>
         </div>
         <div class="text-small mt-2 xl:hidden">{{ mainCollection?.main_collection_description_2 }}</div>
@@ -83,10 +104,55 @@ useHead({
   }
 }
 
+.block-main-collection {
+  margin-top: 50px;
+
+  @media screen and (min-width: 480px) {
+    margin-top: 80px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-top: 100px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 150px;
+  }
+}
+
+.view-all-btn {
+  width: 110px;
+  height: 30px;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 480px) {
+    width: 142px;
+    height: 40px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 174px;
+    height: 45px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 196px;
+    height: 50px;
+  }
+}
+
 .collections-text {
   font-family: 'Italiana';
   font-size: 40px;
-  line-height: 1;
+  font-weight: 400;
+  line-height: normal;
 
   @media screen and (min-width: 480px) {
     font-size: 60px;
@@ -102,7 +168,7 @@ useHead({
   @media screen and (min-width: 1280px) {
     font-size: 200px;
     margin-top: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
 }
 </style>
