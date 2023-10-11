@@ -13,7 +13,7 @@ const props = defineProps<{
     <div class="flex flex-col ml-auto">
       <img v-if="collection.products && collection.products.length > 0" :src="collection.products[0].preview_pic" alt=""
         class="image-left">
-      <div class="flex-1 flex flex-col gap-[20px] mt-[20px] xl:gap-[30px] xl:mt-[30px]">
+      <div class="flex-1 flex flex-col gap-[20px] mt-[20px] xl:gap-[30px] xl:mt-[30px] max-w-[412px]">
         <div class="text-medium">{{ collection.name }} collection</div>
         <div class="text-small">{{ collection.descriptions }}</div>
       </div>

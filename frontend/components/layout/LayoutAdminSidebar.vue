@@ -25,7 +25,7 @@ const links = [{
 
 <template>
   <div class="p-2 border-r border-gray-500">
-    <div class="h-20 text-4xl flex justify-center items-center">YSV</div>
+    <div class="h-20 text-4xl flex justify-center items-center font-['Italiana']">YSV</div>
     <UVerticalNavigation :links="links"
       :ui="{ padding: 'px-5 py-3', size: 'text-md', font: '', icon: { base: 'w-6 h-6' } }" />
   </div>

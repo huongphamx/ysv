@@ -19,7 +19,7 @@ useHead({
 
 
 <template>
-  <div>
+  <div class="home-body">
     <div class="-mt-16 relative">
       <video autoplay muted loop class="hero-video">
         <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
@@ -90,6 +90,22 @@ useHead({
 
 
 <style scoped>
+.home-body {
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 480px) {
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 480px) {
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 150px;
+  }
+}
+
 .hero-video {
   width: 100%;
   height: 550px;

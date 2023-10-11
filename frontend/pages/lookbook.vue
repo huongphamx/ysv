@@ -15,7 +15,7 @@ useHead({
 
 
 <template>
-  <div class="lookbook-body mycontainer mx-auto mb-10">
+  <div class="lookbook-body mycontainer mx-auto">
     <div class="relative">
       <img src="/img/lookbook-hero.webp" alt="event hero" class="hero-image" />
       <div class="hero-text in-image">LOOK</div>

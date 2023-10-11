@@ -21,6 +21,7 @@ if (cartIdCookie.value) {
     cartIdCookie.value = cartId
   }
 }
+const isShowedMobileMenu = useIsShowedMobileMenu()
 </script>
 
 <template>
@@ -32,7 +33,8 @@ if (cartIdCookie.value) {
       <template v-if="cart.length > 0">
         <CustomerBag />
         <div class="p-3">
-          <UButton label="GO TO CHECKOUT" block color="black" :ui="{ rounded: '' }" to="/checkout" />
+          <UButton label="GO TO CHECKOUT" block color="black" :ui="{ rounded: '' }" to="/checkout"
+            @click="isShowedMobileMenu = false" />
         </div>
       </template>
       <template v-else>

@@ -16,7 +16,7 @@ const links = [
   { to: '/lookbook', text: 'LOOKBOOK' },
 ]
 
-const isShowedMobileMenu = ref(false)
+const isShowedMobileMenu = useIsShowedMobileMenu()
 const isShowedHeaderLine = useIsShowedHeaderLine()
 </script>
 

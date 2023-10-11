@@ -30,6 +30,8 @@ const sortedCollectionGroups = computed(() => {
   }, {})
   return Object.values(data)
 })
+
+const isShowedMobileMenu = useIsShowedMobileMenu()
 </script>
 
 
@@ -43,7 +45,9 @@ const sortedCollectionGroups = computed(() => {
         <div v-for="g, i in (sortedCollectionGroups as CollectionGroup[])" :key="i">
           <div class="border-b text-gray-500">{{ g.alphabet }}</div>
           <div v-for="c, i in g.collections" class="my-2 text-black">
-            <NuxtLink :to="`/catalog/${c.id}`" class="underline">{{ c.name.toUpperCase() }}</NuxtLink>
+            <NuxtLink :to="`/catalog/${c.id}`" class="underline" @click="isShowedMobileMenu = false">
+              {{ c.name.toUpperCase() }}
+            </NuxtLink>
           </div>
         </div>
       </div>

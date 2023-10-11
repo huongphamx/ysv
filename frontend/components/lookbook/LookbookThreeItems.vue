@@ -12,7 +12,7 @@ const props = defineProps<{
   <div class="block-main">
     <img :src="collection.preview_pic" alt="" class="image-left">
     <div class="flex flex-col">
-      <div class="flex-1">
+      <div class="flex-1 max-w-[628px]">
         <div class="collection-name text-medium">{{ collection.name }} collection</div>
         <div class="collection-description text-small">{{ collection.descriptions }}</div>
       </div>

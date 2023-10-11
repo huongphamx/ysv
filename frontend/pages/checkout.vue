@@ -17,6 +17,7 @@ const checkoutFormState = ref({
   street_address: '',
   zip_code: '',
   phone_number: undefined,
+  email: '',
 })
 const checkoutFormSchema = object({
   fname: string().required('Enter first name'),
@@ -27,6 +28,7 @@ const checkoutFormSchema = object({
   street_address: string().required('Enter street address'),
   zip_code: string().required('Enter Zip/Postal code'),
   phone_number: string().required('Enter phone number'),
+  email: string().required('Enter email address').email('Invalid email address'),
 })
 const dialCode = computed(() => {
   return countriesCode.find(c => c.name ===
@@ -132,6 +134,9 @@ useHead({
               <AppInput type="number" label="PHONE NUMBER" v-model="checkoutFormState.phone_number"
                 :dial-code="dialCode" />
             </UFormGroup>
+            <UFormGroup name="email">
+              <AppInput label="Email address" v-model="checkoutFormState.email" />
+            </UFormGroup>
             <div class="mt-10 mb-4 pb-2 text-medium text-center border-b">SHIPPING FEE</div>
             <div class="text-small">
               <template v-if="checkoutFormState.country === 'United Arab Emirates'">
@@ -179,6 +184,7 @@ useHead({
             <div class="text-gray-500">{{ `${checkoutFormState.state}` }}</div>
             <div class="text-gray-500">{{ `${checkoutFormState.street_address}` }}</div>
             <div class="text-gray-500">{{ `PHONE: ${dialCode} ${checkoutFormState.phone_number}` }}</div>
+            <div class="text-gray-500">{{ `EMAIL: ${checkoutFormState.email}` }}</div>
           </div>
         </template>
       </div>
