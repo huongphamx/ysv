@@ -161,6 +161,18 @@ useHead({
   height: 210px;
   object-fit: cover;
 
+  &.image-1 {
+    margin-top: 15px;
+
+    @media screen and (min-width: 480px) {
+      margin-top: 20px;
+    }
+
+    @media screen and (min-width: 1280px) {
+      margin-top: 30px;
+    }
+  }
+
   @media screen and (min-width: 480px) {
     width: 200px;
     height: 300px;

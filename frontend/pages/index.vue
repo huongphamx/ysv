@@ -140,6 +140,7 @@ useHead({
   @media screen and (min-width: 768px) {
     width: 174px;
     height: 45px;
+    border: 2px solid;
   }
 
   @media screen and (min-width: 1280px) {

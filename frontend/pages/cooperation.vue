@@ -9,17 +9,50 @@ useHead({
 
 
 <template>
-  <div class="mb-10 mycontainer mx-auto">
+  <div class="cooperation-body mycontainer mx-auto">
     <GoBackArrow />
-    <div class="mt-5 mb-12">
-      <div class="relative">
-        <img src="/img/cooperation-hero.webp" alt="" class="hero-image cooperation-hero">
-        <div class="absolute w-full top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-center text-white">
-          <div class="text-medium">LET'S WORK TOGETHER</div>
-          <div class="mt-2 text-small">FOR COOPERATION DROP A MESSAGE ON</div>
-          <div class="text-small">ysv.shukshina@gmail.com</div>
-        </div>
+    <div class="relative">
+      <img src="/img/cooperation-hero.webp" alt="" class="hero-image cooperation-hero">
+      <div class="absolute w-full top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-center text-white">
+        <div class="text-medium">LET'S WORK TOGETHER</div>
+        <div class="text-2 text-small">FOR COOPERATION DROP A MESSAGE ON</div>
+        <div class="text-small email">ysv.shukshina@gmail.com</div>
       </div>
     </div>
   </div>
 </template>
+
+
+<style scoped>
+.cooperation-body {
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 480px) {
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 100px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 150px;
+  }
+}
+
+.text-2 {
+  margin-top: 15px;
+
+  @media screen and (min-width: 480px) {
+    margin-top: 20px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 30px;
+  }
+}
+
+.email {
+  text-transform: lowercase !important;
+}
+</style>
