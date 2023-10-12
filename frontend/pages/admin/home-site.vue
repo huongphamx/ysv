@@ -18,7 +18,7 @@ onChangeVideo(async (files) => {
       body: formData,
     })
     if (error.value) {
-      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
+      toast.add({ title: 'Error', description: error.value.data.detail, icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
       toast.add({ title: 'Success', description: 'New video has been uploaded', icon: 'i-ph-check-circle', color: 'green' })
       videoSrc.value = `${config.public.s3BaseUrl}/hero.mp4`
@@ -74,7 +74,7 @@ async function addHomeCollections() {
       body: { collection_ids: selectedHomeCollections.value.map(c => c.id) }
     })
     if (error.value) {
-      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
+      toast.add({ title: 'Error', description: error.value.data.detail, icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
       toast.add({ title: 'Success', description: 'Home collections saved', icon: 'i-ph-check-circle', color: 'green' })
     }

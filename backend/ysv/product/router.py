@@ -64,7 +64,7 @@ async def read_product(*, db: AsyncSession = Depends(get_async_db), product_id: 
     )
     if product_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="PRODUCT_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This product not existed"
         )
     return product_db
 
@@ -87,7 +87,7 @@ async def update_product(
     )
     if product_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="PRODUCT_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This product not existed"
         )
     product_db.collection_id = product_data.collection_id
     product_db.name = product_data.name
@@ -133,7 +133,7 @@ async def delete_product(*, db: AsyncSession = Depends(get_async_db), product_id
     product_db = await db.scalar(select(Product).where(Product.id == product_id))
     if product_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="PRODUCT_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This product not existed"
         )
     await db.delete(product_db)
     await db.commit()

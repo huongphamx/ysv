@@ -28,7 +28,7 @@ async def get_cart_item_list(*, db: AsyncSession = Depends(get_async_db), cart_i
     )
     if cart_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="CART_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This cart not existed."
         )
     for item in cart_db.cart_items:
         product_size_variant_id = item.product_size_variant_id
@@ -108,11 +108,12 @@ async def update_cart_item(
     )
     if cart_item_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="CART_ITEM_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="This cart item not existed.",
         )
     if str(cart_item_db.cart_id) != cart_id:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="CART_ITEM_NOT_CORRECTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This cart item not existed."
         )
     if cart_item_data.action == "increase_item":
         cart_item_db.quantity += 1

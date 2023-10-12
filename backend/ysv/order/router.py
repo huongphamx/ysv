@@ -141,7 +141,7 @@ async def update_order(
     order_db = await db.scalar(select(Order).where(Order.id == order_id))
     if order_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="ORDER_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This order not existed"
         )
     order_db.is_delivered = order_data.is_delivered
     db.add(order_db)

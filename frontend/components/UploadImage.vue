@@ -33,7 +33,7 @@ onChange(async (files) => {
         body: formData
       })
       if (error.value) {
-        toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
+        toast.add({ title: 'Error', description: error.value.data.detail, icon: 'i-ph-x-circle', color: 'red' })
       } else if (data.value) {
         toast.add({ title: 'Success', description: 'Media file uploaded', icon: 'i-ph-check-circle', color: 'green' })
         newUrl.push(data.value)
@@ -52,7 +52,7 @@ async function deleteImage(url: string) {
       method: 'delete'
     })
     if (error.value) {
-      toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
+      toast.add({ title: 'Error', description: error.value.data.detail, icon: 'i-ph-x-circle', color: 'red' })
     } else if (data.value) {
       toast.add({ title: 'Success', description: 'Media file deleted', icon: 'i-ph-check-circle', color: 'green' })
       const remainUrls = props.modelValue.filter(u => u !== url)

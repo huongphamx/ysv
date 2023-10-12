@@ -126,7 +126,7 @@ async function submitSaveProduct() {
     body: productData,
   })
   if (error.value) {
-    toast.add({ title: 'Error', description: 'Some error happen, please reload page and try again.', icon: 'i-ph-x-circle', color: 'red' })
+    toast.add({ title: 'Error', description: error.value.data.detail, icon: 'i-ph-x-circle', color: 'red' })
   } else if (data.value) {
     toast.add({ title: 'Success', description: 'Product saved', icon: 'i-ph-check-circle', color: 'green' })
     return navigateTo('/admin/products/')

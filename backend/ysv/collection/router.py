@@ -43,7 +43,8 @@ async def create_collection(
     )
     if collection_db is not None:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="COLLECTION_NAME_EXISTED"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="This collection name existed",
         )
     collection_obj = Collection(
         name=collection_in.name,
@@ -85,7 +86,7 @@ async def update_collection(
     )
     if collection_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="COLLECTION_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This collection not existed"
         )
     collection_db.name = collection_data.name
     collection_db.descriptions = collection_data.descriptions
@@ -112,7 +113,7 @@ async def delete_collection(
     )
     if collection_db is None:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="COLLECTION_NOT_EXISTED"
+            status_code=status.HTTP_404_NOT_FOUND, detail="This collection not existed"
         )
     await db.delete(collection_db)
     await db.commit()
