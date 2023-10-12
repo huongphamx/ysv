@@ -48,7 +48,7 @@ const randomCollection = computed(() => {
         </div>
       </div>
     </template>
-    <template>
+    <template v-else>
       <div class="text-sm sm:text-base">ANOTHER COLLECTIONS</div>
       <div>
         <div v-for="collection in randomCollection" :key="collection.id" class="my-2 relative hover:cursor-pointer"

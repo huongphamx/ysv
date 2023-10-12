@@ -54,7 +54,8 @@ useHead({
     </div>
 
     <div>
-      <UTable :columns="collectionTableCols" :rows="collectionList">
+      <UTable :columns="collectionTableCols" :rows="collectionList"
+        :ui="{ td: { base: 'max-w-[200px] whitespace-normal' } }">
         <template #descriptions-data="{ row }: { row: Collection }">
           <div class="h-full">
             <li v-for="d, i in row.descriptions.split(/\r?\n/)" :key="i">{{ d }}</li>

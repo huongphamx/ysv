@@ -66,10 +66,9 @@ useHead({
 
     <div class="mb-20 grid grid-cols-2 gap-5">
       <img src="/img/event-12.webp" alt="Event 12" class="rect-image event-image-small ml-auto image-12">
-      <video autoplay loop class="rect-image video-13">
+      <video autoplay preload="auto" playsinline loop class="rect-image video-13">
         <source :src="`${config.public.s3BaseUrl}/event-13.mp4`" type="video/mp4">
       </video>
-
     </div>
   </div>
 </template>

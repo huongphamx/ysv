@@ -28,6 +28,9 @@ const orderTableCols = [{
   key: 'phone_number',
   label: 'Phone number',
 }, {
+  key: 'email',
+  label: 'Email address',
+}, {
   key: 'is_paid',
   label: 'Is paid',
 }, {
@@ -78,7 +81,7 @@ useHead({
     </div>
 
     <div>
-      <UTable :columns="orderTableCols" :rows="orderList">
+      <UTable :columns="orderTableCols" :rows="orderList" :ui="{ td: { base: 'max-w-[200px] whitespace-normal' } }">
         <template #name-data="{ row }">
           {{ row.fname + row.lname }}
         </template>

@@ -64,7 +64,7 @@ useHead({
     </div>
 
     <div>
-      <UTable :columns="productTableCols" :rows="productList">
+      <UTable :columns="productTableCols" :rows="productList" :ui="{ td: { base: 'max-w-[200px] whitespace-normal' } }">
         <template #collection-data="{ row }">
           {{ collectionList.find(c => c.id === row.collection_id)?.name }}
         </template>

@@ -75,6 +75,7 @@ export interface Order {
   street_address: string,
   zip_code: string,
   phone_number: string,
+  email: string,
   is_paid: boolean,
   is_delivered: boolean,
 }

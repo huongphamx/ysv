@@ -76,6 +76,11 @@ isShowedHeaderLine.value = true
 
   @media screen and (min-width: 768px) {
     gap: 30px;
+    max-width: 334px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    max-width: 412px;
   }
 }
 
