@@ -61,8 +61,8 @@ async function deleteCartItem(itemId: string) {
         <img :src="item.preview_pic" alt="" class="w-[66px] h-[84px] object-cover">
         <div class="ml-4">
           <NuxtLink :to="`/p/${item.product_id}`" class="hover:underline">
-            <div class="flex text-[13px] font-bold w-[200px]">
-              <div>{{ item.collection }}</div>
+            <div class="flex text-[13px] font-bold uppercase w-[200px]" :class="border ? 'sm:w-[300px]' : ''">
+              <div>{{ item.collection }} collection</div>
               <div class="ml-auto">${{ item.price }}</div>
             </div>
             <div class="text-[11px] text-gray-500">COLOR: {{ item.color.toUpperCase() }}</div>

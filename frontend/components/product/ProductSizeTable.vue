@@ -8,7 +8,7 @@ const props = defineProps<{
 const selectedProductVariant = useSelectedProductVariant()
 
 const sizeList = useSizeList()
-// await getSizeList()
+await getSizeList()
 const sizeOrder = ['XS', 'S', 'M', 'L'];
 
 const unSortedSizeVariants = props.variants.map(v => {
@@ -38,8 +38,8 @@ const selectSize = (v: ProductVariantExtended) => {
     <table class="border-collapse border ">
       <tr>
         <td v-for="v in sortedSizeVariants.slice(0, 2)" :key="v.id"
-          class="w-[150px] h-[70px] border-2 border-black text-center hover:cursor-pointer group relative"
-          :class="{ 'bg-black text-white': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+          class="w-[150px] h-[70px] border-2 border-[var(--black)] text-center hover:cursor-pointer group relative"
+          :class="{ 'bg-[var(--black)] text-white': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
           <div class="group-hover:hidden">{{ v.size }}</div>
           <div class="absolute w-full bottom -right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
           <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
@@ -48,7 +48,7 @@ const selectSize = (v: ProductVariantExtended) => {
       <tr>
         <td v-for="v in sortedSizeVariants.slice(2, 4)" :key="v.id"
           class="w-[150px] h-[70px] border-2 border-black text-center hover:cursor-pointer group relative"
-          :class="{ 'bg-black text-white': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+          :class="{ 'bg-[var(--black)] text-white': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
           <div class="group-hover:hidden">{{ v.size }}</div>
           <div class="absolute w-full bottom-0 right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
           <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>

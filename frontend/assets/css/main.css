@@ -1,3 +1,7 @@
+:root {
+  --black: #272727;
+}
+
 html {
   font-family: 'IBM Plex Sans';
   color: #272727;

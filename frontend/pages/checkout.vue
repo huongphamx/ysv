@@ -83,7 +83,7 @@ useHead({
   <div class="checkout-body mycontainer mx-auto">
     <GoBackArrow />
 
-    <div class="w-full max-w-[420px] mx-auto flex flex-col justify-center">
+    <div class="w-full max-w-[300px] sm:max-w-[420px] mx-auto flex flex-col justify-center">
       <div>
         <div class="grid grid-cols-2">
           <div class="hover:cursor-pointer" @click="currentStep = 1">
