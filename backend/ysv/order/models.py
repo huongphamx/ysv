@@ -31,6 +31,7 @@ class Order(Base):
     street_address: Mapped[str]
     zip_code: Mapped[str]
     phone_number: Mapped[str]
+    email: Mapped[str] = mapped_column(nullable=True)
     cart_id: Mapped[str]
     is_paid: Mapped[bool] = mapped_column(default=False)
     is_delivered: Mapped[bool] = mapped_column(default=False)

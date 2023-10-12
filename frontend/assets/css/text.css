@@ -40,6 +40,10 @@
     @media screen and (min-width: 1280px) {
       margin-top: 35px;
       margin-left: 108px;
+
+      &.text-book {
+        margin-left: 216px;
+      }
     }
   }
 }

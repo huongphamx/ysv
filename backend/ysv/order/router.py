@@ -1,5 +1,14 @@
 import stripe
-from fastapi import APIRouter, Depends, Header, HTTPException, Query, Request, status
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Depends,
+    Header,
+    HTTPException,
+    Request,
+    status,
+)
+from fastapi_mail import MessageSchema, MessageType
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -10,6 +19,7 @@ from ysv.database.session import get_async_db
 from ysv.product.models import Product
 from ysv.product.size.models import ProductSizeVariant
 from ysv.user.deps import current_admin
+from ysv.service.send_email import fm
 
 from .models import Order, OrderItem
 from .schemas import OrderCreate, OrderRead, OrderUpdate
@@ -21,7 +31,9 @@ stripe.api_key = stripe_settings.STRIPE_API_KEY
 
 @router.post("/")
 async def create_order(
-    *, db: AsyncSession = Depends(get_async_db), order_in: OrderCreate
+    *,
+    db: AsyncSession = Depends(get_async_db),
+    order_in: OrderCreate,
 ):
     # create order
     order_obj = Order(
@@ -33,6 +45,7 @@ async def create_order(
         street_address=order_in.street_address,
         zip_code=order_in.zip_code,
         phone_number=order_in.phone_number,
+        email=order_in.email,
         cart_id=order_in.cart_id,
         is_paid=False,
         is_delivered=False,
@@ -80,6 +93,7 @@ async def create_order(
     try:
         checkout_session = stripe.checkout.Session.create(
             client_reference_id=order_obj.id,
+            customer_email=order_in.email,
             line_items=[
                 {
                     "price_data": {
@@ -118,7 +132,11 @@ async def get_order_list(
     "/{order_id}", dependencies=[Depends(current_admin)], status_code=status.HTTP_200_OK
 )
 async def update_order(
-    *, db: AsyncSession = Depends(get_async_db), order_id: str, order_data: OrderUpdate
+    *,
+    db: AsyncSession = Depends(get_async_db),
+    order_id: str,
+    order_data: OrderUpdate,
+    background_tasks: BackgroundTasks,
 ):
     order_db = await db.scalar(select(Order).where(Order.id == order_id))
     if order_db is None:
@@ -128,6 +146,15 @@ async def update_order(
     order_db.is_delivered = order_data.is_delivered
     db.add(order_db)
     await db.commit()
+    message = MessageSchema(
+        subject="Your order is shipping to you",
+        recipients=[order_db.email],
+        # template_body={"verify_url": verify_url},
+        subtype=MessageType.html,
+    )
+    background_tasks.add_task(
+        fm.send_message, message, template_name="order-delivered.html"
+    )
     return {"detail": "ORDER_UPDATED"}
 
 
@@ -137,6 +164,7 @@ async def stripe_webhook(
     request: Request,
     STRIPE_SIGNATURE: str | None = Header(default=None),
     db: AsyncSession = Depends(get_async_db),
+    background_tasks: BackgroundTasks,
 ):
     endpoint_secret = stripe_settings.STRIPE_ENDPOINT_SECRET
     payload = await request.body()
@@ -185,5 +213,14 @@ async def stripe_webhook(
         cart_db.cart_items = []  # type:ignore
         db.add(cart_db)
         await db.commit()
+        message = MessageSchema(
+            subject="Your order has been placed",
+            recipients=[order_db.email],  # type:ignore
+            # template_body={"verify_url": verify_url},
+            subtype=MessageType.html,
+        )
+        background_tasks.add_task(
+            fm.send_message, message, template_name="payment-success.html"
+        )
     elif event["type"] == "checkout.session.expired":
         session = event["data"]["object"]

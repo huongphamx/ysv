@@ -23,12 +23,12 @@ class StripeSettings(BaseSettings):
 
 
 class SMTPSettings(BaseSettings):
-    MAIL_USERNAME: str = "admin@gmail.com"
+    MAIL_USERNAME: str = "admin-ysv@gmail.com"
     MAIL_PASSWORD: str = "app_password"
-    MAIL_FROM: str = "admin@gmail.com"
+    MAIL_FROM: str = "admin-ysv@gmail.com"
     MAIL_PORT: int = 587
     MAIL_SERVER: str = "smtp.gmail.com"
-    MAIL_FROM_NAME: str = "Wizzy QR Team"
+    MAIL_FROM_NAME: str = "YSV"
     MAIL_STARTTLS: bool = True
     MAIL_SSL_TLS: bool = False
     USE_CREDENTIALS: bool = True

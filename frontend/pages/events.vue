@@ -24,7 +24,7 @@ useHead({
           TO SHOWCASE THE WONDERS OF THE CAPITAL OF FASHION OF THE MIDDLE EAST.</div>
         <img src="/img/event-1.webp" alt="Event 1" class="rect-image image-1">
       </div>
-      <div><img src="/img/event-2.webp" alt="Event 2" class="rect-image image-2"></div>
+      <img src="/img/event-2.webp" alt="Event 2" class="rect-image image-2">
     </div>
 
     <div class="my-12 mx-auto text-medium text-center max-w-[756px]">
@@ -83,7 +83,6 @@ useHead({
   }
 
   .image-2 {
-    margin-top: 13px;
     width: 412px;
     height: 619px;
   }

@@ -12,6 +12,7 @@ class OrderCreate(BaseModel):
     street_address: str
     zip_code: str
     phone_number: str
+    email: str
     cart_id: str
 
 
@@ -25,6 +26,7 @@ class OrderRead(BaseModel):
     street_address: str
     zip_code: str
     phone_number: str
+    email: str | None
     is_paid: bool
     is_delivered: bool
 
