@@ -38,11 +38,11 @@ const randomCollection = computed(() => {
   <div>
     <template v-if="productList.length > 1">
       <div class="text-sm sm:text-base">ANOTHER FROM THE COLLECTION</div>
-      <div class="flex gap-2 2xl:block">
-        <div v-for="product in randomProduct" :key="product.id" class="my-2 relative hover:cursor-pointer"
+      <div class="flex gap-2 xl:block">
+        <div v-for="product in randomProduct" :key="product.id" class="my-2 xl:my-4 relative hover:cursor-pointer"
           @click="$router.push(`/p/${product.id}`)">
           <img :src="product.preview_pic" alt="" class="preview-pic">
-          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] 2xl:text-xl text-white">{{
+          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] xl:text-xl text-white">{{
             product.name.toUpperCase() }}
           </div>
         </div>
@@ -50,11 +50,11 @@ const randomCollection = computed(() => {
     </template>
     <template v-else>
       <div class="text-sm sm:text-base">ANOTHER COLLECTIONS</div>
-      <div>
-        <div v-for="collection in randomCollection" :key="collection.id" class="my-2 relative hover:cursor-pointer"
-          @click="$router.push(`/catalog/${collection.id}`)">
+      <div class="flex gap-2 xl:block">
+        <div v-for="collection in randomCollection" :key="collection.id"
+          class="my-2 xl:my-4 relative hover:cursor-pointer" @click="$router.push(`/catalog/${collection.id}`)">
           <img :src="collection.preview_pic" alt="" class="preview-pic">
-          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] 2xl:text-xl text-white">{{
+          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] xl:text-xl text-white">{{
             collection.name.toUpperCase() }}
           </div>
         </div>

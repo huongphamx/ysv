@@ -1,3 +1,24 @@
 <div>
-  Your payment has been success.
+  <div style="font-size: 20px; font-weight: 600; margin: 0 auto 10px;">
+    Your order <span style="color:steelblue">has been placed!</span>
+  </div>
+
+  <div style="margin: 20px 0;">
+    Hello
+    <span style="font-weight: 600;">{{ fname }} {{ lname }}</span>,
+    thanks for making an order with us.
+    We'll prepare your items and you'll receive and email when your items are shipped.
+  </div>
+
+  <div style="margin: 20px 0;">
+    <span style="font-weight: 600;">Your items:</span>
+    <ol>
+      {% for item in items %}
+      <li>{{ item.collection }} ({{ item.name }}) - Size: {{ item.size }} - Quantity: {{ item.quantity }} -
+        Amount: {{ item.amount }}$</li>
+      {% endfor %}
+    </ol>
+  </div>
+
+  <div style="font-weight: 600;margin: 20px 0;">Total: {{ total }}$</div>
 </div>

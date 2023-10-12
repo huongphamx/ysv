@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class OrderCreate(BaseModel):
@@ -29,6 +29,8 @@ class OrderRead(BaseModel):
     email: str | None
     is_paid: bool
     is_delivered: bool
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class OrderUpdate(BaseModel):

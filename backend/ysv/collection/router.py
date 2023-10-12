@@ -5,6 +5,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from ysv.database.session import get_async_db
 from ysv.product.schemas import CollectionProductsRead
+from ysv.order.models import OrderItem
+from ysv.cart.models import CartItem
+from ysv.product.models import Product
 from ysv.user.deps import current_admin
 from .models import Collection
 from .schemas import (
@@ -109,12 +112,41 @@ async def delete_collection(
     *, db: AsyncSession = Depends(get_async_db), collection_id: str
 ):
     collection_db = await db.scalar(
-        select(Collection).where(Collection.id == collection_id)
+        select(Collection)
+        .where(Collection.id == collection_id)
+        .options(selectinload(Collection.products))
     )
     if collection_db is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="This collection not existed"
         )
+    for product in collection_db.products:
+        product_db = await db.scalar(
+            select(Product)
+            .where(Product.id == product.id)
+            .options(selectinload(Product.size_variants))
+        )
+        for size_variant in product_db.size_variants:  # type: ignore
+            existing_order_items = (
+                await db.scalars(
+                    select(OrderItem).where(
+                        OrderItem.product_size_variant_id == size_variant.id
+                    )
+                )
+            ).all()
+            for item in existing_order_items:
+                await db.delete(item)
+            existing_cart_items = (
+                await db.scalars(
+                    select(CartItem).where(
+                        CartItem.product_size_variant_id == size_variant.id
+                    )
+                )
+            ).all()
+            for cart_item in existing_cart_items:
+                await db.delete(cart_item)
+            await db.delete(size_variant)
+        await db.delete(product)
     await db.delete(collection_db)
     await db.commit()
     return {"detail": "DELETED_COLLECTION"}

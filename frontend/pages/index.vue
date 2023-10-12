@@ -31,7 +31,7 @@ useHead({
     </div>
     <div class="mycontainer mx-auto">
       <div class="hero-text out-image">BRAND</div>
-      <div class="block-main-collection grid xl:grid-cols-2 gap-5">
+      <div v-if="mainCollectionPics" class="block-main-collection grid xl:grid-cols-2 gap-5">
         <div class="hidden xl:block w-[628px] h-[962px]"><img :src="mainCollectionPics![0]" alt=""></div>
         <div class="grid grid-cols-2 gap-3 xl:hidden">
           <div>

@@ -7,5 +7,4 @@ python /app/ysv/backend_pre_start.py
 alembic upgrade head
 
 # Create initial data in DB
-# for creating super user,
 python /app/ysv/initial_data.py

@@ -78,8 +78,9 @@ useHead({
             <UModal :modelValue="isShowedDeleteCollection" prevent-close :transition="false">
               <div class="p-5">
                 <div class="text-center text-2xl font-bold">Delete this collection?</div>
-                <div class="my-5 text-center">Deleted collection can not be recovered.
-                  Are you sure you want to delete?
+                <div class="my-5 text-center">Deleted collection will delete all of its product and related cart items,
+                  order item.
+                  Consider modifying instead of delete. Still want to delete?
                 </div>
                 <div class="flex justify-center gap-5">
                   <UButton @click="confirmDeleteCollection(true)" color="red">Yes, Delete</UButton>

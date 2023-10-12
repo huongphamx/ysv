@@ -14,12 +14,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from ysv.cart.models import Cart
+from ysv.collection.models import Collection
 from ysv.config import common_settings, stripe_settings
 from ysv.database.session import get_async_db
 from ysv.product.models import Product
 from ysv.product.size.models import ProductSizeVariant
-from ysv.user.deps import current_admin
 from ysv.service.send_email import fm
+from ysv.user.deps import current_admin
 
 from .models import Order, OrderItem
 from .schemas import OrderCreate, OrderRead, OrderUpdate
@@ -128,6 +129,53 @@ async def get_order_list(
     return orders
 
 
+@router.get(
+    "/{order_id}",
+    dependencies=[Depends(current_admin)],
+)
+async def get_order_detail(*, db: AsyncSession = Depends(get_async_db), order_id: str):
+    order_db = await db.scalar(
+        select(Order)
+        .where(Order.id == order_id)
+        .options(selectinload(Order.order_items))
+    )
+    if order_db is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Order not found"
+        )
+    items_detail = []
+    for item in order_db.order_items:
+        size_variant = await db.scalar(
+            select(ProductSizeVariant)
+            .where(ProductSizeVariant.id == item.product_size_variant_id)
+            .options(selectinload(ProductSizeVariant.clothes_size))
+        )
+        if size_variant is None:
+            return None
+        product_db = await db.scalar(
+            select(Product).where(Product.id == size_variant.product_id)
+        )
+        if product_db is None:
+            return None
+        collection_db = await db.scalar(
+            select(Collection).where(Collection.id == product_db.collection_id)
+        )
+        if collection_db is None:
+            return None
+        items_detail.append(
+            {
+                "collection": collection_db.name.upper(),
+                "name": product_db.name.upper(),
+                "size": size_variant.clothes_size.label.upper(),
+                "quantity": item.quantity,
+                # "amount": product_db.price * item.quantity,
+            }
+        )
+    order_info = OrderRead.model_validate(order_db).model_dump()
+    order_info["items"] = items_detail
+    return order_info
+
+
 @router.put(
     "/{order_id}", dependencies=[Depends(current_admin)], status_code=status.HTTP_200_OK
 )
@@ -149,7 +197,10 @@ async def update_order(
     message = MessageSchema(
         subject="Your order is shipping to you",
         recipients=[order_db.email],
-        # template_body={"verify_url": verify_url},
+        template_body={
+            "fname": order_db.fname.upper(),
+            "lname": order_db.lname.upper(),
+        },
         subtype=MessageType.html,
     )
     background_tasks.add_task(
@@ -201,7 +252,13 @@ async def stripe_webhook(
     elif event["type"] == "checkout.session.completed":
         session = event["data"]["object"]
         order_id = session["client_reference_id"]
-        order_db = await db.scalar(select(Order).where(Order.id == order_id))
+        order_db = await db.scalar(
+            select(Order)
+            .where(Order.id == order_id)
+            .options(selectinload(Order.order_items))
+        )
+        if order_db is None:
+            return None
         order_db.is_paid = True  # type:ignore
         db.add(order_db)
         # remove cart item
@@ -213,10 +270,45 @@ async def stripe_webhook(
         cart_db.cart_items = []  # type:ignore
         db.add(cart_db)
         await db.commit()
+        items_detail = []
+        total = 0
+        for item in order_db.order_items:
+            size_variant = await db.scalar(
+                select(ProductSizeVariant)
+                .where(ProductSizeVariant.id == item.product_size_variant_id)
+                .options(selectinload(ProductSizeVariant.clothes_size))
+            )
+            if size_variant is None:
+                return
+            product_db = await db.scalar(
+                select(Product).where(Product.id == size_variant.product_id)
+            )
+            if product_db is None:
+                return None
+            collection_db = await db.scalar(
+                select(Collection).where(Collection.id == product_db.collection_id)
+            )
+            if collection_db is None:
+                return None
+            items_detail.append(
+                {
+                    "collection": collection_db.name.upper(),
+                    "name": product_db.name.upper(),
+                    "size": size_variant.clothes_size.label.upper(),
+                    "quantity": item.quantity,
+                    "amount": product_db.price * item.quantity,
+                }
+            )
+            total += product_db.price * item.quantity
         message = MessageSchema(
             subject="Your order has been placed",
             recipients=[order_db.email],  # type:ignore
-            # template_body={"verify_url": verify_url},
+            template_body={
+                "fname": order_db.fname.upper(),
+                "lname": order_db.lname.upper(),
+                "items": items_detail,
+                "total": total,
+            },
             subtype=MessageType.html,
         )
         background_tasks.add_task(

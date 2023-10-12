@@ -62,7 +62,10 @@ export interface ClothesSize {
 }
 
 export interface OrderItem {
-
+  collection: string,
+  name: string,
+  size: string,
+  quantity: number,
 }
 
 export interface Order {
@@ -78,4 +81,5 @@ export interface Order {
   email: string,
   is_paid: boolean,
   is_delivered: boolean,
+  items?: OrderItem[],
 }
