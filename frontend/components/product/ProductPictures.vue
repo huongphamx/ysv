@@ -23,7 +23,7 @@ const showedBigPicture = ref(props.pictures[0].url)
         </div>
         <div class="my-5 text-sm xl:text-base text-gray-500">AVAILABLE COLORS: {{ productData?.name.toUpperCase() }}</div>
         <div class="my-4 text-xl sm:text-2xl xl:text-3xl">${{ productData?.price }}</div>
-        <div class="px-5 text-sm xl:text-base text-gray-500">
+        <div class="px-3 text-sm xl:text-base text-gray-500">
           <li v-for="d, i in productData?.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
         </div>
         <ProductSizeTable :variants="productData?.size_variants!" class="hidden xl:block" />

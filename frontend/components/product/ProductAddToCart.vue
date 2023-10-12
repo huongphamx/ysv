@@ -29,7 +29,7 @@ const addToCart = async () => {
     toast.add({
       description: 'Product added to cart',
       icon: 'i-ph-check-circle',
-      timeout: 5000,
+      timeout: 2000,
       closeButton: { icon: '' },
       ui: {
         title: 'text-white',
