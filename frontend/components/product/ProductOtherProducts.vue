@@ -42,7 +42,7 @@ const randomCollection = computed(() => {
         <div v-for="product in randomProduct" :key="product.id" class="my-2 xl:my-4 relative hover:cursor-pointer"
           @click="$router.push(`/p/${product.id}`)">
           <img :src="product.preview_pic" alt="" class="preview-pic">
-          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] xl:text-xl text-white">{{
+          <div class="product-text">{{
             product.name.toUpperCase() }}
           </div>
         </div>
@@ -54,7 +54,7 @@ const randomCollection = computed(() => {
         <div v-for="collection in randomCollection" :key="collection.id"
           class="my-2 xl:my-4 relative hover:cursor-pointer" @click="$router.push(`/catalog/${collection.id}`)">
           <img :src="collection.preview_pic" alt="" class="preview-pic">
-          <div class="absolute w-full bottom-0 left-2 font-['Italiana'] xl:text-xl text-white">{{
+          <div class="product-text">{{
             collection.name.toUpperCase() }}
           </div>
         </div>
@@ -69,5 +69,26 @@ const randomCollection = computed(() => {
   width: 140px;
   height: 175px;
   object-fit: cover;
+
+  @media screen and (min-width: 768px) {
+    width: 196px;
+    height: 253px;
+  }
+}
+
+.product-text {
+  position: absolute;
+  bottom: 0;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  color: white;
+  font-size: 20px;
+  font-family: 'Italiana';
+  line-height: normal;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
 }
 </style>

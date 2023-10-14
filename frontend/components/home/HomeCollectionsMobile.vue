@@ -10,15 +10,15 @@ const props = defineProps<{
 <template>
   <div class="xl:hidden">
     <div class="grid grid-cols-2 gap-5 justify-items-center">
-      <CollectionCard :collection="showCollections[0]" />
-      <CollectionCard :collection="showCollections[1]" />
-      <CollectionCard :collection="showCollections[2]" />
-      <CollectionCard :collection="showCollections[3]" />
+      <CollectionCard v-if="showCollections[0]" :collection="showCollections[0]" />
+      <CollectionCard v-if="showCollections[1]" :collection="showCollections[1]" />
+      <CollectionCard v-if="showCollections[2]" :collection="showCollections[2]" />
+      <CollectionCard v-if="showCollections[3]" :collection="showCollections[3]" />
     </div>
     <div class="my-5 mx-auto"><img src="/img/home-collection-square-1.webp" alt="" class="square-img"></div>
     <div class="grid grid-cols-2 gap-5 justify-items-center mb-5">
-      <CollectionCard :collection="showCollections[4]" />
-      <CollectionCard :collection="showCollections[5]" />
+      <CollectionCard v-if="showCollections[4]" :collection="showCollections[4]" />
+      <CollectionCard v-if="showCollections[5]" :collection="showCollections[5]" />
     </div>
     <div>
       <NuxtLink to="/lookbook">

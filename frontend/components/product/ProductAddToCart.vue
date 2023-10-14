@@ -46,13 +46,36 @@ const addToCart = async () => {
 
 <template>
   <div>
-    <div class="my-4 flex items-center gap-5">
-      <UButton label="ADD TO CART" trailing-icon="i-ph-arrow-down-right" color="black"
-        :ui="{ rounded: '', padding: { 'sm': 'px-16 py-4' } }" @click="addToCart" />
+    <div class="btn-add-to-cart" @click="addToCart">
+      ADD TO CART
+      <UIcon name="i-iconamoon-arrow-bottom-right-1" class="text-2xl" />
     </div>
-    <div class="mb-5 underline text-gray-500 text-sm md:text-base">
+    <div class="underline text-gray-500 text-sm md:text-base">
       <a href="https://api.whatsapp.com/send?phone=971545602477" target="_blank">CONTACT VIA WHATSAPP</a>
     </div>
   </div>
 </template>
 
+
+<style scoped>
+.btn-add-to-cart {
+  margin-bottom: 10px;
+  width: 200px;
+  height: 40px;
+  background-color: var(--black);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 304px;
+    height: 50px;
+  }
+}
+</style>

@@ -34,21 +34,19 @@ const selectSize = (v: ProductVariantExtended) => {
 </script>
 
 <template>
-  <div class="my-5 text-sm md:text-base">
-    <table class="border-collapse border ">
+  <div>
+    <table>
       <tr>
-        <td v-for="v in sortedSizeVariants.slice(0, 2)" :key="v.id"
-          class="w-[150px] h-[70px] border-2 border-[var(--black)] text-center hover:cursor-pointer group relative"
-          :class="{ 'bg-[var(--black)] text-white': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+        <td v-for="v in sortedSizeVariants.slice(0, 2)" :key="v.id" class="group"
+          :class="{ 'active-td': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
           <div class="group-hover:hidden">{{ v.size }}</div>
           <div class="absolute w-full bottom -right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
           <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
         </td>
       </tr>
       <tr>
-        <td v-for="v in sortedSizeVariants.slice(2, 4)" :key="v.id"
-          class="w-[150px] h-[70px] border-2 border-black text-center hover:cursor-pointer group relative"
-          :class="{ 'bg-[var(--black)] text-white': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+        <td v-for="v in sortedSizeVariants.slice(2, 4)" :key="v.id" class="group"
+          :class="{ 'active-td': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
           <div class="group-hover:hidden">{{ v.size }}</div>
           <div class="absolute w-full bottom-0 right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
           <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
@@ -60,4 +58,40 @@ const selectSize = (v: ProductVariantExtended) => {
     </div>
   </div>
 </template>
+
+
+<style scoped>
+table {
+  border: 2px solid var(--black);
+  border-collapse: collapse;
+  color: var(--black);
+  font-size: 14px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+td {
+  width: 75px;
+  height: 59px;
+  border: 2px solid var(--black);
+  text-align: center;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.active-td {
+    background-color: var(--black);
+    color: white;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 99px;
+    height: 72px;
+  }
+}
+</style>
 

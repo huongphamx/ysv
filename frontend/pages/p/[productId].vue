@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core'
 import { Product } from '@/types'
 
 const { params } = useRoute()
 const productId = params.productId as string
 const productData = ref<Product>()
+
+const { width } = useWindowSize()
 
 getSizeList()
 
@@ -38,25 +41,48 @@ useHead({
 
 
 <template>
-  <div class="mycontainer mx-auto pb-10">
+  <div class="product-body mycontainer mx-auto">
     <NuxtLink to="/lookbook">
-      <div class="my-5 flex items-center gap-2 text-gray-500">
-        <UIcon name="i-iconamoon-arrow-top-left-1-light" class="text-2xl" /><span>LOOK ANOTHER COLLECTIONS</span>
+      <div class="btn-look-another">
+        <UIcon name="i-iconamoon-arrow-top-left-1-light" class="text-2xl" /><span class="text-sm md:text-base">LOOK
+          ANOTHER COLLECTIONS</span>
       </div>
     </NuxtLink>
 
-    <div class="xl:flex">
-      <div v-if="productData" class="xl:flex-1">
-        <div class="md:flex">
-          <ProductPictures :pictures="productData.pictures" :product-data="productData" />
-        </div>
-        <div class="max-w-[412px] xl:hidden">
-          <ProductSizeTable :variants="productData?.size_variants!" />
-          <ProductAddToCart />
-        </div>
-      </div>
-      <ProductOtherProducts class="xl:max-w-[200px]" />
-    </div>
+    <ProductCardMobile v-if="width < 768" :product="productData!" />
+    <ProductCardTablet v-if="768 <= width && width < 1280" :product="productData!" />
+    <ProductCardDesktop v-if="width >= 1280" :product="productData!" />
   </div>
 </template>
 
+
+<style scoped>
+.product-body {
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 150px;
+  }
+}
+
+.btn-look-another {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #888;
+  width: 300px;
+  margin: 20px 0;
+
+  @media screen and (min-width: 768px) {
+    margin: 30px 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin: 50px 0;
+  }
+}
+</style>

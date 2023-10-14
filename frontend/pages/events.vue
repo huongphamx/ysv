@@ -18,7 +18,7 @@ useHead({
 
     <div class="mt-32 mb-12 flex justify-center">
       <div>
-        <div class="text-small mb-5 event-text">FOR THE FIRST TIME FASHION FACTOR TOOK PLACE IN DUBAI AND THEREFORE,
+        <div class="text-small event-text">FOR THE FIRST TIME FASHION FACTOR TOOK PLACE IN DUBAI AND THEREFORE,
           THE LOCATION WAS
           CHOSEN
           TO SHOWCASE THE WONDERS OF THE CAPITAL OF FASHION OF THE MIDDLE EAST.</div>
@@ -120,10 +120,12 @@ useHead({
 .event-text {
   max-width: 155px;
   margin-right: 5px;
+  margin-bottom: 15px;
 
   @media screen and (min-width: 480px) {
     max-width: 200px;
     margin-right: 12px;
+    margin-bottom: 20px;
   }
 
   @media screen and (min-width: 768px) {
@@ -134,6 +136,7 @@ useHead({
   @media screen and (min-width: 1280px) {
     max-width: 324px;
     margin-right: 15px;
+    margin-bottom: 30px;
   }
 }
 

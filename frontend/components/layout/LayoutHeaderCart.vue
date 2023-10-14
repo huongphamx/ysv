@@ -25,7 +25,7 @@ const isShowedMobileMenu = useIsShowedMobileMenu()
 </script>
 
 <template>
-  <UPopover :mode="width > 1280 ? 'hover' : 'click'" :ui="{ rounded: '' }">
+  <UPopover :mode="width > 1280 ? 'hover' : 'click'" :ui="{ rounded: '', ring: 'ring-black' }">
     <!-- <UButton icon="i-ph-shopping-cart" color="black" variant="ghost" :ui="{ icon: { size: { sm: 'h-6 w-6' } } }" /> -->
     <IconCart />
     <!-- <IconCartFilled v-else class="w-10 h-10" /> -->

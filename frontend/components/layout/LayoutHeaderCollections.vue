@@ -36,7 +36,7 @@ const isShowedMobileMenu = useIsShowedMobileMenu()
 
 
 <template>
-  <UPopover :mode="width > 1280 ? 'hover' : 'click'">
+  <UPopover :mode="width > 1280 ? 'hover' : 'click'" :ui="{ rounded: '', ring: 'ring-black' }">
     <div class="flex items-center">COLLECTIONS
       <UIcon name="i-iconamoon-arrow-bottom-right-1" class="ml-2 text-2xl" />
     </div>
