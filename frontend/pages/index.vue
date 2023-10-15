@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const config = useRuntimeConfig()
 
+const isHeroVideoPlaying = ref(false)
 const collectionList = useCollectionList()
 await getCollectionList()
 const mainCollection = collectionList.value.find(c => c.is_main_collection)
@@ -21,17 +22,17 @@ useHead({
 <template>
   <div class="home-body">
     <div class="-mt-16 relative">
-      <video autoplay preload="auto" playsinline muted loop class="hero-video">
+      <video autoplay preload="auto" playsinline muted loop class="hero-video" @play="isHeroVideoPlaying = true">
         <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
-        <div class="hero-text in-image" v-motion="popVisibleOnceMotion">
+        <div v-if="isHeroVideoPlaying" class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
           YSV
         </div>
       </div>
     </div>
     <div class="mycontainer mx-auto">
-      <div class="hero-text out-image" v-motion="popVisibleOnceMotion">BRAND</div>
+      <div v-if="isHeroVideoPlaying" class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">BRAND</div>
       <div v-if="mainCollectionPics" class="block-main-collection grid xl:grid-cols-2 gap-5">
         <div class="hidden xl:block" v-motion="slideVisibleOnceLeftMotion"><img :src="mainCollectionPics![0]" alt=""
             class=" w-[628px] h-[962px] object-cover">
