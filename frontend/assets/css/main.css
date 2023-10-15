@@ -1,8 +1,9 @@
 :root {
   --black: #272727;
+  --gray: #888888;
 }
 
 html {
   font-family: 'IBM Plex Sans';
-  color: #272727;
+  color: var(--black);
 }

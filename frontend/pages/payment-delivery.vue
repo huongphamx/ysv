@@ -12,11 +12,12 @@ useHead({
   <div class="delivery-body mycontainer mx-auto">
     <GoBackArrow />
     <div class="delivery-main">
-      <img src="/img/delivery-02.webp" class="delivery-hero-image">
+      <img src="/img/delivery-02.webp" class="delivery-hero-image" v-motion="slideVisibleOnceRightMotion">
       <div class="xl:max-w-[412px]">
-        <img src="/img/delivery-01.webp" class="delivery-sub-hero-image">
-        <div class="mt-[30px] md:mt-0 xl:mt-[30px] text-medium">DELIVERY/SHIPPING</div>
-        <div class="mt-1 text-small uppercase delivery-description">
+        <img src="/img/delivery-01.webp" class="delivery-sub-hero-image" v-motion="slideVisibleOnceLeftMotion">
+        <div class="mt-[30px] md:mt-0 xl:mt-[30px] text-medium" v-motion="slideVisibleOnceBottomMotion">DELIVERY/SHIPPING
+        </div>
+        <div class="mt-1 text-small uppercase delivery-description" v-motion="slideVisibleOnceBottomMotion">
           <p>After “placing an order” we will contact you within 24 hours.</p><br>
           <p>Delivery shipping in UAE within 1-3 days starts from 4 $ TO 15 $</p><br>
           <p>Worldwide shipping starts from 54 $ depending on your country and Delivery company. Delivery time up to 10-15

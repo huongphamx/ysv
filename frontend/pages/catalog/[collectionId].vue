@@ -23,21 +23,23 @@ isShowedHeaderLine.value = true
 <template>
   <div class="mycontainer mx-auto mb-12 xl:mb-24">
     <div class="w-fit">
-      <NuxtLink to="/lookbook">
-        <div class="my-10 items-center gap-2 hidden xl:flex text-gray-500 hover:border-b hover:border-[#272727]">
-          <UIcon name="i-iconamoon-arrow-top-left-1" class="text-2xl" /><span>LOOK ANOTHER COLLECTIONS</span>
+      <div class="my-10 w-fit group" @click="$router.push('/lookbook')">
+        <div class="look-another-body">
+          <UIcon name="i-iconamoon-arrow-top-left-1-light" class="text-2xl" /><span>LOOK ANOTHER COLLECTIONS</span>
         </div>
-      </NuxtLink>
+        <div class="-mt-0.5 ml-1 h-[2px] bg-[var(--gray)] hidden group-hover:block"></div>
+      </div>
     </div>
 
     <div class="product-card xl:items-center">
       <div v-for="p in productList" :key="p.id" class="flex hover:cursor-pointer group"
         @click="$router.push(`/p/${p.id}`)">
-        <img :src="p.preview_pic" alt="Product picture" class="rect-image collection-catalog">
+        <img :src="p.preview_pic" alt="Product picture" class="rect-image collection-catalog"
+          v-motion="slideVisibleOnceLeftMotion">
         <div class="product-description group-hover:underline">
-          <div class="text-medium">{{ p.collection.name }} COLLECTION</div>
-          <div class="product-color">AVAILABLE COLOR: {{ p.name }}</div>
-          <div class="product-price">${{ p.price }}</div>
+          <div class="text-medium" v-motion="slideVisibleOnceRightMotion">{{ p.collection.name }} COLLECTION</div>
+          <div class="product-color" v-motion="slideVisibleOnceRightMotion">AVAILABLE COLOR: {{ p.name }}</div>
+          <div class="product-price" v-motion="slideVisibleOnceRightMotion">${{ p.price }}</div>
         </div>
       </div>
     </div>
@@ -46,6 +48,22 @@ isShowedHeaderLine.value = true
 
 
 <style scoped>
+.look-another-body {
+  color: var(--gray);
+  display: none;
+
+  @media screen and (min-width: 1280px) {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
 .product-card {
   display: flex;
   flex-direction: column;

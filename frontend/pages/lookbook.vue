@@ -17,10 +17,10 @@ useHead({
 <template>
   <div class="mycontainer mx-auto">
     <div class="relative">
-      <img src="/img/lookbook-hero.webp" alt="event hero" class="hero-image" />
-      <div class="hero-text in-image">LOOK</div>
+      <img src="/img/lookbook-hero.webp" alt="event hero" class="hero-image" v-motion="slideVisibleOnceMotion" />
+      <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">LOOK</div>
     </div>
-    <div class="hero-text out-image text-book">BOOK</div>
+    <div class="hero-text out-image text-book" v-motion="slideVisibleOnceBottomMotion">BOOK</div>
     <div v-for="collection in collectionList" :key="collection.id" class="lookbook-body">
       <template v-if="collection.lookbook_layout_code === 'two' && width >= 768">
         <LookbookTwoItems :collection="collection" />
@@ -43,6 +43,7 @@ useHead({
 .lookbook-body {
   margin-top: 50px;
   margin-bottom: 50px;
+
 
   @media screen and (min-width: 480px) {
     margin-top: 80px;

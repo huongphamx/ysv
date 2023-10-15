@@ -42,12 +42,12 @@ useHead({
 
 <template>
   <div class="product-body mycontainer mx-auto">
-    <NuxtLink to="/lookbook">
-      <div class="btn-look-another">
-        <UIcon name="i-iconamoon-arrow-top-left-1-light" class="text-2xl" /><span class="text-sm md:text-base">LOOK
-          ANOTHER COLLECTIONS</span>
+    <div class="my-10 w-fit group" @click="$router.push('/lookbook')">
+      <div class="look-another-body">
+        <UIcon name="i-iconamoon-arrow-top-left-1-light" class="text-2xl" /><span>LOOK ANOTHER COLLECTIONS</span>
       </div>
-    </NuxtLink>
+      <div class="-mt-0.5 ml-1 h-[2px] bg-[var(--gray)] hidden group-hover:block"></div>
+    </div>
 
     <ProductCardMobile v-if="width < 768" :product="productData!" />
     <ProductCardTablet v-if="768 <= width && width < 1280" :product="productData!" />
@@ -57,6 +57,22 @@ useHead({
 
 
 <style scoped>
+.look-another-body {
+  color: var(--gray);
+  display: none;
+
+  @media screen and (min-width: 1280px) {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
 .product-body {
   margin-bottom: 50px;
 

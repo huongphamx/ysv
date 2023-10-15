@@ -9,12 +9,12 @@ const props = defineProps<{
 
 <template>
   <div class="block-main">
-    <div class="text-medium">{{ collection.name }} collection</div>
-    <div class="description text-small">{{ collection.descriptions }}</div>
+    <div class="text-medium" v-motion="slideVisibleOnceBottomMotion">{{ collection.name }} collection</div>
+    <div class="description text-small" v-motion="slideVisibleOnceBottomMotion">{{ collection.descriptions }}</div>
     <div class="grid grid-cols-2 gap-5">
-      <img :src="collection.preview_pic" alt="" class="rect-image">
+      <img :src="collection.preview_pic" alt="" class="rect-image" v-motion="slideVisibleOnceBottomMotion">
       <img v-if="collection.products && collection.products.length > 0" :src="collection.products[0].preview_pic" alt=""
-        class="rect-image">
+        class="rect-image" v-motion="slideVisibleOnceBottomMotion">
     </div>
     <NuxtLink :to="`/catalog/${collection.id}`">
       <div class="view-all-btn">VIEW ALL
@@ -53,7 +53,7 @@ const props = defineProps<{
   align-items: center;
 
   &:hover {
-    background-color: #272727;
+    background-color: var(--black);
     color: white;
   }
 

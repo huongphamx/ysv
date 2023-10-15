@@ -8,7 +8,7 @@ const cart = useCart()
 const cartIdCookie = useCartIdCookie()
 
 if (cartIdCookie.value) {
-  await getCartItems()
+  getCartItems()
 } else {
   const cartId = uuidv4()
   const { data, error } = await useCustomFetch('/v1/carts/', {
@@ -26,20 +26,17 @@ const isShowedMobileMenu = useIsShowedMobileMenu()
 
 <template>
   <UPopover :mode="width > 1280 ? 'hover' : 'click'" :ui="{ rounded: '', ring: 'ring-black' }">
-    <!-- <UButton icon="i-ph-shopping-cart" color="black" variant="ghost" :ui="{ icon: { size: { sm: 'h-6 w-6' } } }" /> -->
     <IconCart />
-    <!-- <IconCartFilled v-else class="w-10 h-10" /> -->
 
     <template #panel>
-      <template v-if="cart.length > 0">
+      <template v-if="cart && cart.length > 0">
         <CustomerBag />
         <div class="p-3">
-          <UButton label="GO TO CHECKOUT" block color="black" :ui="{ rounded: '' }" to="/checkout"
-            @click="isShowedMobileMenu = false" />
+          <div class="go-to-checkout-btn">GO TO CHECKOUT</div>
         </div>
       </template>
       <template v-else>
-        <div class="p-3 text-black">
+        <div class="p-3">
           <div class="text-lg font-['Italiana']">YOUR BAG ({{ cart.length }})</div>
           You don't have any item in bag!
         </div>
@@ -47,3 +44,21 @@ const isShowedMobileMenu = useIsShowedMobileMenu()
     </template>
   </UPopover>
 </template>
+
+
+<style scoped>
+.go-to-checkout-btn {
+  width: 100%;
+  height: 46px;
+  background-color: var(--black);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--gray);
+  }
+}
+</style>

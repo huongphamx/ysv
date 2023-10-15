@@ -71,6 +71,7 @@ const addToCart = async () => {
 
   &:hover {
     cursor: pointer;
+    background-color: #888888;
   }
 
   @media screen and (min-width: 768px) {

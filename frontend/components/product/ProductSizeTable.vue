@@ -53,7 +53,7 @@ const selectSize = (v: ProductVariantExtended) => {
         </td>
       </tr>
     </table>
-    <div class="my-2 underline text-gray-500 text-sm md:text-base">
+    <div class="mt-2 xl:-mb-0.5 underline text-gray-500 text-sm md:text-base">
       <NuxtLink to="/size-guide">SIZE GUIDE</NuxtLink>
     </div>
   </div>
@@ -74,7 +74,7 @@ table {
 
 td {
   width: 75px;
-  height: 59px;
+  height: 45px;
   border: 2px solid var(--black);
   text-align: center;
   position: relative;

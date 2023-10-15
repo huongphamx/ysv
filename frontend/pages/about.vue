@@ -15,25 +15,27 @@ useHead({
 <template>
   <div class="mb-10 mycontainer mx-auto">
     <div class="relative">
-      <img src="/img/about-hero.webp" alt="event hero" class="hero-image" />
-      <div class="hero-text in-image">ABOUT
+      <img src="/img/about-hero.webp" alt="event hero" class="hero-image" v-motion="slideVisibleOnceMotion" />
+      <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
+        ABOUT
       </div>
     </div>
-    <div class="hero-text out-image">THE BRAND</div>
+    <div class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">
+      THE BRAND</div>
 
     <div class="block-1 flex">
-      <div class="mr-3 block-1_left">
+      <div class="mr-3 block-1_left" v-motion="slideVisibleOnceLeftMotion">
         <div class="block-1_left_text text-small">
           SENSUALITY WITH STYLE. LUXURY FOR THE WOMAN WHO DESERVES IT. FOR YOUR INNER GODDESS. YOUR
           KIND OF LUXURY. SENSUAL. ELEGANT. CLASSY. EXTRAORDINARY. JUST LIKE YOU.
         </div>
         <img src="/img/about-1.webp" alt="about 1" class="rect-image image-1">
       </div>
-      <img src="/img/about-2.webp" alt="about 2" class="rect-image image-2">
+      <img src="/img/about-2.webp" alt="about 2" class="rect-image image-2" v-motion="slideVisibleOnceRightMotion">
     </div>
 
     <div class="block-2">
-      <div class="text-medium text-center quoto">
+      <div class="text-medium text-center quoto" v-motion="slideVisibleOnceBottomMotion">
         “YOUR LIFE IS A STAGE. YOU DESERVE TO SHINE ON IT. YSV IS NOT YOUR ORDINARY
         DRESS. IT’S EXQUISITE, IT’S SENSUAL, IT’S YOU.”
       </div>
@@ -88,8 +90,9 @@ useHead({
     <template v-else>
       <div class="mb-20 grid grid-cols-2 gap-5">
         <div>
-          <img src="/img/about-3.webp" alt="" class="w-[628px] h-[785px] object-cover">
-          <div class="max-w-[479px] ml-[108px]">
+          <img src="/img/about-3.webp" alt="" class="w-[628px] h-[785px] object-cover"
+            v-motion="slideVisibleOnceLeftMotion">
+          <div class="max-w-[479px] ml-[108px]" v-motion="slideVisibleOnceLeftMotion">
             <div class="text-small my-[60px]">
               <p>
                 With no exception, we take great care of the details from fabrics to individual
@@ -105,7 +108,7 @@ useHead({
           </div>
         </div>
         <div>
-          <div class="text-small w-[520px]">
+          <div class="text-small w-[520px]" v-motion="slideVisibleOnceRightMotion">
             <p>
               The founder of the brand Yulia Shukshina drew hяer inspiration from professional dancing
               by creating a brand that is everything you were looking for and more. She wanted to bring the glam and chic
@@ -125,8 +128,9 @@ useHead({
               extraordinary, whenever you go.
             </p>
           </div>
-          <img src="/img/about-4.webp" alt="" class="w-[628px] h-[785px] object-cover my-[60px]">
-          <div class="text-small w-[520px]">
+          <img src="/img/about-4.webp" alt="" class="w-[628px] h-[785px] object-cover my-[60px]"
+            v-motion="slideVisibleOnceRightMotion">
+          <div class="text-small w-[520px]" v-motion="slideVisibleOnceRightMotion">
             <p>
               YSV brand is inspired by strong and beautiful woman who want to feel
               unapologetically
@@ -144,7 +148,7 @@ useHead({
       </div>
     </template>
 
-    <div class="xl:relative mb-16 xl:mb-28 quoto-2">
+    <div class="xl:relative mb-16 xl:mb-28 quoto-2" v-motion="slideVisibleOnceBottomMotion">
       <img src="/img/about-6.webp" alt="about 6" class="about-end">
       <div class="text-medium text-center quoto-2_text">
         INDULGE IN LUXURY LIKE NEVER BEFORE WITH YSV BRAND.

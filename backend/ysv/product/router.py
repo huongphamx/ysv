@@ -21,7 +21,7 @@ async def read_product_list(
     stmt = (
         select(Product)
         .options(selectinload(Product.collection))
-        .order_by(Product.updated_at)
+        .order_by(Product.updated_at.desc())
     )
     if collection_id is not None:
         stmt = stmt.filter(Product.collection_id == collection_id)

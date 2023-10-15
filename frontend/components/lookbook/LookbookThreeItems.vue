@@ -10,18 +10,20 @@ const props = defineProps<{
 
 <template>
   <div class="block-main">
-    <img :src="collection.preview_pic" alt="" class="image-left">
+    <img :src="collection.preview_pic" alt="" class="image-left" v-motion="slideVisibleOnceLeftMotion">
     <div class="flex flex-col">
       <div class="flex-1 max-w-[628px]">
-        <div class="collection-name text-medium">{{ collection.name }} collection</div>
-        <div class="collection-description text-small">{{ collection.descriptions }}</div>
+        <div class="collection-name text-medium" v-motion="slideVisibleOnceRightMotion">{{ collection.name }} collection
+        </div>
+        <div class="collection-description text-small" v-motion="slideVisibleOnceRightMotion">{{ collection.descriptions
+        }}</div>
       </div>
       <div>
         <div class="flex gap-[20px]">
           <img v-if="collection.products && collection.products.length > 0" :src="collection.products[0].preview_pic"
-            alt="" class="image-right">
+            alt="" class="image-right" v-motion="slideVisibleOnceRightMotion">
           <img v-if="collection.products && collection.products.length > 1" :src="collection.products[1].preview_pic"
-            alt="" class="image-right">
+            alt="" class="image-right" v-motion="slideVisibleOnceRightMotion">
         </div>
         <NuxtLink :to="`/catalog/${collection.id}`">
           <div class="view-all-btn mt-5">VIEW ALL
@@ -47,7 +49,7 @@ const props = defineProps<{
 
 .image-left {
   width: 520px;
-  height: 781px;
+  height: 780px;
   object-fit: cover;
 }
 
@@ -67,7 +69,7 @@ const props = defineProps<{
   align-items: center;
 
   &:hover {
-    background-color: #272727;
+    background-color: var(--black);
     color: white;
   }
 }

@@ -8,7 +8,8 @@ const props = defineProps<{
 
 
 <template>
-  <div class="relative hover:cursor-pointer group" @click="$router.push(`/catalog/${collection.id}`)">
+  <div class="relative hover:cursor-pointer group" @click="$router.push(`/catalog/${collection.id}`)"
+    v-motion="popVisibleOnceMotion">
     <img :src="collection.preview_pic" alt="" class="rect-image">
     <div
       class="group-hover:hidden absolute bottom-0 max-w-[120px] sm:max-w-[180px] md:max-w-[250px] pl-4 pb-2 text-medium text-white">

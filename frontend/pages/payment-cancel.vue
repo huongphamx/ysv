@@ -57,7 +57,7 @@ useHead({
   align-items: center;
 
   &:hover {
-    background-color: #272727;
+    background-color: var(--black);
     color: white;
   }
 

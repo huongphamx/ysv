@@ -245,7 +245,7 @@ useHead({
 .go-checkout-btn {
   width: 100%;
   height: 40px;
-  background-color: #272727;
+  background-color: var(--black);
   color: white;
   display: flex;
   justify-content: center;
@@ -257,6 +257,7 @@ useHead({
 
   &:hover {
     cursor: pointer;
+    background-color: var(--gray);
   }
 }
 

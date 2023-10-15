@@ -27,7 +27,9 @@ const showedBigPicture = ref(props.product.pictures[0].url)
       <div class="product-color">Available colors: {{ product.name }}</div>
       <div class="product-price">${{ product.price }}</div>
       <div class="product-description">
-        <li v-for="d, i in product.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
+        <ul class="list-disc">
+          <li v-for="d, i in product.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
+        </ul>
       </div>
       <ProductSizeTable :variants="product.size_variants" />
     </div>
@@ -56,6 +58,7 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 
 .description {
   margin-right: 129px;
+  height: 618px;
   width: 412px;
   display: flex;
   flex-direction: column;
@@ -72,6 +75,7 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 }
 
 .product-description {
+  flex: 1 1 0%;
   color: #888;
   margin-left: 15px;
 }

@@ -11,11 +11,12 @@ const props = defineProps<{
 
 <template>
   <div class="block-main">
-    <img :src="collection.preview_pic" alt="" class="image-left">
+    <img :src="collection.preview_pic" alt="" class="image-left" v-motion="slideVisibleOnceBottomMotion">
     <div class="flex flex-col">
       <img v-if="collection.products && collection.products.length > 0" :src="collection.products[0].preview_pic" alt=""
-        class="image-right">
-      <div class="flex-1 flex flex-col gap-[20px] mt-[20px] xl:gap-[30px] xl:mt-[30px] md:max-w-[220px] xl:max-w-[412px]">
+        class="image-right" v-motion="slideVisibleOnceBottomMotion">
+      <div class="flex-1 flex flex-col gap-[20px] mt-[20px] xl:gap-[30px] xl:mt-[30px] md:max-w-[220px] xl:max-w-[304px]"
+        v-motion="slideVisibleOnceBottomMotion">
         <div class="text-medium">{{ collection.name }} collection</div>
         <div class="text-small">{{ collection.descriptions }}</div>
       </div>
@@ -33,6 +34,7 @@ const props = defineProps<{
 <style scoped>
 .block-main {
   display: flex;
+  justify-content: center;
   column-gap: 20px;
   margin: 50px auto;
 }
@@ -44,8 +46,8 @@ const props = defineProps<{
   }
 
   @media screen and (min-width: 1280px) {
-    width: 736px;
-    height: 920px;
+    width: 520px;
+    height: 780px;
   }
 
   object-fit: cover;
@@ -58,8 +60,8 @@ const props = defineProps<{
   }
 
   @media screen and (min-width: 1280px) {
-    width: 412px;
-    height: 515px;
+    width: 304px;
+    height: 442px;
   }
 
   object-fit: cover;
@@ -75,12 +77,12 @@ const props = defineProps<{
   font-size: 18px;
 
   &:hover {
-    background-color: #272727;
+    background-color: var(--black);
     color: white;
   }
 
   @media screen and (min-width: 1280px) {
-    width: 412px;
+    width: 304px;
     height: 92px;
     font-size: 20px;
   }

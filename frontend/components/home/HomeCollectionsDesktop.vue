@@ -15,10 +15,10 @@ const props = defineProps<{
           <CollectionCard v-if="showCollections[0]" :collection="showCollections[0]" />
           <CollectionCard v-if="showCollections[1]" :collection="showCollections[1]" />
         </div>
-        <img src="/img/home-collection-square-1.webp" alt="" class="square-img">
+        <img src="/img/home-collection-square-1.webp" alt="" class="square-img" v-motion="slideVisibleOnceBottomMotion">
       </div>
       <div>
-        <img src="/img/home-collection-square-2.webp" alt="" class="square-img">
+        <img src="/img/home-collection-square-2.webp" alt="" class="square-img" v-motion="slideVisibleOnceBottomMotion">
         <div class="my-5 grid grid-cols-2 gap-2.5">
           <CollectionCard v-if="showCollections[2]" :collection="showCollections[2]" />
           <CollectionCard v-if="showCollections[3]" :collection="showCollections[3]" />
@@ -31,7 +31,7 @@ const props = defineProps<{
           <CollectionCard v-if="showCollections[4]" :collection="showCollections[4]" />
           <CollectionCard v-if="showCollections[5]" :collection="showCollections[5]" />
         </div>
-        <img src="/img/home-collection-square-3.webp" alt="" class="square-img">
+        <img src="/img/home-collection-square-3.webp" alt="" class="square-img" v-motion="slideVisibleOnceBottomMotion">
       </div>
       <div>
         <div class="mb-5 grid grid-cols-2 gap-2.5">
@@ -63,7 +63,7 @@ const props = defineProps<{
   align-items: center;
 
   &:hover {
-    background-color: #272727;
+    background-color: var(--black);
     color: white;
   }
 }

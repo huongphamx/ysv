@@ -25,23 +25,27 @@ useHead({
         <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
-        <div class="hero-text in-image">YSV
+        <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
+          YSV
         </div>
       </div>
     </div>
     <div class="mycontainer mx-auto">
-      <div class="hero-text out-image">BRAND</div>
+      <div class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">BRAND</div>
       <div v-if="mainCollectionPics" class="block-main-collection grid xl:grid-cols-2 gap-5">
-        <div class="hidden xl:block w-[628px] h-[962px]"><img :src="mainCollectionPics![0]" alt=""></div>
+        <div class="hidden xl:block" v-motion="slideVisibleOnceLeftMotion"><img :src="mainCollectionPics![0]" alt=""
+            class=" w-[628px] h-[962px] object-cover">
+        </div>
         <div class="grid grid-cols-2 gap-3 xl:hidden">
           <div>
-            <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image">
-            <div class="mt-4 text-small">
+            <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image" v-motion="slideVisibleOnceLeftMotion">
+            <div class="mt-4 text-small" v-motion="slideVisibleOnceBottomMotion">
               {{ mainCollection?.main_collection_description }}
-              <div class="hidden xl:block">{{ mainCollection?.main_collection_description_2 }}</div>
+              <div class="hidden xl:block" v-motion="slideVisibleOnceBottomMotion">{{
+                mainCollection?.main_collection_description_2 }}</div>
             </div>
           </div>
-          <div>
+          <div v-motion="slideVisibleOnceRightMotion">
             <div class="text-medium">{{ mainCollection?.name }} COLLECTION
             </div>
             <div class="text-small my-5 xl:my-8">NEW OF 2023</div>
@@ -55,8 +59,9 @@ useHead({
         </div>
         <div class="hidden xl:block">
           <div class="flex gap-5">
-            <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image home-image">
-            <div>
+            <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image home-image"
+              v-motion="slideVisibleOnceRightMotion">
+            <div v-motion="slideVisibleOnceRightMotion">
               <div class="text-medium">{{ mainCollection?.name }} COLLECTION
               </div>
               <div class="text-small my-5 xl:my-8">NEW OF 2023</div>
@@ -68,17 +73,20 @@ useHead({
             </div>
           </div>
           <div class="mt-[30px] flex gap-5">
-            <div class="text-small">
+            <div class="text-small" v-motion="slideVisibleOnceBottomMotion">
               {{ mainCollection?.main_collection_description }}
-              <div class="hidden xl:block">{{ mainCollection?.main_collection_description_2 }}</div>
+              <div class="hidden xl:block" v-motion="slideVisibleOnceBottomMotion">{{
+                mainCollection?.main_collection_description_2 }}</div>
             </div>
-            <img :src="mainCollectionPics![2]" alt="main prod 2" class="rect-image home-image">
+            <img :src="mainCollectionPics![2]" alt="main prod 2" class="rect-image home-image"
+              v-motion="slideVisibleOnceRightMotion">
           </div>
         </div>
-        <div class="text-small mt-2 xl:hidden">{{ mainCollection?.main_collection_description_2 }}</div>
+        <div class="text-small mt-2 xl:hidden" v-motion="slideVisibleOnceBottomMotion">{{
+          mainCollection?.main_collection_description_2 }}</div>
       </div>
       <div class="mt-12">
-        <div class="collections-text">COLLECTIONS</div>
+        <div class="collections-text" v-motion="slideVisibleOnceBottomMotion">COLLECTIONS</div>
         <div class="my-3">
           <HomeCollectionsMobile :show-collections="showCollections" />
           <HomeCollectionsDesktop :show-collections="showCollections" />
@@ -146,7 +154,7 @@ useHead({
 
   &:hover {
     cursor: pointer;
-    background-color: #272727;
+    background-color: var(--black);
     color: white;
   }
 

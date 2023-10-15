@@ -31,7 +31,7 @@ async def read_collection_list(
             select(Collection)
             .where(Collection.is_on_sale)
             .options(selectinload(Collection.products))
-            .order_by(Collection.updated_at)
+            .order_by(Collection.updated_at.desc())
         )
     ).all()
     return collections

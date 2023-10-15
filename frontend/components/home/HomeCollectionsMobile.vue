@@ -15,7 +15,8 @@ const props = defineProps<{
       <CollectionCard v-if="showCollections[2]" :collection="showCollections[2]" />
       <CollectionCard v-if="showCollections[3]" :collection="showCollections[3]" />
     </div>
-    <div class="my-5 mx-auto"><img src="/img/home-collection-square-1.webp" alt="" class="square-img"></div>
+    <div class="my-5 mx-auto" v-motion="slideVisibleOnceBottomMotion"><img src="/img/home-collection-square-1.webp" alt=""
+        class="square-img"></div>
     <div class="grid grid-cols-2 gap-5 justify-items-center mb-5">
       <CollectionCard v-if="showCollections[4]" :collection="showCollections[4]" />
       <CollectionCard v-if="showCollections[5]" :collection="showCollections[5]" />
@@ -42,7 +43,7 @@ const props = defineProps<{
 
   &:hover {
     cursor: pointer;
-    background-color: #272727;
+    background-color: var(--black);
     color: white;
   }
 
