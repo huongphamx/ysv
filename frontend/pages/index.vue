@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 const config = useRuntimeConfig()
 
 const isHeroVideoPlaying = ref(false)
@@ -37,20 +40,21 @@ useHead({
     </div>
     <div class="mycontainer mx-auto">
       <div v-if="isHeroVideoPlaying" class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">BRAND</div>
-      <div v-if="mainCollectionPics" class="block-main-collection grid xl:grid-cols-2 gap-5">
-        <div class="hidden xl:block" v-motion="slideVisibleOnceLeftMotion"><img :src="mainCollectionPics![0]" alt=""
-            class=" w-[628px] h-[962px] object-cover">
+      <div class="block-main-collection grid xl:grid-cols-2 gap-5">
+        <div v-if="width >= 1280" v-motion="slideVisibleOnceLeftMotion"><img v-if="mainCollectionPics![0]"
+            :src="mainCollectionPics![0]" alt="" class=" w-[628px] h-[962px] object-cover">
         </div>
-        <div class="grid grid-cols-2 gap-3 xl:hidden">
-          <div v-if="mainCollectionPics && mainCollectionPics.length > 0">
-            <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image" v-motion="slideVisibleOnceLeftMotion">
+        <div v-if="width < 1280" class="grid grid-cols-2 gap-3">
+          <div>
+            <img v-if="mainCollectionPics![1]" :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image"
+              v-motion="slideVisibleOnceLeftMotion">
             <div class="mt-4 text-small" v-motion="slideVisibleOnceBottomMotion">
               {{ mainCollection?.main_collection_description }}
-              <div class="hidden xl:block" v-motion="slideVisibleOnceBottomMotion">{{
+              <div v-if="width >= 1280" v-motion="slideVisibleOnceBottomMotion">{{
                 mainCollection?.main_collection_description_2 }}</div>
             </div>
           </div>
-          <div v-if="mainCollectionPics && mainCollectionPics.length > 0" v-motion="slideVisibleOnceRightMotion">
+          <div v-motion="slideVisibleOnceRightMotion">
             <div class="text-medium">{{ mainCollection?.name }} COLLECTION
             </div>
             <div class="text-small my-5 xl:my-8">NEW OF 2023</div>
@@ -59,13 +63,13 @@ useHead({
                 <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl" />
               </div>
             </NuxtLink>
-            <img :src="mainCollectionPics![2]" alt="main prod 2" class="mt-8 rect-image">
+            <img v-if="mainCollectionPics![2]" :src="mainCollectionPics![2]" alt="main prod 2" class="mt-8 rect-image">
           </div>
         </div>
-        <div v-if="mainCollectionPics" class="hidden xl:block">
+        <div v-if="width >= 1280">
           <div class="flex gap-5">
-            <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image home-image"
-              v-motion="slideVisibleOnceRightMotion">
+            <img v-if="mainCollectionPics![1]" :src="mainCollectionPics![1]" alt="main prod 1"
+              class="rect-image home-image" v-motion="slideVisibleOnceRightMotion">
             <div v-motion="slideVisibleOnceRightMotion">
               <div class="text-medium">{{ mainCollection?.name }} COLLECTION
               </div>
@@ -80,16 +84,15 @@ useHead({
           <div class="mt-[30px] flex gap-5">
             <div class="text-small" v-motion="slideVisibleOnceBottomMotion">
               {{ mainCollection?.main_collection_description }}
-              <div class="hidden xl:block" v-motion="slideVisibleOnceBottomMotion">{{
+              <div v-if="width >= 1280" v-motion="slideVisibleOnceBottomMotion">{{
                 mainCollection?.main_collection_description_2 }}</div>
             </div>
-            <img :src="mainCollectionPics![2]" alt="main prod 2" class="rect-image home-image"
-              v-motion="slideVisibleOnceRightMotion">
+            <img v-if="mainCollectionPics![2]" :src="mainCollectionPics![2]" alt="main prod 2"
+              class="rect-image home-image" v-motion="slideVisibleOnceRightMotion">
           </div>
         </div>
-        <div v-if="mainCollectionPics && mainCollectionPics.length > 0" class="text-small mt-2 xl:hidden"
-          v-motion="slideVisibleOnceBottomMotion">{{
-            mainCollection?.main_collection_description_2 }}</div>
+        <div v-if="width < 1280" class="text-small mt-2" v-motion="slideVisibleOnceBottomMotion">{{
+          mainCollection?.main_collection_description_2 }}</div>
       </div>
       <div class="mt-12">
         <div class="collections-text" v-motion="slideVisibleOnceBottomMotion">COLLECTIONS</div>
