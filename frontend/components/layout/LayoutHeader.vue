@@ -46,7 +46,8 @@ const isShowedHeaderLine = useIsShowedHeaderLine()
         <div class="relative">
           <UButton icon="i-ph-list" color="black" variant="ghost" :ui="{ icon: { size: { sm: 'h-6 w-6' } } }"
             @click="isShowedMobileMenu = true" />
-          <div v-if="isShowedMobileMenu" class="absolute top-0 -right-0 w-[210px] bg-white border border-black">
+          <div v-if="isShowedMobileMenu"
+            class="absolute top-0 -right-0 w-[210px] bg-white text-[var(--black)] border border-black">
             <div class="text-right">
               <UButton icon="i-ph-x" color="white" variant="ghost" :ui="{ icon: { size: { sm: 'h-6 w-6' } } }"
                 @click="isShowedMobileMenu = false" />

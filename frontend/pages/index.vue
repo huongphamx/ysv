@@ -25,19 +25,19 @@ useHead({
         <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
-        <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
+        <div class="hero-text in-image" v-motion="popVisibleOnceMotion">
           YSV
         </div>
       </div>
     </div>
     <div class="mycontainer mx-auto">
-      <div class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">BRAND</div>
+      <div class="hero-text out-image" v-motion="popVisibleOnceMotion">BRAND</div>
       <div v-if="mainCollectionPics" class="block-main-collection grid xl:grid-cols-2 gap-5">
         <div class="hidden xl:block" v-motion="slideVisibleOnceLeftMotion"><img :src="mainCollectionPics![0]" alt=""
             class=" w-[628px] h-[962px] object-cover">
         </div>
         <div class="grid grid-cols-2 gap-3 xl:hidden">
-          <div>
+          <div v-if="mainCollection">
             <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image" v-motion="slideVisibleOnceLeftMotion">
             <div class="mt-4 text-small" v-motion="slideVisibleOnceBottomMotion">
               {{ mainCollection?.main_collection_description }}
@@ -45,7 +45,7 @@ useHead({
                 mainCollection?.main_collection_description_2 }}</div>
             </div>
           </div>
-          <div v-motion="slideVisibleOnceRightMotion">
+          <div v-if="mainCollection" v-motion="slideVisibleOnceRightMotion">
             <div class="text-medium">{{ mainCollection?.name }} COLLECTION
             </div>
             <div class="text-small my-5 xl:my-8">NEW OF 2023</div>
@@ -57,7 +57,7 @@ useHead({
             <img :src="mainCollectionPics![2]" alt="main prod 2" class="mt-8 rect-image">
           </div>
         </div>
-        <div class="hidden xl:block">
+        <div v-if="mainCollection" class="hidden xl:block">
           <div class="flex gap-5">
             <img :src="mainCollectionPics![1]" alt="main prod 1" class="rect-image home-image"
               v-motion="slideVisibleOnceRightMotion">
@@ -82,7 +82,7 @@ useHead({
               v-motion="slideVisibleOnceRightMotion">
           </div>
         </div>
-        <div class="text-small mt-2 xl:hidden" v-motion="slideVisibleOnceBottomMotion">{{
+        <div v-if="mainCollection" class="text-small mt-2 xl:hidden" v-motion="slideVisibleOnceBottomMotion">{{
           mainCollection?.main_collection_description_2 }}</div>
       </div>
       <div class="mt-12">
