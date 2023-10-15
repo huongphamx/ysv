@@ -39,7 +39,7 @@ useHead({
         “YOUR LIFE IS A STAGE. YOU DESERVE TO SHINE ON IT. YSV IS NOT YOUR ORDINARY
         DRESS. IT’S EXQUISITE, IT’S SENSUAL, IT’S YOU.”
       </div>
-      <img src="/img/about-sign.svg" alt="about sign" class="sign">
+      <img src="/img/about-sign.svg" alt="about sign" class="sign" v-motion="slideVisibleOnceBottomMotion">
     </div>
 
     <template v-if="width < 1280">
