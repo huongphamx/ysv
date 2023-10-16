@@ -25,6 +25,7 @@ export default defineNuxtConfig({
       apiBase: 'http://localhost:8000/api',
       frontendDomain: process.env.NUXT_PUBLIC_FRONTEND_DOMAIN || 'localhost:3000',
       s3BaseUrl: 'https://ysv-dev.s3.ap-northeast-1.amazonaws.com',
+      cloudfrontDistributionDomain: 'https://abc.cloudfront.net'
     }
   },
 

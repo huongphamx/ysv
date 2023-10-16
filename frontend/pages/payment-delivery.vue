@@ -2,6 +2,9 @@
 const isShowedHeaderLine = useIsShowedHeaderLine()
 isShowedHeaderLine.value = true
 
+const config = useRuntimeConfig()
+const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
+
 useHead({
   title: 'Payment & Delivery - YSV'
 })
@@ -12,9 +15,11 @@ useHead({
   <div class="delivery-body mycontainer mx-auto">
     <GoBackArrow />
     <div class="delivery-main">
-      <img src="/img/delivery-02.webp" class="delivery-hero-image" v-motion="slideVisibleOnceRightMotion">
+      <img :src="`${cloudfrontDistributionDomain}/img/delivery-02.webp`" class="delivery-hero-image"
+        v-motion="slideVisibleOnceRightMotion">
       <div class="xl:max-w-[412px]">
-        <img src="/img/delivery-01.webp" class="delivery-sub-hero-image" v-motion="slideVisibleOnceLeftMotion">
+        <img :src="`${cloudfrontDistributionDomain}/img/delivery-01.webp`" class="delivery-sub-hero-image"
+          v-motion="slideVisibleOnceLeftMotion">
         <div class="mt-[30px] md:mt-0 xl:mt-[30px] text-medium" v-motion="slideVisibleOnceBottomMotion">DELIVERY/SHIPPING
         </div>
         <div class="mt-1 text-small uppercase delivery-description" v-motion="slideVisibleOnceBottomMotion">

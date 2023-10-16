@@ -6,6 +6,9 @@ const { width, height } = useWindowSize()
 const isShowedHeaderLine = useIsShowedHeaderLine()
 isShowedHeaderLine.value = false
 
+const config = useRuntimeConfig()
+const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
+
 useHead({
   title: 'About - YSV'
 })
@@ -15,7 +18,8 @@ useHead({
 <template>
   <div class="mb-10 mycontainer mx-auto">
     <div class="relative">
-      <img src="/img/about-hero.webp" alt="event hero" class="hero-image" v-motion="slideVisibleOnceMotion" />
+      <img :src="`${cloudfrontDistributionDomain}/img/about-hero.webp`" alt="event hero" class="hero-image"
+        v-motion="slideVisibleOnceMotion" />
       <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
         ABOUT
       </div>
@@ -29,9 +33,10 @@ useHead({
           SENSUALITY WITH STYLE. LUXURY FOR THE WOMAN WHO DESERVES IT. FOR YOUR INNER GODDESS. YOUR
           KIND OF LUXURY. SENSUAL. ELEGANT. CLASSY. EXTRAORDINARY. JUST LIKE YOU.
         </div>
-        <img src="/img/about-1.webp" alt="about 1" class="rect-image image-1">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-1.webp`" alt="about 1" class="rect-image image-1">
       </div>
-      <img src="/img/about-2.webp" alt="about 2" class="rect-image image-2" v-motion="slideVisibleOnceRightMotion">
+      <img :src="`${cloudfrontDistributionDomain}/img/about-2.webp`" alt="about 2" class="rect-image image-2"
+        v-motion="slideVisibleOnceRightMotion">
     </div>
 
     <div class="block-2">
@@ -39,13 +44,14 @@ useHead({
         “YOUR LIFE IS A STAGE. YOU DESERVE TO SHINE ON IT. YSV IS NOT YOUR ORDINARY
         DRESS. IT’S EXQUISITE, IT’S SENSUAL, IT’S YOU.”
       </div>
-      <img src="/img/about-sign.svg" alt="about sign" class="sign" v-motion="slideVisibleOnceBottomMotion">
+      <img :src="`${cloudfrontDistributionDomain}/img/about-sign.svg`" alt="about sign" class="sign"
+        v-motion="slideVisibleOnceBottomMotion">
     </div>
 
     <template v-if="width < 1280">
       <div class="grid grid-cols-2 gap-2.5 items-end">
-        <img src="/img/about-3.webp" alt="about 3" class="rect-image image-3">
-        <img src="/img/about-5.webp" alt="about 5" class="rect-image image-5">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-3.webp`" alt="about 3" class="rect-image image-3">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-5.webp`" alt="about 5" class="rect-image image-5">
       </div>
       <div class="block-3-mobile text-small">
         <p>
@@ -75,7 +81,8 @@ useHead({
             YOU
             STEP INSIDE THE ROOM AND AND TAKE EVERYONE'S BREATH AWAY. YOU ARE OUR INSPIRATION.</div>
         </div>
-        <div class="block-4-mobile_image"><img src="/img/about-4.webp" alt="about 4" class="rect-image image-4"></div>
+        <div class="block-4-mobile_image"><img :src="`${cloudfrontDistributionDomain}/img/about-4.webp`" alt="about 4"
+            class="rect-image image-4"></div>
       </div>
       <div class="block-5-mobile text-small">
         <p>YSV BRAND IS INSPIRED BY STRONG AND BEAUTIFUL WOMAN WHO WANT TO FEEL UNAPOLOGETICALLY HERSELF, SHE WANTS TO
@@ -90,7 +97,7 @@ useHead({
     <template v-else>
       <div class="mb-20 grid grid-cols-2 gap-5">
         <div>
-          <img src="/img/about-3.webp" alt="" class="w-[628px] h-[785px] object-cover"
+          <img :src="`${cloudfrontDistributionDomain}/img/about-3.webp`" alt="" class="w-[628px] h-[785px] object-cover"
             v-motion="slideVisibleOnceLeftMotion">
           <div class="max-w-[479px] ml-[108px]" v-motion="slideVisibleOnceLeftMotion">
             <div class="text-small my-[60px]">
@@ -104,7 +111,8 @@ useHead({
                 step inside the room and and take everyone's breath away. You are our inspiration.
               </p>
             </div>
-            <img src="/img/about-5.webp" alt="" class="w-[412px] h-[515px] object-cover">
+            <img :src="`${cloudfrontDistributionDomain}/img/about-5.webp`" alt=""
+              class="w-[412px] h-[515px] object-cover">
           </div>
         </div>
         <div>
@@ -128,8 +136,8 @@ useHead({
               extraordinary, whenever you go.
             </p>
           </div>
-          <img src="/img/about-4.webp" alt="" class="w-[628px] h-[785px] object-cover my-[60px]"
-            v-motion="slideVisibleOnceRightMotion">
+          <img :src="`${cloudfrontDistributionDomain}/img/about-4.webp`" alt=""
+            class="w-[628px] h-[785px] object-cover my-[60px]" v-motion="slideVisibleOnceRightMotion">
           <div class="text-small w-[520px]" v-motion="slideVisibleOnceRightMotion">
             <p>
               YSV brand is inspired by strong and beautiful woman who want to feel
@@ -149,7 +157,7 @@ useHead({
     </template>
 
     <div class="xl:relative mb-16 xl:mb-28 quoto-2" v-motion="slideVisibleOnceBottomMotion">
-      <img src="/img/about-6.webp" alt="about 6" class="about-end">
+      <img :src="`${cloudfrontDistributionDomain}/img/about-6.webp`" alt="about 6" class="about-end">
       <div class="text-medium text-center quoto-2_text">
         INDULGE IN LUXURY LIKE NEVER BEFORE WITH YSV BRAND.
         IT’S YOUR TIME TO SHINE, DARLING.

@@ -3,6 +3,7 @@ import { useWindowSize } from '@vueuse/core'
 
 const { width } = useWindowSize()
 const config = useRuntimeConfig()
+const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
 
 const isHeroVideoPlaying = ref(false)
 const collectionList = useCollectionList()
@@ -12,9 +13,6 @@ const mainCollection = computed(() => {
 })
 const showCollections = computed(() => {
   return collectionList.value.filter(c => c.is_show_in_home)
-})
-const mainCollectionPics = computed(() => {
-  return mainCollection.value?.main_collection_pics?.split('$')
 })
 
 const isShowedHeaderLine = useIsShowedHeaderLine()
@@ -30,7 +28,7 @@ useHead({
   <div class="home-body">
     <div class="-mt-16 relative">
       <video autoplay preload="auto" playsinline muted loop class="hero-video" @play="isHeroVideoPlaying = true">
-        <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
+        <source :src="`${cloudfrontDistributionDomain}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
         <div v-show="isHeroVideoPlaying" class="hero-text in-image" v-motion="{

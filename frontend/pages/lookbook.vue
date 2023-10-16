@@ -2,6 +2,9 @@
 import { useWindowSize } from '@vueuse/core'
 const { width } = useWindowSize()
 
+const config = useRuntimeConfig()
+const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
+
 const collectionList = useCollectionList()
 await getCollectionList()
 
@@ -17,7 +20,8 @@ useHead({
 <template>
   <div class="mycontainer mx-auto">
     <div class="relative">
-      <img src="/img/lookbook-hero.webp" alt="event hero" class="hero-image" v-motion="slideVisibleOnceMotion" />
+      <img :src="`${cloudfrontDistributionDomain}/img/lookbook-hero.webp`" alt="event hero" class="hero-image"
+        v-motion="slideVisibleOnceMotion" />
       <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">LOOK</div>
     </div>
     <div class="hero-text out-image text-book" v-motion="slideVisibleOnceBottomMotion">BOOK</div>

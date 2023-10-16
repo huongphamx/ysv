@@ -2,6 +2,9 @@
 const isShowedHeaderLine = useIsShowedHeaderLine()
 isShowedHeaderLine.value = true
 
+const config = useRuntimeConfig()
+const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
+
 useHead({
   title: 'Cooperation - YSV'
 })
@@ -12,7 +15,8 @@ useHead({
   <div class="cooperation-body mycontainer mx-auto">
     <GoBackArrow />
     <div class="relative">
-      <img src="/img/cooperation-hero.webp" alt="" class="hero-image cooperation-hero" v-motion="slideVisibleOnceMotion">
+      <img :src="`${cloudfrontDistributionDomain}/img/cooperation-hero.webp`" alt="" class="hero-image cooperation-hero"
+        v-motion="slideVisibleOnceMotion">
       <div class="absolute w-full top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-center text-white">
         <div class="text-medium">LET'S WORK TOGETHER</div>
         <div class="text-2 text-small">FOR COOPERATION DROP A MESSAGE ON</div>
