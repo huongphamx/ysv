@@ -33,9 +33,9 @@ useHead({
         <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
-        <div v-if="isHeroVideoPlaying" class="hero-text in-image" v-motion="{
+        <div v-show="isHeroVideoPlaying" class="hero-text in-image" v-motion="{
           initial: { opacity: 0, y: 50 },
-          enter: { opacity: 1, y: 0, transition: { duration: 800 } },
+          visibleOnce: { opacity: 1, y: 0, transition: { duration: 800 } },
           delay: 500
         }">
           YSV
@@ -43,9 +43,9 @@ useHead({
       </div>
     </div>
     <div class="mycontainer mx-auto">
-      <div v-if="isHeroVideoPlaying" class="hero-text out-image" v-motion="{
+      <div v-show="isHeroVideoPlaying" class="hero-text out-image" v-motion="{
         initial: { opacity: 0, y: 50 },
-        enter: { opacity: 1, y: 0, transition: { duration: 800 } },
+        visibleOnce: { opacity: 1, y: 0, transition: { duration: 800 } },
         delay: 500
       }">BRAND</div>
       <template v-if="width < 768">
