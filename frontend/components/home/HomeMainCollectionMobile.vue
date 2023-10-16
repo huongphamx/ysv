@@ -14,7 +14,11 @@ const collectionPics = computed(() => {
 <template>
   <div class="collection-body">
     <div class="grid grid-cols-2 gap-5">
-      <img :src="collectionPics![1]" class="rect-image" v-motion="slideVisibleOnceLeftMotion">
+      <img :src="collectionPics![1]" class="rect-image" v-motion="{
+        initial: { opacity: 0, x: -50 },
+        enter: { opacity: 1, x: 0, transition: { duration: 800 } },
+        delay: 500
+      }">
       <div>
         <div class="text-medium">{{ mainCollection.name }} collection</div>
         <div class="my-[15px]">NEW OF 2023</div>

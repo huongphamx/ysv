@@ -33,17 +33,25 @@ useHead({
         <source :src="`${config.public.s3BaseUrl}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
-        <div v-if="isHeroVideoPlaying" class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
+        <div v-if="isHeroVideoPlaying" class="hero-text in-image" v-motion="{
+          initial: { opacity: 0, y: 50 },
+          enter: { opacity: 1, y: 0, transition: { duration: 800 } },
+          delay: 500
+        }">
           YSV
         </div>
       </div>
     </div>
     <div class="mycontainer mx-auto">
-      <div v-if="isHeroVideoPlaying" class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">BRAND</div>
+      <div v-if="isHeroVideoPlaying" class="hero-text out-image" v-motion="{
+        initial: { opacity: 0, y: 50 },
+        enter: { opacity: 1, y: 0, transition: { duration: 800 } },
+        delay: 500
+      }">BRAND</div>
       <template v-if="width < 768">
         <HomeMainCollectionMobile :main-collection="mainCollection" />
       </template>
-      <template v-if="width >= 768 && width < 1280">
+      <template v-else-if="width >= 768 && width < 1280">
         <HomeMainCollectionTablet :main-collection="mainCollection" />
       </template>
       <template v-else>
