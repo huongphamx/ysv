@@ -40,10 +40,12 @@ const sizeVariants = ref([{
 const sizeTableCols = [{
   key: 'size',
   label: 'Size',
-}, {
-  key: 'is_pre_order',
-  label: 'Is pre-order',
-}, {
+},
+// {
+//   key: 'is_pre_order',
+//   label: 'Is pre-order',
+// }, 
+{
   key: 'storage',
   label: 'Storage'
 }]
@@ -194,10 +196,10 @@ useHead({
         <div v-else class="text-sm">Hold 'Cmd (Ctrl on Windows)' to choose multiple pictures</div>
 
         <div class="text-sm font-medium text-gray-700 dark:text-gray-200">Config Available Size of Product</div>
-        <UTable :rows="sizeVariants" :columns="sizeTableCols">
-          <template #is_pre_order-data="{ row }">
+        <UTable :rows="sizeVariants" :columns="sizeTableCols" :ui="{ td: { base: 'max-w-[200px] whitespace-normal' } }">
+          <!-- <template #is_pre_order-data="{ row }">
             <UToggle v-model="row.is_pre_order" />
-          </template>
+          </template> -->
           <template #storage-data="{ row }">
             <UInput v-model="row.storage" />
           </template>

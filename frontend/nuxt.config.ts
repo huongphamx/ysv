@@ -33,11 +33,11 @@ export default defineNuxtConfig({
 
   routeRules: {
     // '/admin/**': { ssr: false },
-    '/about': { prerender: true },
-    '/events': { prerender: true },
-    '/payment-delivery': { prerender: true },
-    '/cooperation': { prerender: true },
-    '/size-guide': { prerender: true },
+    // '/about': { prerender: true },
+    // '/events': { prerender: true },
+    // '/payment-delivery': { prerender: true },
+    // '/cooperation': { prerender: true },
+    // '/size-guide': { prerender: true },
   },
   // ssr: false,
 
