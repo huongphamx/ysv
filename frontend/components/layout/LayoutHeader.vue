@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { useWindowSize } from '@vueuse/core'
-
-const { width, height } = useWindowSize()
 const route = useRoute()
 
 const borderColor = computed(() => {
@@ -29,20 +26,18 @@ const isShowedHeaderLine = useIsShowedHeaderLine()
         <NuxtLink to="/" @click="isShowedMobileMenu = false">YSV</NuxtLink>
       </div>
 
-      <template v-if="width > 1280">
-        <div class="w-2/3 flex justify-between">
-          <NuxtLink v-for="link, i in links" :key="i" :to="link.to"
-            :class="{ 'active': $route.path === link.to, 'link': $route.path !== link.to }">
-            {{ link.text }}
-          </NuxtLink>
-          <LayoutHeaderCollections />
-        </div>
-        <div>
-          <LayoutHeaderCart />
-        </div>
-      </template>
+      <div class="w-2/3 justify-between hidden xl:flex">
+        <NuxtLink v-for="link, i in links" :key="i" :to="link.to"
+          :class="{ 'active': $route.path === link.to, 'link': $route.path !== link.to }">
+          {{ link.text }}
+        </NuxtLink>
+        <LayoutHeaderCollections />
+      </div>
+      <div class="hidden xl:block">
+        <LayoutHeaderCart />
+      </div>
 
-      <template v-else>
+      <div class="xl:hidden">
         <div class="relative">
           <UButton icon="i-ph-list" color="black" variant="ghost" :ui="{ icon: { size: { sm: 'h-6 w-6' } } }"
             @click="isShowedMobileMenu = true" />
@@ -64,7 +59,7 @@ const isShowedHeaderLine = useIsShowedHeaderLine()
             </div>
           </div>
         </div>
-      </template>
+      </div>
 
     </div>
   </div>

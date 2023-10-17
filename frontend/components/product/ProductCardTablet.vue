@@ -11,7 +11,7 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 
 
 <template>
-  <div>
+  <div class="tablet-container">
     <div class="small-pic-container">
       <img v-for="image, i in product.pictures" :key="i" :src="image.url" alt="" class="small-pic"
         @click="showedBigPicture = image.url">
@@ -23,7 +23,9 @@ const showedBigPicture = ref(props.product.pictures[0].url)
         <div class="product-color">Available colors: {{ product.name }}</div>
         <div class="product-price">${{ product.price }}</div>
         <div class="product-description">
-          <li v-for="d, i in product.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
+          <ul class="list-disc">
+            <li v-for="d, i in product.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -35,6 +37,14 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 
 
 <style scoped>
+.tablet-container {
+
+  @media screen and (max-width: 767px),
+  (min-width: 1280px) {
+    display: none;
+  }
+}
+
 .small-pic-container {
   margin-bottom: 20px;
   max-width: 330px;
@@ -84,6 +94,6 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 
 .product-description {
   color: #888;
-  margin-left: 15px;
+  margin-left: 20px;
 }
 </style>

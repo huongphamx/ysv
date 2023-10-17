@@ -1,11 +1,7 @@
 <script lang="ts" setup>
-import { useWindowSize } from '@vueuse/core'
-
-const { width } = useWindowSize()
 const config = useRuntimeConfig()
 const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
 
-const isHeroVideoPlaying = ref(false)
 const collectionList = useCollectionList()
 await getCollectionList()
 const mainCollection = computed(() => {
@@ -27,34 +23,20 @@ useHead({
 <template>
   <div class="home-body">
     <div class="-mt-16 relative">
-      <video autoplay preload="auto" playsinline muted loop class="hero-video" @play="isHeroVideoPlaying = true">
+      <video autoplay preload="auto" playsinline muted loop class="hero-video">
         <source :src="`${cloudfrontDistributionDomain}/hero.mp4`" type="video/mp4">
       </video>
       <div class="mycontainer mx-auto">
-        <div v-show="isHeroVideoPlaying" class="hero-text in-image" v-motion="{
-          initial: { opacity: 0, y: 50 },
-          visibleOnce: { opacity: 1, y: 0, transition: { duration: 800 } },
-          delay: 500
-        }">
+        <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
           YSV
         </div>
       </div>
     </div>
     <div class="mycontainer mx-auto">
-      <div v-show="isHeroVideoPlaying" class="hero-text out-image" v-motion="{
-        initial: { opacity: 0, y: 50 },
-        visibleOnce: { opacity: 1, y: 0, transition: { duration: 800 } },
-        delay: 500
-      }">BRAND</div>
-      <template v-if="width < 768">
-        <HomeMainCollectionMobile :main-collection="mainCollection" />
-      </template>
-      <template v-else-if="width >= 768 && width < 1280">
-        <HomeMainCollectionTablet :main-collection="mainCollection" />
-      </template>
-      <template v-else>
-        <HomeMainCollectionDesktop :main-collection="mainCollection" />
-      </template>
+      <div class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">BRAND</div>
+      <HomeMainCollectionMobile :main-collection="mainCollection" />
+      <HomeMainCollectionTablet :main-collection="mainCollection" />
+      <HomeMainCollectionDesktop :main-collection="mainCollection" />
       <div class="mt-12">
         <div class="collections-text" v-motion="slideVisibleOnceBottomMotion">COLLECTIONS</div>
         <div class="my-3">

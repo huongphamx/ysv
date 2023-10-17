@@ -22,20 +22,24 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase: 'http://localhost:8000/api',
+      apiBase: 'https://api.pxh-dev.online/api',
       frontendDomain: process.env.NUXT_PUBLIC_FRONTEND_DOMAIN || 'localhost:3000',
       s3BaseUrl: 'https://ysv-dev.s3.ap-northeast-1.amazonaws.com',
-      cloudfrontDistributionDomain: 'https://abc.cloudfront.net'
+      cloudfrontDistributionDomain: 'https://d1oxuz3phc9a42.cloudfront.net'
     }
   },
 
   colorMode: { preference: 'light' },
 
-  //routeRules: {
-  // Admin dashboard renders only on client-side
-  // '/admin/**': { ssr: false },
-  // },
-  ssr: false,
+  routeRules: {
+    // '/admin/**': { ssr: false },
+    '/about': { prerender: true },
+    '/events': { prerender: true },
+    '/payment-delivery': { prerender: true },
+    '/cooperation': { prerender: true },
+    '/size-guide': { prerender: true },
+  },
+  // ssr: false,
 
   googleFonts: {
     families: {

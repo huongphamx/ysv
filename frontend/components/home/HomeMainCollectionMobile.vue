@@ -23,7 +23,7 @@ const collectionPics = computed(() => {
         <div class="text-medium">{{ mainCollection.name }} collection</div>
         <div class="my-[15px]">NEW OF 2023</div>
         <div class="view-all-btn">VIEW ALL
-          <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl ml-[10px]" />
+          <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl md:ml-[10px]" />
         </div>
       </div>
     </div>
@@ -43,6 +43,10 @@ const collectionPics = computed(() => {
 
   @media screen and (min-width: 480px) {
     margin: 80px 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 }
 

@@ -36,22 +36,24 @@ const selectSize = (v: ProductVariantExtended) => {
 <template>
   <div>
     <table>
-      <tr>
-        <td v-for="v in sortedSizeVariants.slice(0, 2)" :key="v.id" class="group"
-          :class="{ 'active-td': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
-          <div class="group-hover:hidden">{{ v.size }}</div>
-          <div class="absolute w-full bottom-0 right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
-          <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
-        </td>
-      </tr>
-      <tr>
-        <td v-for="v in sortedSizeVariants.slice(2, 4)" :key="v.id" class="group"
-          :class="{ 'active-td': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
-          <div class="group-hover:hidden">{{ v.size }}</div>
-          <div class="absolute w-full bottom-0 right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
-          <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td v-for="v in sortedSizeVariants.slice(0, 2)" :key="v.id" class="group"
+            :class="{ 'active-td': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+            <div class="group-hover:hidden">{{ v.size }}</div>
+            <div class="absolute w-full bottom-0 right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
+            <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
+          </td>
+        </tr>
+        <tr>
+          <td v-for="v in sortedSizeVariants.slice(2, 4)" :key="v.id" class="group"
+            :class="{ 'active-td': selectedProductVariant?.size === v.size }" @click="selectSize(v)">
+            <div class="group-hover:hidden">{{ v.size }}</div>
+            <div class="absolute w-full bottom-0 right-0 group-hover:hidden">{{ v.is_pre_order ? 'Pre-order' : '' }}</div>
+            <div class="absolute w-full top-1/2 -translate-y-1/2 hidden group-hover:block">{{ v.standard_tall }} cm</div>
+          </td>
+        </tr>
+      </tbody>
     </table>
     <div class="mt-2 xl:-mb-0.5 underline text-gray-500 text-sm md:text-base">
       <NuxtLink to="/size-guide">SIZE GUIDE</NuxtLink>

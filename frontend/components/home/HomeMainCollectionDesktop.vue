@@ -36,6 +36,10 @@ const collectionPics = computed(() => {
 <style scoped>
 .collection-body {
   margin: 150px 0;
+
+  @media screen and (max-width: 1279px) {
+    display: none;
+  }
 }
 
 .collection-image-1 {

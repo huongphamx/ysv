@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { useWindowSize } from '@vueuse/core'
-const { width } = useWindowSize()
-
 const config = useRuntimeConfig()
 const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
 
@@ -26,17 +23,14 @@ useHead({
     </div>
     <div class="hero-text out-image text-book" v-motion="slideVisibleOnceBottomMotion">BOOK</div>
     <div v-for="collection in collectionList" :key="collection.id" class="lookbook-body">
-      <template v-if="collection.lookbook_layout_code === 'two' && width >= 768">
+      <template v-if="collection.lookbook_layout_code === 'two'">
         <LookbookTwoItems :collection="collection" />
       </template>
-      <template v-else-if="collection.lookbook_layout_code === 'two_reversed' && width >= 1280">
+      <template v-else-if="collection.lookbook_layout_code === 'two_reversed'">
         <LookbookTwoItemsReverse :collection="collection" />
       </template>
-      <template v-else-if="collection.lookbook_layout_code === 'three' && width >= 1280">
+      <template v-else-if="collection.lookbook_layout_code === 'three'">
         <LookbookThreeItems :collection="collection" />
-      </template>
-      <template v-else>
-        <LookbookMobile :collection="collection" />
       </template>
     </div>
   </div>

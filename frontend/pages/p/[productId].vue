@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { useWindowSize } from '@vueuse/core'
 import { Product } from '@/types'
 
 const { params } = useRoute()
 const productId = params.productId as string
 const productData = ref<Product>()
-
-const { width } = useWindowSize()
 
 getSizeList()
 
@@ -49,9 +46,9 @@ useHead({
       <div class="-mt-0.5 ml-1 h-[2px] bg-[var(--gray)] hidden group-hover:block"></div>
     </div>
 
-    <ProductCardMobile v-if="width < 768" :product="productData!" />
-    <ProductCardTablet v-if="768 <= width && width < 1280" :product="productData!" />
-    <ProductCardDesktop v-if="width >= 1280" :product="productData!" />
+    <ProductCardMobile :product="productData!" />
+    <ProductCardTablet :product="productData!" />
+    <ProductCardDesktop :product="productData!" />
   </div>
 </template>
 
