@@ -44,8 +44,119 @@ useHead({
         v-motion="slideVisibleOnceBottomMotion">
     </div>
 
-    <AboutBodyMobile />
-    <AboutBodyDesktop />
+    <div class="xl:hidden">
+      <div class="grid grid-cols-2 gap-2.5 items-end">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-3.webp`" alt="about 3" class="rect-image image-3"
+          v-motion="slideVisibleOnceLeftMotion">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-5.webp`" alt="about 5" class="rect-image image-5"
+          v-motion="slideVisibleOnceRightMotion">
+      </div>
+      <div class="block-3-mobile text-small">
+        <p v-motion="slideVisibleOnceBottomMotion">
+          THE FOUNDER OF THE BRAND YULIA SHUKSHINA DREW HER INSPIRATION FROM PROFESSIONAL DANCING BY CREATING A BRAND THAT
+          IS EVERYTHING YOU WERE LOOKING FOR AND MORE. SHE WANTED TO BRING THE GLAM AND CHIC THAT YOU SEE ON STAGE TO THE
+          WARDROBE OF ANY WOMAN WHO WANTS TO BE NOTICED.
+        </p><br>
+        <p v-motion="slideVisibleOnceBottomMotion">
+          YSV IS MADE FOR WOMEN WITH HIGH STANDARDS, WHO APPRECIATE DISTINCTIVE APPEAL OF EVERY DETAIL AND THE TOUCH OF
+          THE
+          FINEST FABRICS THAT SURROUND YOUR BODY IN PURE LUXURY. THE ONE YOU DON’T WANT TO TAKE OFF.
+        </p><br>
+        <p v-motion="slideVisibleOnceBottomMotion">
+          CREATED AT FIRST AS A SMALL COLLECTION OF JUST THREE DRESSES, THE BRAND NOW OFFERS A CHOICE OF STUNNING
+          ONE-OF-A-KIND PIECES THAT ARE MADE
+          TO PERFECTION FOR YOU TO INDULGE YOURSELF, TO STEAL THE SHOW AND FEEL EXTRAORDINARY, WHENEVER YOU GO.
+        </p>
+      </div>
+      <div class="block-4-mobile text-small">
+        <div class="block-4-mobile_text">
+          <p v-motion="slideVisibleOnceBottomMotion">WITH NO EXCEPTION, WE TAKE GREAT CARE OF THE DETAILS FROM FABRICS TO
+            INDIVIDUAL MEASUREMENTS
+            AND
+            BEYOND TO
+            PRODUCE YOUR PERFECT DRESS, BAR TO NONE.
+          </p><br>
+          <p v-motion="slideVisibleOnceBottomMotion">WE DON’T STOP UNTIL YOU GET THAT WOW-EFFECT. FROM THE EXPERIENCE WHEN
+            YOU OPEN YOUR BOX, TILL THE MOMENT
+            YOU
+            STEP INSIDE THE ROOM AND AND TAKE EVERYONE'S BREATH AWAY. YOU ARE OUR INSPIRATION.</p>
+        </div>
+        <div class="block-4-mobile_image"><img :src="`${cloudfrontDistributionDomain}/img/about-4.webp`" alt="about 4"
+            class="rect-image image-4"></div>
+      </div>
+      <div class="block-5-mobile text-small">
+        <p v-motion="slideVisibleOnceBottomMotion">YSV BRAND IS INSPIRED BY STRONG AND BEAUTIFUL WOMAN WHO WANT TO FEEL
+          UNAPOLOGETICALLY HERSELF, SHE WANTS TO
+          EXPERIENCE LIFE AND FEEL DESIRED. SHE IS SOPHISTICATED AND REFINED.
+        </p><br>
+        <p v-motion="slideVisibleOnceBottomMotion">WITH THAT IN MIND, WE CREATED THE FINEST COLLECTIONS THAT ARE EQUALLY
+          SENSUAL BUT ALSO ELEGANT AND CLASSY.
+          IT’S
+          AN ABSOLUTE LUXURY, BUT THE ONE YOU CAN AFFORD.</p><br>
+        <p>WE SET THE BAR HIGH, SO YOU NOLONGER HAVE TO COMPROMISE. YOU CAN HAVE THE BEST OF ALL WORLDS.</p>
+      </div>
+    </div>
+    <div class="hidden xl:block">
+      <div class="mb-20 grid grid-cols-2 gap-5">
+        <div>
+          <img :src="`${cloudfrontDistributionDomain}/img/about-3.webp`" alt="" class="w-[628px] h-[785px] object-cover"
+            v-motion="slideVisibleOnceLeftMotion">
+          <div class="max-w-[479px] ml-[108px]" v-motion="slideVisibleOnceLeftMotion">
+            <div class="text-small my-[60px]">
+              <p>
+                With no exception, we take great care of the details from fabrics to individual
+                measurements and beyond to produce your perfect dress, bar to none.
+              </p><br>
+              <p>
+                We don’t stop until you get that WOW-effect. From the experience when you open your box, till the moment
+                you
+                step inside the room and and take everyone's breath away. You are our inspiration.
+              </p>
+            </div>
+            <img :src="`${cloudfrontDistributionDomain}/img/about-5.webp`" alt=""
+              class="w-[412px] h-[515px] object-cover">
+          </div>
+        </div>
+        <div>
+          <div class="text-small w-[520px]" v-motion="slideVisibleOnceRightMotion">
+            <p>
+              The founder of the brand Yulia Shukshina drew hяer inspiration from professional dancing
+              by creating a brand that is everything you were looking for and more. She wanted to bring the glam and chic
+              that you see on stage to the wardrobe of any woman who wants to be
+              noticed.
+            </p><br>
+
+            <p>
+              YSV is made for women with high standards, who appreciate distinctive appeal of every detail and the touch
+              of
+              the finest fabrics that surround your body in pure luxury. The one you don’t want to take off.
+            </p><br>
+
+            <p>
+              Created at first as a small collection of just three dresses, the brand now offers a choice of stunning
+              one-of-a-kind pieces that are made to perfection for you to indulge yourself, to steal the show and feel
+              extraordinary, whenever you go.
+            </p>
+          </div>
+          <img :src="`${cloudfrontDistributionDomain}/img/about-4.webp`" alt=""
+            class="w-[628px] h-[785px] object-cover my-[60px]" v-motion="slideVisibleOnceRightMotion">
+          <div class="text-small w-[520px]" v-motion="slideVisibleOnceRightMotion">
+            <p>
+              YSV brand is inspired by strong and beautiful woman who want to feel
+              unapologetically
+              herself, she wants to experience life and feel desired. She is sophisticated and refined.
+            </p><br>
+
+            <p>
+              With that in mind, we created the finest collections that are equally sensual but also elegant and classy.
+              It’s an absolute luxury, but the one you can afford.
+            </p><br>
+
+            <p>We set the bar high, so you nolonger have to compromise. You can have the best of all worlds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="xl:relative mb-16 xl:mb-28 quoto-2" v-motion="slideVisibleOnceBottomMotion">
       <img :src="`${cloudfrontDistributionDomain}/img/about-6.webp`" alt="about 6" class="about-end">
