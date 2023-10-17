@@ -3,6 +3,7 @@ export interface ProductVariant {
   product_id: string,
   clothes_size_id: string,
   is_pre_order: boolean,
+  storage: number,
 }
 
 export interface ProductVariantExtended extends ProductVariant {

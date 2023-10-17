@@ -21,6 +21,7 @@ useHead({
         <div class="text-medium">LET'S WORK TOGETHER</div>
         <div class="text-2 text-small">FOR COOPERATION DROP A MESSAGE ON</div>
         <div class="text-small email">ysv.shukshina@gmail.com</div>
+        <div class="text-small email">+971 54 560 2477</div>
       </div>
     </div>
   </div>

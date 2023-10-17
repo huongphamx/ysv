@@ -9,11 +9,13 @@ class ProductSizeVariantCreate(BaseModel):
     id: str
     clothes_size_id: str
     is_pre_order: bool = False
+    storage: int
 
 
 class ProductSizeVariantUpdate(BaseModel):
     id: str
     is_pre_order: bool = False
+    storage: int
 
 
 class ProductSizeVariantRead(BaseModel):
@@ -21,6 +23,7 @@ class ProductSizeVariantRead(BaseModel):
     product_id: uuid.UUID
     clothes_size_id: uuid.UUID
     is_pre_order: bool
+    storage: int
 
 
 class ProductCreate(BaseModel):

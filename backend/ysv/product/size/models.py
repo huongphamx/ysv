@@ -18,5 +18,6 @@ class ProductSizeVariant(Base):
     clothes_size_id: Mapped[str] = mapped_column(
         ForeignKey("clothes_size.id"), primary_key=True
     )
+    storage: Mapped[int] = mapped_column(default=1)
     is_pre_order: Mapped[bool] = mapped_column(default=False)
     clothes_size: Mapped["ClothesSize"] = relationship()

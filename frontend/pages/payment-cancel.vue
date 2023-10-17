@@ -18,7 +18,7 @@ useHead({
     </div>
     <div class="text-base md:text-lg 2xl:text-xl">SOMETHING WENT WRONG, PLEASE TRY AGAIN</div>
     <NuxtLink to="/">
-      <div class="go-back-btn">GO BACK</div>
+      <div class="go-back-btn">GO HOME</div>
     </NuxtLink>
   </div>
 </template>

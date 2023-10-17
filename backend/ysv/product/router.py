@@ -49,6 +49,7 @@ async def create_product(
             id=uuid.UUID(variant.id),
             clothes_size_id=uuid.UUID(variant.clothes_size_id),
             is_pre_order=variant.is_pre_order,
+            storage=variant.storage,
         )
         product_obj.size_variants.append(variant_obj)
 
@@ -118,8 +119,9 @@ async def update_product(
             select(ProductSizeVariant).where(ProductSizeVariant.id == variant.id)
         )
         if variant_db is None:
-            pass
+            return
         variant_db.is_pre_order = variant.is_pre_order
+        variant_db.storage = variant.storage
         db.add(variant_db)
 
     db.add(product_db)

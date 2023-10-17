@@ -19,19 +19,23 @@ const title = productId ? 'Edit Product' : 'Create new Product'
 const sizeVariants = ref([{
   id: uuidv4(),
   size: 'XS',
-  is_pre_order: false
+  is_pre_order: false,
+  storage: 1,
 }, {
   id: uuidv4(),
   size: 'S',
-  is_pre_order: false
+  is_pre_order: false,
+  storage: 1,
 }, {
   id: uuidv4(),
   size: 'M',
-  is_pre_order: false
+  is_pre_order: false,
+  storage: 1,
 }, {
   id: uuidv4(),
   size: 'L',
-  is_pre_order: true
+  is_pre_order: true,
+  storage: 1
 },])
 const sizeTableCols = [{
   key: 'size',
@@ -39,7 +43,10 @@ const sizeTableCols = [{
 }, {
   key: 'is_pre_order',
   label: 'Is pre-order',
-},]
+}, {
+  key: 'storage',
+  label: 'Storage'
+}]
 
 const productForm = ref()
 const productFormState = ref({
@@ -77,7 +84,8 @@ if (productId) {
       return {
         id: v.id,
         size: sizeList.value.find(s => s.id === v.clothes_size_id)?.label!,
-        is_pre_order: v.is_pre_order
+        is_pre_order: v.is_pre_order,
+        storage: v.storage,
       }
     })
     sizeVariants.value = unSortedSizeVariants.sort((a, b) => {
@@ -115,6 +123,7 @@ async function submitSaveProduct() {
       return {
         id: size.id,
         is_pre_order: size.is_pre_order,
+        storage: size.storage,
         clothes_size_id: sizeList.value.find(s => s.label === size.size)?.id
       }
     }),
@@ -188,6 +197,9 @@ useHead({
         <UTable :rows="sizeVariants" :columns="sizeTableCols">
           <template #is_pre_order-data="{ row }">
             <UToggle v-model="row.is_pre_order" />
+          </template>
+          <template #storage-data="{ row }">
+            <UInput v-model="row.storage" />
           </template>
         </UTable>
 
