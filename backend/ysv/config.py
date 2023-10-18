@@ -15,6 +15,7 @@ class CommonSettings(BaseSettings):
 class AwsSettings(BaseSettings):
     AWS_S3_REGION: str
     AWS_S3_BUCKET: str
+    AWS_CLOUDFRONT_DISTRIBUTION_DOMAIN: str
 
 
 class StripeSettings(BaseSettings):

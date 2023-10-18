@@ -21,9 +21,7 @@ class Collection(Base):
     main_collection_description_2: Mapped[str] = mapped_column(nullable=True)
     main_collection_pics: Mapped[str] = mapped_column(nullable=True)
     is_show_in_home: Mapped[bool] = mapped_column(default=False)
-    lookbook_layout_code: Mapped[str | None] = mapped_column(
-        nullable=True, default="two"
-    )
+    lookbook_layout_code: Mapped[str] = mapped_column(default="two")
     products: Mapped[list["Product"]] = relationship(
         back_populates="collection", cascade="all, delete-orphan"
     )

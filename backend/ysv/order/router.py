@@ -9,13 +9,15 @@ from fastapi import (
     status,
 )
 from fastapi_mail import MessageSchema, MessageType
+from fastapi_pagination import Page
+from fastapi_pagination.ext.sqlalchemy import paginate
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from ysv.cart.models import Cart
 from ysv.collection.models import Collection
-from ysv.config import common_settings, stripe_settings
+from ysv.config import common_settings, stripe_settings, aws_settings
 from ysv.database.session import get_async_db
 from ysv.product.models import Product
 from ysv.product.size.models import ProductSizeVariant
@@ -89,7 +91,7 @@ async def create_order(
             continue
         total_price += product_db.price * cart_item.quantity
 
-    shipping_fee = 5 if order_in.country == "United Arab Emirates" else 20
+    shipping_fee = 20 if order_in.country == "United Arab Emirates" else 50
     pay_amount = total_price + shipping_fee
     try:
         checkout_session = stripe.checkout.Session.create(
@@ -102,6 +104,9 @@ async def create_order(
                         "product_data": {
                             "name": "Payment YSV",
                             "description": "YSV Order",
+                            "images": [
+                                f"{aws_settings.AWS_CLOUDFRONT_DISTRIBUTION_DOMAIN}/payment-logo.JPG"
+                            ],
                         },
                         "unit_amount": pay_amount * 100,
                     },
@@ -118,15 +123,14 @@ async def create_order(
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
-@router.get("/", dependencies=[Depends(current_admin)], response_model=list[OrderRead])
+@router.get("/", dependencies=[Depends(current_admin)], response_model=Page[OrderRead])
 async def get_order_list(
     *, db: AsyncSession = Depends(get_async_db), phone_number: str | None = None
 ):
     stmt = select(Order).order_by(Order.created_at.desc())
     if phone_number is not None:
         stmt = stmt.filter(Order.phone_number == phone_number)
-    orders = (await db.scalars(stmt)).all()
-    return orders
+    return await paginate(db, stmt)
 
 
 @router.get(
@@ -280,6 +284,13 @@ async def stripe_webhook(
             )
             if size_variant is None:
                 return
+            # decrease size_variant storage
+            size_variant.storage -= item.quantity
+            if size_variant.storage < 0:
+                size_variant.storage = 0
+            db.add(size_variant)
+            await db.commit()
+
             product_db = await db.scalar(
                 select(Product).where(Product.id == size_variant.product_id)
             )
@@ -300,6 +311,7 @@ async def stripe_webhook(
                 }
             )
             total += product_db.price * item.quantity
+        shipping_fee = 20 if order_db.country == "United Arab Emirates" else 50
         message = MessageSchema(
             subject="Your order has been placed",
             recipients=[order_db.email],  # type:ignore
@@ -308,6 +320,7 @@ async def stripe_webhook(
                 "lname": order_db.lname.upper(),
                 "items": items_detail,
                 "total": total,
+                "shipping_fee": shipping_fee,
             },
             subtype=MessageType.html,
         )

@@ -8,7 +8,7 @@ const props = defineProps<{
 
 
 <template>
-  <div class="block-main">
+  <div class="block-main-mobile">
     <div class="text-medium" v-motion="slideVisibleOnceBottomMotion">{{ collection.name }} collection</div>
     <div class="description text-small" v-motion="slideVisibleOnceBottomMotion">{{ collection.descriptions }}</div>
     <div class="grid grid-cols-2 gap-5">
@@ -35,6 +35,10 @@ const props = defineProps<{
 
   @media screen and (min-width: 768px) {
     margin: 100px auto;
+  }
+
+  @media screen and (min-width: 1280px) {
+    display: none;
   }
 }
 

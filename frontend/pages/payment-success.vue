@@ -19,7 +19,7 @@ useHead({
     <div class="text-small text-center">YOUR ORDER HAS BEEN PLACED. CHECK YOUR MAIL BOX.
     </div>
     <NuxtLink to="/">
-      <div class="go-back-btn">GO BACK</div>
+      <div class="go-back-btn">GO HOME</div>
     </NuxtLink>
   </div>
 </template>

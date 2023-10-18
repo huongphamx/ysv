@@ -31,12 +31,14 @@ const isShowedMobileMenu = useIsShowedMobileMenu()
     <template #panel>
       <template v-if="cart && cart.length > 0">
         <CustomerBag />
-        <div class="p-3">
-          <div class="go-to-checkout-btn">GO TO CHECKOUT</div>
-        </div>
+        <NuxtLink to="/checkout">
+          <div class="p-3">
+            <div class="go-to-checkout-btn">GO TO CHECKOUT</div>
+          </div>
+        </NuxtLink>
       </template>
       <template v-else>
-        <div class="p-3">
+        <div class="p-3 text-[var(--black)]">
           <div class="text-lg font-['Italiana']">YOUR BAG ({{ cart.length }})</div>
           You don't have any item in bag!
         </div>

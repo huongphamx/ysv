@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { useWindowSize } from '@vueuse/core'
-
-const { width, height } = useWindowSize()
-
 const isShowedHeaderLine = useIsShowedHeaderLine()
 isShowedHeaderLine.value = false
+
+const config = useRuntimeConfig()
+const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
 
 useHead({
   title: 'About - YSV'
@@ -15,7 +14,8 @@ useHead({
 <template>
   <div class="mb-10 mycontainer mx-auto">
     <div class="relative">
-      <img src="/img/about-hero.webp" alt="event hero" class="hero-image" v-motion="slideVisibleOnceMotion" />
+      <img :src="`${cloudfrontDistributionDomain}/img/about-hero.webp`" alt="event hero" class="hero-image"
+        v-motion="slideVisibleOnceMotion" />
       <div class="hero-text in-image" v-motion="slideVisibleOnceBottomMotion">
         ABOUT
       </div>
@@ -29,9 +29,10 @@ useHead({
           SENSUALITY WITH STYLE. LUXURY FOR THE WOMAN WHO DESERVES IT. FOR YOUR INNER GODDESS. YOUR
           KIND OF LUXURY. SENSUAL. ELEGANT. CLASSY. EXTRAORDINARY. JUST LIKE YOU.
         </div>
-        <img src="/img/about-1.webp" alt="about 1" class="rect-image image-1">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-1.webp`" alt="about 1" class="rect-image image-1">
       </div>
-      <img src="/img/about-2.webp" alt="about 2" class="rect-image image-2" v-motion="slideVisibleOnceRightMotion">
+      <img :src="`${cloudfrontDistributionDomain}/img/about-2.webp`" alt="about 2" class="rect-image image-2"
+        v-motion="slideVisibleOnceRightMotion">
     </div>
 
     <div class="block-2">
@@ -39,26 +40,29 @@ useHead({
         “YOUR LIFE IS A STAGE. YOU DESERVE TO SHINE ON IT. YSV IS NOT YOUR ORDINARY
         DRESS. IT’S EXQUISITE, IT’S SENSUAL, IT’S YOU.”
       </div>
-      <img src="/img/about-sign.svg" alt="about sign" class="sign" v-motion="slideVisibleOnceBottomMotion">
+      <img :src="`${cloudfrontDistributionDomain}/img/about-sign.svg`" alt="about sign" class="sign"
+        v-motion="slideVisibleOnceBottomMotion">
     </div>
 
-    <template v-if="width < 1280">
+    <div class="xl:hidden">
       <div class="grid grid-cols-2 gap-2.5 items-end">
-        <img src="/img/about-3.webp" alt="about 3" class="rect-image image-3">
-        <img src="/img/about-5.webp" alt="about 5" class="rect-image image-5">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-3.webp`" alt="about 3" class="rect-image image-3"
+          v-motion="slideVisibleOnceLeftMotion">
+        <img :src="`${cloudfrontDistributionDomain}/img/about-5.webp`" alt="about 5" class="rect-image image-5"
+          v-motion="slideVisibleOnceRightMotion">
       </div>
       <div class="block-3-mobile text-small">
-        <p>
+        <p v-motion="slideVisibleOnceBottomMotion">
           THE FOUNDER OF THE BRAND YULIA SHUKSHINA DREW HER INSPIRATION FROM PROFESSIONAL DANCING BY CREATING A BRAND THAT
           IS EVERYTHING YOU WERE LOOKING FOR AND MORE. SHE WANTED TO BRING THE GLAM AND CHIC THAT YOU SEE ON STAGE TO THE
           WARDROBE OF ANY WOMAN WHO WANTS TO BE NOTICED.
         </p><br>
-        <p>
+        <p v-motion="slideVisibleOnceBottomMotion">
           YSV IS MADE FOR WOMEN WITH HIGH STANDARDS, WHO APPRECIATE DISTINCTIVE APPEAL OF EVERY DETAIL AND THE TOUCH OF
           THE
           FINEST FABRICS THAT SURROUND YOUR BODY IN PURE LUXURY. THE ONE YOU DON’T WANT TO TAKE OFF.
         </p><br>
-        <p>
+        <p v-motion="slideVisibleOnceBottomMotion">
           CREATED AT FIRST AS A SMALL COLLECTION OF JUST THREE DRESSES, THE BRAND NOW OFFERS A CHOICE OF STUNNING
           ONE-OF-A-KIND PIECES THAT ARE MADE
           TO PERFECTION FOR YOU TO INDULGE YOURSELF, TO STEAL THE SHOW AND FEEL EXTRAORDINARY, WHENEVER YOU GO.
@@ -66,31 +70,36 @@ useHead({
       </div>
       <div class="block-4-mobile text-small">
         <div class="block-4-mobile_text">
-          <div class="my-3">WITH NO EXCEPTION, WE TAKE GREAT CARE OF THE DETAILS FROM FABRICS TO INDIVIDUAL MEASUREMENTS
+          <p v-motion="slideVisibleOnceBottomMotion">WITH NO EXCEPTION, WE TAKE GREAT CARE OF THE DETAILS FROM FABRICS TO
+            INDIVIDUAL MEASUREMENTS
             AND
             BEYOND TO
             PRODUCE YOUR PERFECT DRESS, BAR TO NONE.
-          </div>
-          <div>WE DON’T STOP UNTIL YOU GET THAT WOW-EFFECT. FROM THE EXPERIENCE WHEN YOU OPEN YOUR BOX, TILL THE MOMENT
+          </p><br>
+          <p v-motion="slideVisibleOnceBottomMotion">WE DON’T STOP UNTIL YOU GET THAT WOW-EFFECT. FROM THE EXPERIENCE WHEN
+            YOU OPEN YOUR BOX, TILL THE MOMENT
             YOU
-            STEP INSIDE THE ROOM AND AND TAKE EVERYONE'S BREATH AWAY. YOU ARE OUR INSPIRATION.</div>
+            STEP INSIDE THE ROOM AND AND TAKE EVERYONE'S BREATH AWAY. YOU ARE OUR INSPIRATION.</p>
         </div>
-        <div class="block-4-mobile_image"><img src="/img/about-4.webp" alt="about 4" class="rect-image image-4"></div>
+        <div class="block-4-mobile_image"><img :src="`${cloudfrontDistributionDomain}/img/about-4.webp`" alt="about 4"
+            class="rect-image image-4"></div>
       </div>
       <div class="block-5-mobile text-small">
-        <p>YSV BRAND IS INSPIRED BY STRONG AND BEAUTIFUL WOMAN WHO WANT TO FEEL UNAPOLOGETICALLY HERSELF, SHE WANTS TO
+        <p v-motion="slideVisibleOnceBottomMotion">YSV BRAND IS INSPIRED BY STRONG AND BEAUTIFUL WOMAN WHO WANT TO FEEL
+          UNAPOLOGETICALLY HERSELF, SHE WANTS TO
           EXPERIENCE LIFE AND FEEL DESIRED. SHE IS SOPHISTICATED AND REFINED.
         </p><br>
-        <p>WITH THAT IN MIND, WE CREATED THE FINEST COLLECTIONS THAT ARE EQUALLY SENSUAL BUT ALSO ELEGANT AND CLASSY.
+        <p v-motion="slideVisibleOnceBottomMotion">WITH THAT IN MIND, WE CREATED THE FINEST COLLECTIONS THAT ARE EQUALLY
+          SENSUAL BUT ALSO ELEGANT AND CLASSY.
           IT’S
           AN ABSOLUTE LUXURY, BUT THE ONE YOU CAN AFFORD.</p><br>
         <p>WE SET THE BAR HIGH, SO YOU NOLONGER HAVE TO COMPROMISE. YOU CAN HAVE THE BEST OF ALL WORLDS.</p>
       </div>
-    </template>
-    <template v-else>
+    </div>
+    <div class="hidden xl:block">
       <div class="mb-20 grid grid-cols-2 gap-5">
         <div>
-          <img src="/img/about-3.webp" alt="" class="w-[628px] h-[785px] object-cover"
+          <img :src="`${cloudfrontDistributionDomain}/img/about-3.webp`" alt="" class="w-[628px] h-[785px] object-cover"
             v-motion="slideVisibleOnceLeftMotion">
           <div class="max-w-[479px] ml-[108px]" v-motion="slideVisibleOnceLeftMotion">
             <div class="text-small my-[60px]">
@@ -104,7 +113,8 @@ useHead({
                 step inside the room and and take everyone's breath away. You are our inspiration.
               </p>
             </div>
-            <img src="/img/about-5.webp" alt="" class="w-[412px] h-[515px] object-cover">
+            <img :src="`${cloudfrontDistributionDomain}/img/about-5.webp`" alt=""
+              class="w-[412px] h-[515px] object-cover">
           </div>
         </div>
         <div>
@@ -128,8 +138,8 @@ useHead({
               extraordinary, whenever you go.
             </p>
           </div>
-          <img src="/img/about-4.webp" alt="" class="w-[628px] h-[785px] object-cover my-[60px]"
-            v-motion="slideVisibleOnceRightMotion">
+          <img :src="`${cloudfrontDistributionDomain}/img/about-4.webp`" alt=""
+            class="w-[628px] h-[785px] object-cover my-[60px]" v-motion="slideVisibleOnceRightMotion">
           <div class="text-small w-[520px]" v-motion="slideVisibleOnceRightMotion">
             <p>
               YSV brand is inspired by strong and beautiful woman who want to feel
@@ -146,10 +156,10 @@ useHead({
           </div>
         </div>
       </div>
-    </template>
+    </div>
 
     <div class="xl:relative mb-16 xl:mb-28 quoto-2" v-motion="slideVisibleOnceBottomMotion">
-      <img src="/img/about-6.webp" alt="about 6" class="about-end">
+      <img :src="`${cloudfrontDistributionDomain}/img/about-6.webp`" alt="about 6" class="about-end">
       <div class="text-medium text-center quoto-2_text">
         INDULGE IN LUXURY LIKE NEVER BEFORE WITH YSV BRAND.
         IT’S YOUR TIME TO SHINE, DARLING.

@@ -11,7 +11,7 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 
 
 <template>
-  <div class="flex">
+  <div class="desktop-container">
     <div class="small-pic-container">
       <img v-for="image, i in product.pictures" :key="i" :src="image.url" alt="" class="small-pic"
         @click="showedBigPicture = image.url">
@@ -40,6 +40,14 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 
 
 <style scoped>
+.desktop-container {
+  display: flex;
+
+  @media screen and (max-width: 1279px) {
+    display: none;
+  }
+}
+
 .small-pic-container {
   max-height: 600px;
   overflow: auto;
@@ -77,6 +85,6 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 .product-description {
   flex: 1 1 0%;
   color: #888;
-  margin-left: 15px;
+  margin-left: 20px;
 }
 </style>

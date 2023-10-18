@@ -4,6 +4,9 @@ import { useConfirmDialog } from '@vueuse/core'
 
 const toast = useToast()
 
+const totalOrder = useTotalOrder()
+const pageOrder = usePageOrder()
+
 const orderList = useOrderList()
 await getOrderList()
 
@@ -75,6 +78,11 @@ async function getOrderDetail(orderId: string) {
     orderDetail.value = data.value
     isShowedDetail.value = true
   }
+}
+
+async function selectPage(newPage: number) {
+  pageOrder.value = newPage
+  await getOrderList({ page: newPage })
 }
 
 definePageMeta({
@@ -159,6 +167,8 @@ useHead({
           </div>
         </template>
       </UTable>
+      <UPagination :model-value="pageOrder" @update:model-value="(newPage: number) => selectPage(newPage)"
+        :page-count="10" :total="totalOrder" />
     </div>
   </div>
 </template>

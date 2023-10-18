@@ -66,7 +66,7 @@ const totalPrice = computed(() => {
   return total
 })
 const shippingFee = computed(() => {
-  return checkoutFormState.value.country === 'United Arab Emirates' ? 5 : 20
+  return checkoutFormState.value.country === 'United Arab Emirates' ? 20 : 50
 })
 const showCartItems = ref(false)
 
