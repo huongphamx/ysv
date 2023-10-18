@@ -41,7 +41,6 @@ const props = defineProps<{
   display: flex;
   justify-content: center;
   column-gap: 20px;
-  margin: 50px auto;
 
   @media screen and (max-width: 767px) {
     display: none;

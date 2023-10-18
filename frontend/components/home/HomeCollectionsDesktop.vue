@@ -11,7 +11,7 @@ const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
 
 
 <template>
-  <div class="hidden xl:block mb-32">
+  <div class="hidden xl:block">
     <div class="grid grid-cols-2 gap-2.5">
       <div>
         <div class="mb-5 grid grid-cols-2 gap-2.5">

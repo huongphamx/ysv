@@ -57,10 +57,10 @@ async function deleteCartItem(itemId: string) {
     <div class="divide-y">
       <div v-for="item in cart" :key="item.id" class="flex py-4">
         <img :src="item.preview_pic" alt="" class="w-[66px] h-[84px] object-cover">
-        <div class="ml-4">
-          <NuxtLink :to="`/p/${item.product_id}`" class="hover:underline">
+        <div class="ml-4 flex flex-col">
+          <NuxtLink :to="`/p/${item.product_id}`" class="flex-1 hover:underline">
             <div class="flex text-[13px] font-bold uppercase w-[200px]" :class="border ? 'sm:w-[300px]' : ''">
-              <div>{{ item.collection }} collection</div>
+              <div class="w-[150px] truncate">{{ item.collection }} collection</div>
               <div class="ml-auto">${{ item.price }}</div>
             </div>
             <div class="text-[11px] text-gray-500">COLOR: {{ item.color.toUpperCase() }}</div>

@@ -21,10 +21,12 @@ const collectionPics = computed(() => {
       }">
       <div>
         <div class="text-medium">{{ mainCollection.name }} collection</div>
-        <div class="my-[15px]">NEW OF 2023</div>
-        <div class="view-all-btn">VIEW ALL
-          <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl md:ml-[10px]" />
-        </div>
+        <div class="my-[15px]">NEW OF {{ new Date().getFullYear() }}</div>
+        <NuxtLink :to="`/catalog/${mainCollection.id}`">
+          <div class="view-all-btn">VIEW ALL
+            <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl md:ml-[10px]" />
+          </div>
+        </NuxtLink>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-5">

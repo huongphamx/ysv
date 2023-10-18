@@ -22,11 +22,13 @@ const collectionPics = computed(() => {
     </div>
     <div class="flex flex-col">
       <div class="text-medium mb-10" v-motion="slideVisibleOnceRightMotion">{{ mainCollection.name }}</div>
-      <div class="text-small mb-5" v-motion="slideVisibleOnceRightMotion">NEW OF 2023
+      <div class="text-small mb-5" v-motion="slideVisibleOnceRightMotion">NEW OF {{ new Date().getFullYear() }}
       </div>
-      <div class="view-all-btn" v-motion="slideVisibleOnceRightMotion">VIEW ALL
-        <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl ml-[10px]" />
-      </div>
+      <NuxtLink :to="`/catalog/${mainCollection.id}`">
+        <div class="view-all-btn" v-motion="slideVisibleOnceRightMotion">VIEW ALL
+          <UIcon name="i-iconamoon-arrow-bottom-right-1-light" class="text-2xl ml-[10px]" />
+        </div>
+      </NuxtLink>
       <img :src="collectionPics![2]" alt="" class="collection-image mt-auto" v-motion="slideVisibleOnceRightMotion">
     </div>
   </div>

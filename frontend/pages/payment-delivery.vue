@@ -70,6 +70,7 @@ useHead({
   width: 300px;
   height: 400px;
   object-fit: cover;
+  object-position: top;
 
   @media screen and (min-width: 480px) {
     width: 420px;

@@ -12,7 +12,7 @@ useHead({
 
 
 <template>
-  <div class="mycontainer mx-auto mb-10">
+  <div class="events-body mycontainer mx-auto">
     <div class="relative">
       <img :src="`${cloudfrontDistributionDomain}/img/event-hero.webp`" alt="event hero" class="hero-image"
         v-motion="slideVisibleOnceMotion" />
@@ -83,10 +83,11 @@ useHead({
     <div class="my-5"><img :src="`${cloudfrontDistributionDomain}/img/event-11.webp`" alt="Event 11" class="image-11"
         v-motion="slideVisibleOnceBottomMotion"></div>
 
-    <div class="mb-20 grid grid-cols-2 gap-5">
+    <div class="grid grid-cols-2 gap-5">
       <img :src="`${cloudfrontDistributionDomain}/img/event-12.webp`" alt="Event 12"
         class="rect-image event-image-small ml-auto image-12" v-motion="slideVisibleOnceBottomMotion">
-      <video autoplay preload="auto" playsinline loop class="rect-image video-13" v-motion="slideVisibleOnceBottomMotion">
+      <video autoplay preload="auto" playsinline muted loop class="rect-image video-13"
+        v-motion="slideVisibleOnceBottomMotion">
         <source :src="`${cloudfrontDistributionDomain}/event-13.mp4`" type="video/mp4">
       </video>
     </div>
@@ -95,6 +96,22 @@ useHead({
 
 
 <style scoped>
+.events-body {
+  margin-bottom: 50px;
+
+  @media screen and (min-width: 480px) {
+    margin-bottom: 80px;
+  }
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 100px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 150px;
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .image-1 {
     width: 304px;

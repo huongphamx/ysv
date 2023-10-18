@@ -105,7 +105,7 @@ useHead({
   @media screen and (min-width: 480px) {
     font-size: 60px;
     margin-top: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   @media screen and (min-width: 640px) {
@@ -116,7 +116,6 @@ useHead({
   @media screen and (min-width: 1280px) {
     font-size: 200px;
     margin-top: 150px;
-    margin-bottom: 50px;
   }
 }
 </style>
