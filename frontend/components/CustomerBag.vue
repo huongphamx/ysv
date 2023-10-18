@@ -52,7 +52,7 @@ async function deleteCartItem(itemId: string) {
 
 
 <template>
-  <div class="p-3 max-h-[600px] overflow-auto" :class="{ 'border border-black': border }">
+  <div class="p-3 max-h-[600px] overflow-auto text-[var(--black)]" :class="{ 'border border-black': border }">
     <div class="text-lg font-['Italiana']"><span>{{ title }}</span> ({{ cart.length }})</div>
     <div class="divide-y">
       <div v-for="item in cart" :key="item.id" class="flex py-4">

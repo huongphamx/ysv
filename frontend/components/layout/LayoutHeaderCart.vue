@@ -38,7 +38,7 @@ const isShowedMobileMenu = useIsShowedMobileMenu()
         </NuxtLink>
       </template>
       <template v-else>
-        <div class="p-3">
+        <div class="p-3 text-[var(--black)]">
           <div class="text-lg font-['Italiana']">YOUR BAG ({{ cart.length }})</div>
           You don't have any item in bag!
         </div>

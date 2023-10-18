@@ -13,11 +13,13 @@ const props = defineProps<{
     <div class="block-main">
       <img :src="collection.preview_pic" alt="" class="image-left" v-motion="slideVisibleOnceLeftMotion">
       <div class="flex flex-col">
-        <div class="flex-1 max-w-[628px]">
-          <div class="collection-name text-medium" v-motion="slideVisibleOnceRightMotion">{{ collection.name }} collection
+        <div class="flex-1 max-w-[628px] flex flex-col justify-between">
+          <div class="collection-name text-medium line-clamp-2" v-motion="slideVisibleOnceRightMotion">
+            {{ collection.name }} collection
           </div>
-          <div class="collection-description text-small" v-motion="slideVisibleOnceRightMotion">{{ collection.descriptions
-          }}</div>
+          <div class="collection-description text-small" v-motion="slideVisibleOnceRightMotion">
+            {{ collection.descriptions }}
+          </div>
         </div>
         <div>
           <div class="flex gap-[20px]">
@@ -60,7 +62,7 @@ const props = defineProps<{
 }
 
 .collection-description {
-  margin: 30px 0;
+  padding-bottom: 30px;
 }
 
 .image-left {

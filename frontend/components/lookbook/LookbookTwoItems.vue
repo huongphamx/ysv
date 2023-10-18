@@ -19,7 +19,7 @@ const props = defineProps<{
         <div
           class="flex-1 flex flex-col gap-[20px] mt-[20px] xl:gap-[30px] xl:mt-[30px] md:max-w-[220px] xl:max-w-[304px]"
           v-motion="slideVisibleOnceBottomMotion">
-          <div class="text-medium">{{ collection.name }} collection</div>
+          <div class="text-medium line-clamp-2">{{ collection.name }} collection</div>
           <div class="text-small">{{ collection.descriptions }}</div>
         </div>
         <NuxtLink :to="`/catalog/${collection.id}`">

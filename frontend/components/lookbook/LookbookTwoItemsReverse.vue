@@ -15,7 +15,8 @@ const props = defineProps<{
         <img v-if="collection.products && collection.products.length > 0" :src="collection.products[0].preview_pic" alt=""
           class="image-left" v-motion="slideVisibleOnceBottomMotion">
         <div class="flex-1 flex flex-col gap-[20px] mt-[20px] xl:gap-[30px] xl:mt-[30px] max-w-[304px]">
-          <div class="text-medium" v-motion="slideVisibleOnceBottomMotion">{{ collection.name }} collection</div>
+          <div class="text-medium line-clamp-2" v-motion="slideVisibleOnceBottomMotion">{{ collection.name }} collection
+          </div>
           <div class="text-small" v-motion="slideVisibleOnceBottomMotion">{{ collection.descriptions }}</div>
         </div>
         <NuxtLink :to="`/catalog/${collection.id}`">
