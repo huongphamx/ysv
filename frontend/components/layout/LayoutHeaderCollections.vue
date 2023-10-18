@@ -45,7 +45,7 @@ const isShowedMobileMenu = useIsShowedMobileMenu()
         <div v-for="g, i in (sortedCollectionGroups as CollectionGroup[])" :key="i">
           <div class="border-b text-gray-500">{{ g.alphabet }}</div>
           <div v-for="c, i in g.collections" class="my-2">
-            <NuxtLink :to="`/catalog/${c.id}`" class="underline" @click="isShowedMobileMenu = false">
+            <NuxtLink :to="`/catalog/${c.id}`" class="underline text-[var(--black)]" @click="isShowedMobileMenu = false">
               {{ c.name.toUpperCase() }}
             </NuxtLink>
           </div>
