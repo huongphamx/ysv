@@ -34,9 +34,11 @@ useHead({
     </div>
     <div class="mycontainer mx-auto">
       <div class="hero-text out-image" v-motion="slideVisibleOnceBottomMotion">BRAND</div>
-      <HomeMainCollectionMobile :main-collection="mainCollection" />
-      <HomeMainCollectionTablet :main-collection="mainCollection" />
-      <HomeMainCollectionDesktop :main-collection="mainCollection" />
+      <template v-if="mainCollection">
+        <HomeMainCollectionMobile :main-collection="mainCollection" />
+        <HomeMainCollectionTablet :main-collection="mainCollection" />
+        <HomeMainCollectionDesktop :main-collection="mainCollection" />
+      </template>
       <div class="mt-12">
         <div class="collections-text" v-motion="slideVisibleOnceBottomMotion">COLLECTIONS</div>
         <div class="my-3">

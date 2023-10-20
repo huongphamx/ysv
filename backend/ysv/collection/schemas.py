@@ -13,6 +13,7 @@ class CollectionRead(BaseModel):
     is_on_sale: bool
     is_main_collection: bool
     is_show_in_home: bool
+    home_position: int | None
     main_collection_description: str | None = None
     main_collection_description_2: str | None = None
     main_collection_pics: str | None = None
@@ -43,4 +44,4 @@ class CollectionAddMain(BaseModel):
 
 
 class CollectionShowHome(BaseModel):
-    collection_ids: list[str]
+    collection_ids: list[str | None]

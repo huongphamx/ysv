@@ -7,6 +7,37 @@ const props = defineProps<{
 
 const config = useRuntimeConfig()
 const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
+
+const collection1 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 1)
+})
+const collection2 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 2)
+})
+const collection3 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 3)
+})
+const collection4 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 4)
+})
+const collection5 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 5)
+})
+const collection6 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 6)
+})
+const collection7 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 7)
+})
+const collection8 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 8)
+})
+const collection9 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 9)
+})
+const collection10 = computed(() => {
+  return props.showCollections.find(c => c.home_position === 10)
+})
 </script>
 
 
@@ -15,8 +46,8 @@ const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
     <div class="grid grid-cols-2 gap-2.5">
       <div>
         <div class="mb-5 grid grid-cols-2 gap-2.5">
-          <CollectionCard v-if="showCollections[0]" :collection="showCollections[0]" />
-          <CollectionCard v-if="showCollections[1]" :collection="showCollections[1]" />
+          <CollectionCard v-if="collection1" :collection="collection1" />
+          <CollectionCard v-if="collection2" :collection="collection2" />
         </div>
         <img :src="`${cloudfrontDistributionDomain}/img/home-collection-square-1.webp`" alt="" class="square-img"
           v-motion="slideVisibleOnceBottomMotion">
@@ -25,28 +56,28 @@ const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
         <img :src="`${cloudfrontDistributionDomain}/img/home-collection-square-2.webp`" alt="" class="square-img"
           v-motion="slideVisibleOnceBottomMotion">
         <div class="my-5 grid grid-cols-2 gap-2.5">
-          <CollectionCard v-if="showCollections[2]" :collection="showCollections[2]" />
-          <CollectionCard v-if="showCollections[3]" :collection="showCollections[3]" />
+          <CollectionCard v-if="collection3" :collection="collection3" />
+          <CollectionCard v-if="collection4" :collection="collection4" />
         </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-2.5">
       <div>
         <div class="mb-5 grid grid-cols-2 gap-2.5">
-          <CollectionCard v-if="showCollections[4]" :collection="showCollections[4]" />
-          <CollectionCard v-if="showCollections[5]" :collection="showCollections[5]" />
+          <CollectionCard v-if="collection5" :collection="collection5" />
+          <CollectionCard v-if="collection6" :collection="collection6" />
         </div>
         <img :src="`${cloudfrontDistributionDomain}/img/home-collection-square-3.webp`" alt="" class="square-img"
           v-motion="slideVisibleOnceBottomMotion">
       </div>
       <div>
         <div class="mb-5 grid grid-cols-2 gap-2.5">
-          <CollectionCard v-if="showCollections[6]" :collection="showCollections[6]" />
-          <CollectionCard v-if="showCollections[7]" :collection="showCollections[7]" />
+          <CollectionCard v-if="collection7" :collection="collection7" />
+          <CollectionCard v-if="collection8" :collection="collection8" />
         </div>
         <div class="mb-5 grid grid-cols-2 gap-2.5">
-          <CollectionCard v-if="showCollections[8]" :collection="showCollections[8]" />
-          <CollectionCard v-if="showCollections[9]" :collection="showCollections[9]" />
+          <CollectionCard v-if="collection9" :collection="collection9" />
+          <CollectionCard v-if="collection10" :collection="collection10" />
         </div>
         <NuxtLink to="/lookbook">
           <div class="lookbook-btn">LOOKBOOK

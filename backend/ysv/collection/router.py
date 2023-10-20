@@ -196,10 +196,15 @@ async def add_home_collections(
     ).all()
     for collection in existing_home_collections:
         collection.is_show_in_home = False
+        collection.home_position = None
         db.add(collection)
-    for id in data.collection_ids:
-        new_collection = await db.scalar(select(Collection).where(Collection.id == id))
-        new_collection.is_show_in_home = True  # type:ignore
-        db.add(new_collection)
+    for i, id in enumerate(data.collection_ids, start=1):
+        if id is not None:
+            new_collection = await db.scalar(
+                select(Collection).where(Collection.id == id)
+            )
+            new_collection.is_show_in_home = True  # type:ignore
+            new_collection.home_position = i  # type:ignore
+            db.add(new_collection)
     await db.commit()
     return {"detail": "HOME_COLLECTIONS_ADDED"}

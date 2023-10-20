@@ -61,25 +61,7 @@ async function addMainCollection() {
     toast.add({ title: 'Success', description: 'Main collection saved', icon: 'i-ph-check-circle', color: 'green' })
   }
 }
-const homeCollectionsError = ref('')
-watch(selectedHomeCollections, () => {
-  homeCollectionsError.value = ''
-})
-async function addHomeCollections() {
-  if (selectedHomeCollections.value.length !== 10) {
-    homeCollectionsError.value = 'Select 10 collections'
-  } else {
-    const { data, error } = await useCustomFetch('/v1/collections/add-home-collections', {
-      method: 'post',
-      body: { collection_ids: selectedHomeCollections.value.map(c => c.id) }
-    })
-    if (error.value) {
-      toast.add({ title: 'Error', description: error.value.data.detail, icon: 'i-ph-x-circle', color: 'red' })
-    } else if (data.value) {
-      toast.add({ title: 'Success', description: 'Home collections saved', icon: 'i-ph-check-circle', color: 'green' })
-    }
-  }
-}
+
 definePageMeta({
   layout: 'admin',
   middleware: 'admin',
@@ -118,8 +100,8 @@ useHead({
 
       <div class="my-5 border-b"></div>
       <div class="my-5 font-medium text-gray-700 dark:text-gray-200">Collections to show in Home</div>
-      <div>
-        <USelectMenu multiple searchable v-model="selectedHomeCollections" :options="collectionList"
+      <div class="flex flex-col gap-3">
+        <!-- <USelectMenu multiple searchable v-model="selectedHomeCollections" :options="collectionList"
           option-attribute="name">
           <template #label>
             {{ selectedHomeCollections.length > 0
@@ -128,8 +110,8 @@ useHead({
             }}
           </template>
         </USelectMenu>
-        <div v-if="homeCollectionsError" class="text-red-500">{{ homeCollectionsError }}</div>
-        <UButton label="Save" class="my-2" @click="addHomeCollections" />
+        <div v-if="homeCollectionsError" class="text-red-500">{{ homeCollectionsError }}</div> -->
+        <AdminHomesiteCollections :collections="collectionList" />
       </div>
     </div>
   </div>

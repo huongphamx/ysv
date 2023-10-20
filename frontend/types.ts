@@ -30,6 +30,7 @@ export interface Collection {
   is_on_sale: boolean,
   is_main_collection: boolean,
   is_show_in_home: boolean,
+  home_position: number | null,
   products?: Product[],
   main_collection_description?: string,
   main_collection_description_2?: string,
