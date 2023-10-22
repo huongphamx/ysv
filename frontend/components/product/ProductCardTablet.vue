@@ -62,7 +62,8 @@ const showedBigPicture = ref(props.product.pictures[0].url)
   margin-right: 20px;
   width: 380px;
   height: 570px;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: white;
 }
 
 .description {

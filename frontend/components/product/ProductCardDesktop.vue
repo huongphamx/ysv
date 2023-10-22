@@ -54,14 +54,17 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 }
 
 .small-pic {
+  object-fit: cover;
   width: 88px;
   height: 134px;
   margin-bottom: 15px;
 }
 
 .big-pic {
+  object-fit: contain;
   width: 411px;
   height: 618px;
+  background-color: white;
 }
 
 .description {

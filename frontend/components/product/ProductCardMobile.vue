@@ -53,7 +53,8 @@ const showedBigPicture = ref(props.product.pictures[0].url)
   margin-right: 20px;
   width: 220px;
   height: 330px;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: white;
 
   @media screen and (min-width: 480px) {
     width: 310px;
