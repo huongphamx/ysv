@@ -22,19 +22,23 @@ const showedBigPicture = ref(props.product.pictures[0].url)
       <ProductAddToCart class="my-5" />
     </div>
 
-    <div class="description">
-      <div class="text-medium">{{ product.collection.name }} collection</div>
-      <div class="product-color">Available colors: {{ product.name }}</div>
-      <div class="product-price">${{ product.price }}</div>
-      <div class="product-description">
-        <ul class="list-disc">
-          <li v-for="d, i in product.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
-        </ul>
+    <div class="description flex flex-col">
+      <div class="flex flex-col gap-5 max-h-[414px] overflow-auto">
+        <div>
+          <div class="text-medium line-clamp-2">{{ product.collection.name }} collection</div>
+        </div>
+        <div class="product-color">Available colors: {{ product.name }}</div>
+        <div class="product-price">${{ product.price }}</div>
+        <div class="product-description">
+          <ul class="list-disc">
+            <li v-for="d, i in product.descriptions.split(/\r?\n/)" :key="i">{{ d.toUpperCase() }}</li>
+          </ul>
+        </div>
       </div>
-      <ProductSizeTable :variants="product.size_variants" />
+      <ProductSizeTable :variants="product.size_variants" class="mt-auto" />
     </div>
 
-    <ProductOtherProducts />
+    <ProductOtherProducts class="ml-auto" />
   </div>
 </template>
 
@@ -71,9 +75,8 @@ const showedBigPicture = ref(props.product.pictures[0].url)
   margin-right: 129px;
   height: 618px;
   width: 412px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .product-color {
@@ -86,7 +89,6 @@ const showedBigPicture = ref(props.product.pictures[0].url)
 }
 
 .product-description {
-  flex: 1 1 0%;
   color: #888;
   margin-left: 20px;
 }

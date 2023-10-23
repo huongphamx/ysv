@@ -113,6 +113,14 @@ async def update_product(
     for url in to_add_picture_urls:
         picture_obj = ProductPicture(url=url)
         product_db.pictures.append(picture_obj)
+    to_remove_picture_urls = [
+        url for url in existing_picture_urls if url not in product_data.pictures
+    ]
+    for url in to_remove_picture_urls:
+        picture_db = await db.scalar(
+            select(ProductPicture).where(ProductPicture.url == url)
+        )
+        product_db.pictures.remove(picture_db)  # type:ignore
 
     for variant in product_data.size_variants:
         variant_db = await db.scalar(
