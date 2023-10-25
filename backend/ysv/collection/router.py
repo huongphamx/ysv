@@ -34,6 +34,22 @@ async def read_collection_list(
             .order_by(Collection.updated_at.desc())
         )
     ).all()
+
+    return collections
+
+
+@router.get(
+    "/admin/",
+    response_model=list[CollectionRead],
+    dependencies=[Depends(current_admin)],
+)
+async def admin_read_collection_list(
+    *,
+    db: AsyncSession = Depends(get_async_db),
+):
+    collections = (
+        await db.scalars(select(Collection).order_by(Collection.updated_at.desc()))
+    ).all()
     return collections
 
 

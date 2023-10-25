@@ -3,6 +3,12 @@ const config = useRuntimeConfig()
 const cloudfrontDistributionDomain = config.public.cloudfrontDistributionDomain
 
 const collectionList = useCollectionList()
+const collectionWithAvailableProduct = computed(() => {
+  return collectionList.value.map(c => {
+    c.products = c.products?.filter(p => p.is_available)
+    return c
+  })
+})
 await getCollectionList()
 
 const isShowedHeaderLine = useIsShowedHeaderLine()
@@ -23,7 +29,7 @@ useHead({
     </div>
     <div class="hero-text out-image text-book" v-motion="slideVisibleOnceBottomMotion">BOOK</div>
     <div class="lookbook-body">
-      <div v-for="collection in collectionList" :key="collection.id" class="lookbook-collection">
+      <div v-for="collection in collectionWithAvailableProduct" :key="collection.id" class="lookbook-collection">
         <template v-if="collection.lookbook_layout_code === 'two'">
           <LookbookTwoItems :collection="collection" />
         </template>

@@ -22,6 +22,24 @@ async def read_product_list(
 ):
     stmt = (
         select(Product)
+        .where(Product.is_available)
+        .options(selectinload(Product.collection))
+        .order_by(Product.updated_at.desc())
+    )
+    if collection_id is not None:
+        stmt = stmt.filter(Product.collection_id == collection_id)
+    products = (await db.scalars(stmt)).all()
+    return products
+
+
+@router.get(
+    "/admin/", response_model=list[ProductRead], dependencies=[Depends(current_admin)]
+)
+async def admin_read_product_list(
+    *, db: AsyncSession = Depends(get_async_db), collection_id: str | None = None
+):
+    stmt = (
+        select(Product)
         .options(selectinload(Product.collection))
         .order_by(Product.updated_at.desc())
     )

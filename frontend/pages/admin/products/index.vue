@@ -27,9 +27,9 @@ const productTableCols = [{
 }]
 
 const productList = useProductList()
-await getProductList()
+await adminGetProductList()
 const collectionList = useCollectionList()
-await getCollectionList()
+await adminGetCollectionList()
 
 const { isRevealed: isShowedDeleteProduct, reveal: showDeleteProduct, confirm: confirmDeleteProduct } = useConfirmDialog()
 async function deleteProduct(productId: string) {

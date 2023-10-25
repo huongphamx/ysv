@@ -12,3 +12,14 @@ export async function getCollectionList() {
     collectionList.value = data.value
   }
 }
+
+export async function adminGetCollectionList() {
+  const collectionList = useCollectionList()
+
+  const { data, error } = await useCustomFetch<Collection[]>('/v1/collections/admin/')
+  if (error.value) {
+    // todo: toast
+  } else if (data.value) {
+    collectionList.value = data.value
+  }
+}

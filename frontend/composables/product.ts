@@ -17,3 +17,14 @@ export async function getProductList(params?: FetchProductParams) {
     productList.value = data.value
   }
 }
+
+export async function adminGetProductList(params?: FetchProductParams) {
+  const productList = useProductList()
+
+  const { data, error } = await useCustomFetch<Product[]>('/v1/products/admin/', { params })
+  if (error.value) {
+    // todo: toast
+  } else if (data.value) {
+    productList.value = data.value
+  }
+}

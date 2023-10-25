@@ -21,7 +21,7 @@ const collectionTableCols = [{
 }]
 
 const collectionList = useCollectionList()
-await getCollectionList()
+await adminGetCollectionList()
 
 const { isRevealed: isShowedDeleteCollection, reveal: showDeleteCollection, confirm: confirmDeleteCollection } = useConfirmDialog()
 async function deleteCollection(collectionId: string) {
