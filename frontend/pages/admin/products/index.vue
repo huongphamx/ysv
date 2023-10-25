@@ -93,7 +93,8 @@ useHead({
             <UModal :modelValue="isShowedDeleteProduct" prevent-close :transition="false">
               <div class="p-5">
                 <div class="text-center text-2xl font-bold">Delete this product?</div>
-                <div class="my-5 text-center">Deleted product can not be recovered.
+                <div class="my-5 text-center">Delete a product will delete all of its related cart items,
+                  order items.
                   Are you sure you want to delete?
                 </div>
                 <div class="flex justify-center gap-5">

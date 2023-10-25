@@ -78,8 +78,8 @@ useHead({
             <UModal :modelValue="isShowedDeleteCollection" prevent-close :transition="false">
               <div class="p-5">
                 <div class="text-center text-2xl font-bold">Delete this collection?</div>
-                <div class="my-5 text-center">Deleted collection will delete all of its product and related cart items,
-                  order item.
+                <div class="my-5 text-center">Delete collection will delete all of its products and related cart items,
+                  order items.
                   Consider modifying instead of delete. Still want to delete?
                 </div>
                 <div class="flex justify-center gap-5">

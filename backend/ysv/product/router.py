@@ -8,6 +8,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ysv.database.session import get_async_db
 from ysv.user.deps import current_admin
 from ysv.product.size.models import ProductSizeVariant
+from ysv.order.models import OrderItem
+from ysv.cart.models import CartItem
 from .models import Product, ProductPicture
 from .schemas import ProductCreate, ProductRead, ProductDetailRead, ProductUpdate
 
@@ -144,11 +146,35 @@ async def update_product(
     status_code=status.HTTP_200_OK,
 )
 async def delete_product(*, db: AsyncSession = Depends(get_async_db), product_id: str):
-    product_db = await db.scalar(select(Product).where(Product.id == product_id))
+    product_db = await db.scalar(
+        select(Product)
+        .where(Product.id == product_id)
+        .options(selectinload(Product.size_variants))
+    )
     if product_db is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="This product not existed"
         )
+    for size_variant in product_db.size_variants:
+        existing_order_items = (
+            await db.scalars(
+                select(OrderItem).where(
+                    OrderItem.product_size_variant_id == size_variant.id
+                )
+            )
+        ).all()
+        for item in existing_order_items:
+            await db.delete(item)
+        existing_cart_items = (
+            await db.scalars(
+                select(CartItem).where(
+                    CartItem.product_size_variant_id == size_variant.id
+                )
+            )
+        ).all()
+        for cart_item in existing_cart_items:
+            await db.delete(cart_item)
+        await db.delete(size_variant)
     await db.delete(product_db)
     await db.commit()
 
